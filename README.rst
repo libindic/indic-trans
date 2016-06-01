@@ -63,9 +63,6 @@ Examples
 2. Using Python:
 ^^^^^^^^^^^^^^^^
 
-a. Text:
-""""""""
-
 .. code:: python
 
     >>> from indictrans import transliterator
