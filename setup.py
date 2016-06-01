@@ -79,7 +79,7 @@ setup(
     url="https://github.com/irshadbhat/indictrans",
     package_dir={"indictrans":"indictrans"},
     packages=['indictrans', 'indictrans._utils', 'indictrans._decode'],
-    package_data={'indictrans': ['models/*.npy']},
+    package_data={'indictrans': ['models/*.npy', 'models/*.vec']},
 
     classifiers=[
         "Topic :: Text Processing :: Linguistic",

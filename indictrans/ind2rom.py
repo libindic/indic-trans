@@ -10,14 +10,15 @@ Indic to Roman transliterator
 
 import re
 import sys
+import json
 import string
 import os.path
 import warnings
 
 import numpy as np
 
-from ._utils import wxilp
-from ._decode import viterbi
+from _decode import viterbi
+from _utils import (wxilp, enc) 
 
 warnings.filterwarnings("ignore")
 
@@ -39,13 +40,14 @@ class ind_to_rom():
 
         #load models
 	lg = lang[0]
-        sys.path.append('%s/_utils' %dist_dir)
-	self.coef_	      = np.load('%s/models/%se_coef.npy' %(dist_dir, lg))[0]
+        self.vectorizer_ = enc(sparse=True) 
+        with open('%s/models/%se_sparse.vec' %(dist_dir, lg)) as jfp:
+            self.vectorizer_.unique_feats = json.load(jfp)
 	self.classes_	      = np.load('%s/models/%se_classes.npy' %(dist_dir, lg))[0]
-        self.vectorizer_      = np.load('%s/models/%se_sparse-vec.npy' %(dist_dir, lg))[0]
-	self.intercept_init_  = np.load('%s/models/%se_intercept_init.npy' %(dist_dir, lg))
-	self.intercept_trans_ = np.load('%s/models/%se_intercept_trans.npy' %(dist_dir, lg))
-	self.intercept_final_ = np.load('%s/models/%se_intercept_final.npy' %(dist_dir, lg))
+	self.coef_	      = np.load('%s/models/%se_coef.npy' %(dist_dir, lg))[0].astype(np.float64)
+	self.intercept_init_  = np.load('%s/models/%se_intercept_init.npy' %(dist_dir, lg)).astype(np.float64)
+	self.intercept_trans_ = np.load('%s/models/%se_intercept_trans.npy' %(dist_dir, lg)).astype(np.float64)
+	self.intercept_final_ = np.load('%s/models/%se_intercept_final.npy' %(dist_dir, lg)).astype(np.float64)
 
         #initialize character maps  
         self.letters = set(string.ascii_letters)
