@@ -1,1 +1,3 @@
 pbr
+cython>=0.24
+scipy>=0.13
