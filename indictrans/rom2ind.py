@@ -17,8 +17,8 @@ import warnings
 
 import numpy as np
 
-from _utils import (wxilp, enc)
-from _decode import viterbi
+from ._utils import (wxilp, enc)
+from ._decode import viterbi
 
 warnings.filterwarnings("ignore")
 
