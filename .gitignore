@@ -61,9 +61,5 @@ target/
 #Ipython Notebook
 .ipynb_checkpoints
 
-#uncompressed models
-*.npy
-*.vec
-
 #backup files
 *~
