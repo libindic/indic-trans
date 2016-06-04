@@ -4,9 +4,21 @@ python:
   - "3.3"
   - "3.4"
   - "3.5-dev"
+sudo: false
+before_install:
+  # use Anaconda to get compiled versions of scipy and numpy,
+  - wget http://repo.continuum.io/miniconda/Miniconda-3.7.3-Linux-x86_64.sh -O miniconda.sh
+  - chmod +x miniconda.sh
+  - ./miniconda.sh -b
+  - export PATH=/home/travis/miniconda/bin:$PATH
+  # Update conda itself
+  - conda update --yes conda
 install:
-  - pip install -r requirements.txt
-  - pip install -r test-requirements.txt
+  - conda create --yes -n testenv python=$TRAVIS_PYTHON_VERSION pip numpy scipy nose Cython
+  - source activate testenv
+  - pip install --pre oslotest  # needed until final release of oslotest?
+  - make cython
+  - python setup.py install
 script:
   - make travis
 after_success: coveralls
