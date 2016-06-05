@@ -17,8 +17,7 @@ install:
   - pip install pbr
   - pip install -r test-requirements.txt
 
-script:
-  - make travis
+script: nosetests
 
 after_success: coveralls
 
