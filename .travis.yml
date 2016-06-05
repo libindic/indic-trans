@@ -1,9 +1,6 @@
 language: python
 python:
   - "2.7"
-  - "3.3"
-  - "3.4"
-  - "3.5-dev"
 
 sudo: false
 
@@ -20,7 +17,8 @@ install:
   - pip install pbr
   - pip install -r test-requirements.txt
 
-script: nosetests
+script:
+  - make travis
 
 after_success: coveralls
 
