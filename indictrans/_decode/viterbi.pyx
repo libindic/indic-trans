@@ -8,7 +8,6 @@ np.import_array()
 
 cdef np.float64_t NEGINF = -np.inf
 
-#assert_array_equal(viterbi(score, None, trans, start, final), y_true)
 @cython.boundscheck(False)
 @cython.wraparound(False)
 def decode(np.ndarray[ndim=2, dtype=np.float64_t] score,

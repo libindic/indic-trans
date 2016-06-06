@@ -6,7 +6,9 @@ import os
 from testtools import TestCase
 from indictrans import transliterator
 
+
 class TestTransliterator(TestCase):
+
     def setUp(self):
         super(TestTransliterator, self).setUp()
         source = ['hin']
@@ -20,7 +22,7 @@ class TestTransliterator(TestCase):
             src = lang_pair[0]
             trg = lang_pair[1]
             trans = transliterator(source=src, target=trg)
-            with open('%s/%s_%s.testpairs' %(self.test_dir, src, trg)) as fp:
+            with open('%s/%s_%s.testpairs' % (self.test_dir, src, trg)) as fp:
                 for line in fp:
                     word, expected = line.split()
                     self.assertEqual(trans.transform(word), expected)
@@ -30,8 +32,7 @@ class TestTransliterator(TestCase):
             src = lang_pair[0]
             trg = lang_pair[1]
             trans = transliterator(source=src, target=trg)
-            with open('%s/%s_%s.testpairs' %(self.test_dir, trg, src)) as fp:
+            with open('%s/%s_%s.testpairs' % (self.test_dir, trg, src)) as fp:
                 for line in fp:
                     expected, word = line.split()
                     self.assertEqual(trans.transform(word), expected)
-
