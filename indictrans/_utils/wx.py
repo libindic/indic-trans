@@ -27,8 +27,7 @@ class wxilp():
         elif self.order == "wx2utf":
             self.initialize_wx2utf_hash()
         else:
-            sys.stderr.write("EncodingError: invalid source/target encoding\n")
-            sys.exit(0)
+            raise ValueError('invalid source/target encoding\n')
     
     def initialize_wx2utf_hash(self):
         # CONSONANTS
@@ -2002,8 +2001,7 @@ class wxilp():
         elif self.lang_tag == "guj":
             unicode_ = self.iscii2unicode_guj(iscii)
         else:
-            sys.stderr.write("LanguageError: invalid language code\n")
-            sys.exit(0)
+            raise NotImplementedError('Language `%s` is not implemented.' %lang)
         return unicode_
     
     def iscii2unicode_hin(self, iscii):
@@ -2065,8 +2063,7 @@ class wxilp():
         elif self.lang_tag == "guj":
             iscii = self.unicode2iscii_guj(unicode_)
         else:
-            sys.stderr.write("LanguageError: invalid language code\n")
-            sys.exit(0)
+            raise NotImplementedError('Language `%s` is not implemented.' %lang)
         return iscii
     
     def iscii2wx(self, my_string):
