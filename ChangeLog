@@ -1,6 +1,22 @@
 CHANGES
 =======
 
+* transliteration tests
+* hin-eng test pairs
+* pythonic handling of unsupported language-pairs
+* pythonic handling of unsupported languages
+* removed redundant authorship information
+* without flake8 testing
+* running nosetests only
+* running nosetests only
+*  Making sure Travis CI uses latest requirements, updated accordingly
+* converted spaces to tabs
+* use Anaconda to get compiled versions of scipy and numpy
+* Travis integration
+* testrepo configuration
+* relative imports
+* allow .npy and .vec files
+* uncompressed models
 * Travis integration
 * Travis integration
 * Travis integration
