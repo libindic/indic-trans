@@ -1,20 +1,13 @@
 #!/usr/bin/env python 
 # -*- coding: utf-8 -*-
 
+__author__     = "Irshad Ahmad Bhat"
+__version__    = "1.0"
+
 import sys
 import argparse
 
 from .transliterator import transliterator
-
-__name__       = "Indic Transliterator"
-__doc__        = "Transliterator for Indian Languages including English"
-__author__     = "Irshad Ahmad Bhat"
-__version__    = "1.0"
-__license__    = "MIT"
-__maintainer__ = "Irshad Ahmad"
-__email__      = ["irshad.bhat@research.iiit.ac.in", "bhatirshad127@gmail.com"]
-__status__     = "Alpha"
-__all__        = ["transliterator", "ind2rom", "rom2ind", "main"]
 
 def main():
     languages = ["hin", "eng"]
