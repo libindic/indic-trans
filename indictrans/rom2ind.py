@@ -9,7 +9,6 @@ Roman to Indic transliterator
 """
 
 import re
-import sys
 import json
 import string
 import os.path
@@ -125,7 +124,6 @@ class rom_to_ind():
         trans_list = list()
         if isinstance(text, str):
             text = text.decode('utf-8')
-        #text = re.sub(r'([a-z])\.([a-z])', r'\1\2', line)
         text = text.lower()
         text = text.replace('\t', self.tab)
         text = text.replace(' ', self.space)

@@ -9,7 +9,6 @@ Indic to Roman transliterator
 """
 
 import re
-import sys
 import json
 import string
 import os.path

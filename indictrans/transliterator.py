@@ -3,10 +3,6 @@
 
 # Copyright (C) 2016 Irshad Ahmad Bhat
 
-import os
-import re
-import sys
-
 from .ind2rom import ind_to_rom
 from .rom2ind import rom_to_ind
 

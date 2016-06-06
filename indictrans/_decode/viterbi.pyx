@@ -8,18 +8,15 @@ np.import_array()
 
 cdef np.float64_t NEGINF = -np.inf
 
-#assert_array_equal(viterbi(score, None, trans, start, final), y_true)
-
-
 @cython.boundscheck(False)
 @cython.wraparound(False)
 def decode(np.ndarray[ndim=2, dtype=np.float64_t] score,
-           np.ndarray[ndim=2, dtype=np.float64_t] b_trans,
-           np.ndarray[ndim=1, dtype=np.float64_t] init,
-           np.ndarray[ndim=1, dtype=np.float64_t] final):
+            np.ndarray[ndim=2, dtype=np.float64_t] b_trans,
+            np.ndarray[ndim=1, dtype=np.float64_t] init,
+            np.ndarray[ndim=1, dtype=np.float64_t] final):
 
-    cdef np.ndarray[ndim = 2, dtype = np.npy_intp, mode = 'c'] backp
-    cdef np.ndarray[ndim = 1, dtype = np.npy_intp, mode = 'c'] path
+    cdef np.ndarray[ndim=2, dtype=np.npy_intp, mode='c'] backp
+    cdef np.ndarray[ndim=1, dtype=np.npy_intp, mode='c'] path
     cdef np.float64_t candidate, maxval
     cdef np.npy_intp i, j, k, n_samples, n_states
 

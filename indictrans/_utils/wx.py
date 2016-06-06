@@ -3,11 +3,12 @@
 
 # Copyright Irshad Ahmad Bhat 2016.
 
-"""An implementation for converting unicode strings in Indian languages to WX-Roman and vice-versa."""
+"""
+An implementation for converting unicode strings in Indian languages to
+WX-Roman and vice-versa.
+"""
 
 import re
-import os
-import sys
 
 
 class wxilp():
@@ -20,10 +21,14 @@ class wxilp():
     def fit(self):
         self.punctuation = r'!"#$%&\'()*+,-./:;<=>?@\[\\\]^_`{|}~'
         # NOTE Handle iscii characters
-        self.iscii_num = dict(zip([unichr(i) for i in range(161, 252)], [
-                              '\x03%s\x04' % (unichr(i)) for i in range(300, 391)]))
-        self.num_iscii = dict(zip(['\x03%s\x04' % (unichr(i)) for i in range(
-            300, 391)], [unichr(i) for i in range(161, 252)]))
+        self.iscii_num = dict(
+            zip(
+                [unichr(i) for i in range(161, 252)],
+                ['\x03%s\x04' % (unichr(i)) for i in range(300, 391)]))
+        self.num_iscii = dict(
+            zip(
+                ['\x03%s\x04' % (unichr(i)) for i in range(300, 391)],
+                [unichr(i) for i in range(161, 252)]))
         self.mask_isc = re.compile(u'([\xA1-\xFB])')
         self.unmask_isc = re.compile(u'(%s)' % '|'.join(
             ['\x03%s\x04' % (unichr(i)) for i in range(300, 391)]))
@@ -334,8 +339,9 @@ class wxilp():
             u"\xFA": u"\u0C6F",  # Digit 9
         }
         self.hashp_i2u = {
-            u"\xA1": u"\u0A70",  # Vowel-modifier GURMUKHI TIPPI  NOTE Added -Irshad
-            # u"\xA1":u"\u0A01",     #Vowel-modifier CHANDRABINDU
+            u"\xA1": u"\u0A70",  # Vowel-modifier GURMUKHI TIPPI
+                                 # NOTE Added -Irshad
+            # u"\xA1":u"\u0A01",  #Vowel-modifier CHANDRABINDU
             u"\xA2": u"\u0A02",  # Vowel-modifier ANUSWAR
             u"\xA3": u"\u0A03",  # Vowel-modifier VISARG
             u"\xA4": u"\u0A05",  # Vowel A
@@ -1206,7 +1212,8 @@ class wxilp():
             u"\u0C6F": u"\xFA",
         }
         self.hashp_u2i = {
-            u"\u0A01": u"\xA1",  # Vowel-modifier CHANDRABINDU NOTE Added -Rashid
+            u"\u0A01": u"\xA1",  # Vowel-modifier CHANDRABINDU
+                                 # NOTE Added -Rashid
             u"\u0A02": u"\xA2",  # Vowel-modifier ANUSWAR
             u"\u0A05": u"\xA4",  # Vowel A
             u"\u0A06": u"\xA5",  # Vowel AA
@@ -1816,8 +1823,11 @@ class wxilp():
     def wx2iscii(self, my_string):
         """Convert WX to ISCII"""
         q, Z = u'q' in my_string, u'Z' in my_string
-        lY, nY, rY, = u'lY' in my_string, u'nY' in my_string, u'rY' in my_string
-        eV, EY, oV, OY = u'eV' in my_string, u'EY' in my_string, u'oV' in my_string, u'OY' in my_string
+        lY, nY, rY, = (
+            u'lY' in my_string, u'nY' in my_string, u'rY' in my_string)
+        eV, EY, oV, OY = (
+            u'eV' in my_string, u'EY' in my_string, u'oV' in my_string,
+            u'OY' in my_string)
         if self.lang_tag == 'pan':  # NOTE Added -Irshad
             my_string = my_string.replace(u'EY', self.hashv_w2i[u"E"] + 'Y')
         if eV:
@@ -2339,9 +2349,6 @@ class wxilp():
             self.hashmd_w2i[
                 m.group(3)],
             my_string)
-        # my_string = self.cvm.sub(lambda m: self.hashc_w2i[m.group(1)]+self.hashm_w2i[m.group(2)]+self.hashm_w2i[m.group(3)], my_string)
-        # if Z:
-        #    my_string = self.cZvm.sub(lambda m: self.hashc_w2i[m.group(1)]+self.hashm_w2i[m.group(2)]+self.hashm_w2i[m.group(3)], my_string)
         my_string = self.cv.sub(
             lambda m: self.hashc_w2i[
                 m.group(1)] +
