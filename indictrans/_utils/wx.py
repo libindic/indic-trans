@@ -2339,7 +2339,7 @@ class wxilp():
             self.hashmd_w2i[
                 m.group(3)],
             my_string)
-        #my_string = self.cvm.sub(lambda m: self.hashc_w2i[m.group(1)]+self.hashm_w2i[m.group(2)]+self.hashm_w2i[m.group(3)], my_string)
+        # my_string = self.cvm.sub(lambda m: self.hashc_w2i[m.group(1)]+self.hashm_w2i[m.group(2)]+self.hashm_w2i[m.group(3)], my_string)
         # if Z:
         #    my_string = self.cZvm.sub(lambda m: self.hashc_w2i[m.group(1)]+self.hashm_w2i[m.group(2)]+self.hashm_w2i[m.group(3)], my_string)
         my_string = self.cv.sub(
@@ -2492,7 +2492,7 @@ class wxilp():
         else:
             raise NotImplementedError(
                 'Language `%s` is not implemented.' %
-                lang)
+                self.lang_tag)
         return unicode_
 
     def iscii2unicode_hin(self, iscii):
@@ -2574,7 +2574,7 @@ class wxilp():
         else:
             raise NotImplementedError(
                 'Language `%s` is not implemented.' %
-                lang)
+                self.lang_tag)
         return iscii
 
     def iscii2wx(self, my_string):
@@ -2650,7 +2650,7 @@ class wxilp():
         my_string = self.c.sub(
             lambda m: self.hashc_i2w[
                 m.group(1)] + u"a", my_string)
-        #VOWEL+MODIFIER, VOWEL, MATRA
+        # VOWEL+MODIFIER, VOWEL, MATRA
         my_string = self.vmd.sub(
             lambda m: self.hashv_i2w[
                 m.group(1)] +
