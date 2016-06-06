@@ -2,7 +2,7 @@
 indic-trans
 ===========
 
-|Build Status|Coverage Status|
+|Build Status| |Coverage Status|
 
 .. |Build Status| image:: https://travis-ci.org/irshadbhat/indic-trans.svg?branch=master
    :target: https://travis-ci.org/irshadbhat/indic-trans
