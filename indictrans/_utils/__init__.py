@@ -4,3 +4,5 @@
 
 from .wx import wxilp
 from .one_hot_repr import OneHotEncoder as enc
+
+__all__ = ["enc", "wxilp"]
