@@ -20,7 +20,7 @@ class wxilp():
 
     def fit(self):
         self.punctuation = r'!"#$%&\'()*+,-./:;<=>?@\[\\\]^_`{|}~'
-        # NOTE Handle iscii characters
+        # Handle iscii characters
         self.iscii_num = dict(
             zip(
                 [unichr(i) for i in range(161, 252)],
@@ -265,12 +265,12 @@ class wxilp():
             u"\xAB": u"\u0C0E",  # Vowel E
             u"\xAC": u"\u0C0F",  # Vowel EY
             u"\xAD": u"\u0C10",  # Vowel AI
-            # u"\xB2":u"\u090D",     #Vowel AYE (Devanagari Script) 7-Mar-11
+            # u"\xB2":u"\u090D",  #Vowel AYE (Devanagari Script) 7-Mar-11
             # -Rashid
             u"\xAF": u"\u0C12",  # Vowel O
             u"\xB0": u"\u0C13",  # Vowel OW
             u"\xB1": u"\u0C14",  # Vowel AU
-            # u"\xB2":u"\u0911",     #Vowel AWE 7-Mar-11 -Rashid
+            # u"\xB2":u"\u0911",  #Vowel AWE 7-Mar-11 -Rashid
             u"\xB3": u"\u0C15",  # Consonant KA
             u"\xB4": u"\u0C16",  # Consonant KHA
             u"\xB5": u"\u0C17",  # Consonant GA
@@ -291,7 +291,7 @@ class wxilp():
             u"\xC4": u"\u0C26",  # Consonant Soft DA
             u"\xC5": u"\u0C27",  # Consonant Soft DHA
             u"\xC6": u"\u0C28",  # Consonant Soft NA
-            # u"\xC7":u"\u0929",     #Consonant NA (Tamil) 28-Feb-11 -Rashid
+            # u"\xC7":u"\u0929",  #Consonant NA (Tamil) 28-Feb-11 -Rashid
             u"\xC8": u"\u0C2A",  # Consonant PA
             u"\xC9": u"\u0C2B",  # Consonant PHA
             u"\xCA": u"\u0C2C",  # Consonant BA
@@ -302,7 +302,7 @@ class wxilp():
             u"\xD0": u"\u0C31",  # Consonant Hard RA (Southern Script)
             u"\xD1": u"\u0C32",  # Consonant LA
             u"\xD2": u"\u0C33",  # Consonant Hard LA
-            # u"\xD3":u"\u0934",     #Consonant LLLA 7-Mar-11 -Rashid
+            # u"\xD3":u"\u0934",  #Consonant LLLA 7-Mar-11 -Rashid
             u"\xD4": u"\u0C35",  # Consonant VA
             u"\xD5": u"\u0C36",  # Consonant SHA
             u"\xD6": u"\u0C37",  # Consonant Hard SHA
@@ -317,15 +317,15 @@ class wxilp():
             u"\xE0": u"\u0C46",  # Vowel Sign E (Southern Scripts)
             u"\xE1": u"\u0C47",  # Vowel Sign EY
             u"\xE2": u"\u0C48",  # Vowel Sign AI
-            # u"\xE3":u"\u0945",     #Vowel Sign AYE (Devanagari Script)
+            # u"\xE3":u"\u0945",  #Vowel Sign AYE (Devanagari Script)
             # 7-Mar-11 -Rashid
             u"\xE4": u"\u0C4A",  # Vowel Sign O
             u"\xE5": u"\u0C4B",  # Vowel Sign OW
             u"\xE6": u"\u0C4C",  # Vowel Sign AU
-            # u"\xE7":u"\u0949",     #Vowel Sign AWE (Devanagari Script)
+            # u"\xE7":u"\u0949",  #Vowel Sign AWE (Devanagari Script)
             # 7-Mar-11 -Rashid
             u"\xE8": u"\u0C4D",  # Vowel Omission Sign (Halant)
-            # u"\xE9":u"\u093C",     #Diacritic Sign (Nukta) 7-Mar-11 -Rashid
+            # u"\xE9":u"\u093C",  #Diacritic Sign (Nukta) 7-Mar-11 -Rashid
             u"\xEA": u".",  # Fullstop
             u"\xF1": u"\u0C66",  # Digit 0
             u"\xF2": u"\u0C67",  # Digit 1
@@ -340,7 +340,7 @@ class wxilp():
         }
         self.hashp_i2u = {
             u"\xA1": u"\u0A70",  # Vowel-modifier GURMUKHI TIPPI
-                                 # NOTE Added -Irshad
+                                 # Added -Irshad
             # u"\xA1":u"\u0A01",  #Vowel-modifier CHANDRABINDU
             u"\xA2": u"\u0A02",  # Vowel-modifier ANUSWAR
             u"\xA3": u"\u0A03",  # Vowel-modifier VISARG
@@ -423,7 +423,7 @@ class wxilp():
             u"\xF8": u"\u0A6D",  # Digit 7
             u"\xF9": u"\u0A6E",  # Digit 8
             u"\xFA": u"\u0A6F",  # Digit 9
-            u"\xFB": u"\u0A71"  # GURMUKHI ADDAK  NOTE Added -Irshad
+            u"\xFB": u"\u0A71"  # GURMUKHI ADDAK  Added -Irshad
         }
         self.hashk_i2u = {
             u"\xA2": u"\u0C82",
@@ -658,7 +658,7 @@ class wxilp():
             u"\xFA": u"\u09EF",  # Digit 9
         }
         self.hashcta_i2u = {
-            # u"\xA2":u"\u0B82",     #Vowel-modifier ANUSWAR commented
+            # u"\xA2":u"\u0B82",  #Vowel-modifier ANUSWAR commented
             # 14-March-11 -Rashid
             u"\xA2": u"\u0BAE\u0BCD",  # Vowel-modifier ANUSWAR is m + halant
             u"\xA3": u"\u0B83",  # Vowel-modifier VISARG
@@ -693,7 +693,7 @@ class wxilp():
             u"\xD2": u"\u0BB3",  # Consonant Hard LA
             u"\xD3": u"\u0BB4",  # Consonant ZHA (Tamil & Malyalam)
             u"\xD4": u"\u0BB5",  # Consonant VA
-            # u"\xD5":u"\u0BB6",     #Consonant SHA commented because it have
+            # u"\xD5":u"\u0BB6",  #Consonant SHA commented because it have
             # same sence of 0BB7 14-Mar-11
             u"\xD5": u"\u0BB7",  # Consonant SHA is nomore use in tamil
             u"\xD6": u"\u0BB7",  # Consonant Hard SHA
@@ -734,13 +734,13 @@ class wxilp():
             u"\xA8": u"\u0B09",  # Vowel U
             u"\xA9": u"\u0B0A",  # Vowel UU
             u"\xAA": u"\u0B0B",  # Vowel RI
-            # u"\xAB":u"\u090E",     #Vowel E
+            # u"\xAB":u"\u090E",  #Vowel E
             u"\xAC": u"\u0B0F",  # Vowel EY
             u"\xAD": u"\u0B10",  # Vowel AI
-            # u"\xB2":u"\u0911",     #Vowel AWE
-            # u"\xAE":u"\u090D",     #Vowel AI -Rashid added
-            # u"\xB2":u"\u090D",     #Vowel AYE (Devanagari Script)
-            # u"\xAF":u"\u0912",     #Vowel O
+            # u"\xB2":u"\u0911",  #Vowel AWE
+            # u"\xAE":u"\u090D",  #Vowel AI -Rashid added
+            # u"\xB2":u"\u090D",  #Vowel AYE (Devanagari Script)
+            # u"\xAF":u"\u0912",  #Vowel O
             u"\xB0": u"\u0B13",  # Vowel OW
             u"\xB1": u"\u0B14",  # Vowel AU
             u"\xB3": u"\u0B15",  # Consonant KA
@@ -885,9 +885,9 @@ class wxilp():
         self.ceVmd = re.compile(u"([%s])eV([MHz])" % const)
 
         self.ceV = re.compile(u"([%s])eV" % const)
-        # NOTE const+nukta+eV added for Bengali -Irshad
+        # const+nukta+eV added for Bengali -Irshad
         self.cZeV = re.compile(u"([%s])ZeV" % const)
-        # NOTE const+nukta+eV+modifier added for Bengali -Irshad
+        # const+nukta+eV+modifier added for Bengali -Irshad
         self.cZeVmd = re.compile(u"([%s])ZeV([MHz])" % const)
 
         self.cEYmd = re.compile(u"([%s])EY([MHz])" % const)
@@ -899,14 +899,14 @@ class wxilp():
         self.coVmd = re.compile(u"([%s])oV([MHz])" % const)
 
         self.coV = re.compile(u"([%s])oV" % const)
-        # NOTE const+nukta+oV added for Bengali -Irshad
+        # const+nukta+oV added for Bengali -Irshad
         self.cZoV = re.compile(u"([%s])ZoV" % const)
-        # NOTE const+nukta+oV+modifier added for Bengali -Irshad
+        # const+nukta+oV+modifier added for Bengali -Irshad
         self.cZoVmd = re.compile(u"([%s])ZoV([MHz])" % const)
 
         self.cOY = re.compile(u"([%s])OY" % const)
         self.cZOY = re.compile(u"([%s])ZOY" %
-                               const)  # NOTE consonant+ZOY case added
+                               const)  # consonant+ZOY case added
 
         self.cvmd = re.compile(u"([%s])([AiIuUeEoO])([MHz])" % const)
         self.cZvmd = re.compile(u"([%s])Z([AiIuUeEoO])([MHz])" % const)
@@ -918,12 +918,12 @@ class wxilp():
         self.cZamd = re.compile(u"([%s])Za([MHz])" % const)
         self.cZmd = re.compile(
             u"([%s])Z([MHz])" %
-            const)  # NOTE consonant+Z+[MHz] case added
+            const)  # consonant+Z+[MHz] case added
 
         self.ca = re.compile(u"([%s])a" % const)
         self.cZa = re.compile(u"([%s])Za" % const)
         self.cYZa = re.compile(u"([%s])YZa" %
-                               const)  # NOTE consonant+YZa case added
+                               const)  # consonant+YZa case added
 
         self.c = re.compile(u"([%s])" % const)
         self.cZ = re.compile(u"([%s])Z" % const)
@@ -931,12 +931,12 @@ class wxilp():
         self.aqmd = re.compile(u"aq([MHz])")
         self.cq = re.compile(u"([%s])q" % const)
         self.cqmd = re.compile(u"([%s])q([MHz])" % const)
-        self.qmd = re.compile(u"q([MHz])")  # NOTE q+[MHz]
+        self.qmd = re.compile(u"q([MHz])")  # q+[MHz]
 
         self.dig = re.compile(u"([0-9])")
         self.i2u = re.compile(u'([\xA1-\xFB])')
 
-        # NOTE Handle Roman strings
+        # Handle Roman strings
         self.unmask_rom = re.compile(
             r'(_[a-zA-Z0-9%s]+_)' %
             (self.punctuation))
@@ -1213,7 +1213,7 @@ class wxilp():
         }
         self.hashp_u2i = {
             u"\u0A01": u"\xA1",  # Vowel-modifier CHANDRABINDU
-                                 # NOTE Added -Rashid
+                                 # Added -Rashid
             u"\u0A02": u"\xA2",  # Vowel-modifier ANUSWAR
             u"\u0A05": u"\xA4",  # Vowel A
             u"\u0A06": u"\xA5",  # Vowel AA
@@ -1284,7 +1284,7 @@ class wxilp():
             u"\u0A4D": u"\xE8",  # Vowel Omission Sign Halant
             u"\u0A5C": u"\xE8",  # Vowel Omission Sign Halant
             u"\u0A64": u"\xEA",  # PURNA VIRAM Reserved
-            u"\u0A65": u"\xEA",  # DEERGH VIRAM #ADDED
+            u"\u0A65": u"\xEA",  # DEERGH VIRAM
             u"\u0A66": u"\xF1",  # Consonant
             u"\u0A67": u"\xF2",  # Consonant
             u"\u0A68": u"\xF3",  # Consonant
@@ -1375,7 +1375,7 @@ class wxilp():
             u"\u0CCC": u"\xE6",  # Vowel
             u"\u0CCD": u"\xE8",  # Consonant
             u"\u0CE4": u"\xEA",  # PURNA VIRAM Reserved
-            u"\u0CE5": u"\xEA",  # DEERGH VIRAM #ADDED
+            u"\u0CE5": u"\xEA",  # DEERGH VIRAM
             u"\u0CE6": u"\xF1",  # Consonant
             u"\u0CE7": u"\xF2",  # Consonant
             u"\u0CE8": u"\xF3",  # Consonant
@@ -1455,7 +1455,7 @@ class wxilp():
             u"\u0D4C": u"\xE6",  # Vowel
             u"\u0D4D": u"\xE8",  # Consonant
             u"\u0D64": u"\xEA",  # PURNA VIRAM Reserved
-            u"\u0D65": u"\xEA",  # DEERGH VIRAM #ADDED
+            u"\u0D65": u"\xEA",  # DEERGH VIRAM
             u"\u0D66": u"\xF1",  # Consonant
             u"\u0D67": u"\xF2",  # Consonant
             u"\u0D68": u"\xF3",  # Consonant
@@ -1526,8 +1526,8 @@ class wxilp():
             u"\u09CB": u"\xE4",  # Vowel
             u"\u09CC": u"\xE6",  # Vowel
             u"\u09CD": u"\xE8",  # Consonant
-            u"\u09E4": u"\xEA",  # PURNA VIRAM Reserved #ADDED
-            u"\u09E5": u"\xEA",  # DEERGH VIRAM #ADDED
+            u"\u09E4": u"\xEA",  # PURNA VIRAM Reserved
+            u"\u09E5": u"\xEA",  # DEERGH VIRAM
             u"\u09E6": u"\xF1",  # Consonant
             u"\u09E7": u"\xF2",  # Consonant
             u"\u09E8": u"\xF3",  # Consonant
@@ -1590,12 +1590,12 @@ class wxilp():
             u"\u0BC6": u"\xE0",  # Vowel
             u"\u0BC7": u"\xE1",  # Vowel
             u"\u0BC8": u"\xE2",  # Vowel
-            u"\u0BCA": u"\xE4",  # Vowel ொ
-            u"\u0BCB": u"\xE5",  # Vowel ோ
-            u"\u0BCC": u"\xE6",  # Vowel ௌ
+            u"\u0BCA": u"\xE4",  # Vowel
+            u"\u0BCB": u"\xE5",  # Vowel
+            u"\u0BCC": u"\xE6",  # Vowel
             u"\u0BCD": u"\xE8",  # Halant
             u"\u0BE4": u"\xEA",  # PURNA VIRAM Reserved
-            u"\u0BE5": u"\xEA",  # DEERGH VIRAM #ADDED
+            u"\u0BE5": u"\xEA",  # DEERGH VIRAM
             u"\u0BE6": u"\xF1",  # Consonant
             u"\u0BE7": u"\xF2",  # Consonant
             u"\u0BE8": u"\xF3",  # Consonant
@@ -1668,18 +1668,18 @@ class wxilp():
             u"\u0B4B": u"\xE5",  # Vowel O
             u"\u0B4C": u"\xE6",  # Vowel OU
             u"\u0B4D": u"\xE8",  # Halant
-            u"\u0B64": u"\xEA",  # PURNA VIRAM Reserved #ADDED
-            u"\u0B65": u"\xEA",  # DEERGH VIRAM #ADDED
-            u"\u0B66": u"\xF1",      # Digit 0
-            u"\u0B67": u"\xF2",      # Digit 1
-            u"\u0B68": u"\xF3",      # Digit 2
-            u"\u0B69": u"\xF4",      # Digit 3
-            u"\u0B6A": u"\xF5",      # Digit 4
-            u"\u0B6B": u"\xF6",      # Digit 5
-            u"\u0B6C": u"\xF7",      # Digit 6
-            u"\u0B6D": u"\xF8",      # Digit 7
-            u"\u0B6E": u"\xF9",      # Digit 8
-            u"\u0B6F": u"\xFA",      # Digit 9
+            u"\u0B64": u"\xEA",  # PURNA VIRAM Reserved
+            u"\u0B65": u"\xEA",  # DEERGH VIRAM
+            u"\u0B66": u"\xF1",  # Digit 0
+            u"\u0B67": u"\xF2",  # Digit 1
+            u"\u0B68": u"\xF3",  # Digit 2
+            u"\u0B69": u"\xF4",  # Digit 3
+            u"\u0B6A": u"\xF5",  # Digit 4
+            u"\u0B6B": u"\xF6",  # Digit 5
+            u"\u0B6C": u"\xF7",  # Digit 6
+            u"\u0B6D": u"\xF8",  # Digit 7
+            u"\u0B6E": u"\xF9",  # Digit 8
+            u"\u0B6F": u"\xFA",  # Digit 9
         }
         self.unicode_norm_hasho_u2i = {
             u"\u0B5C": u"\u0B21",  # ADDED
@@ -1751,8 +1751,8 @@ class wxilp():
             u"\u0ACC": u"\xE6",  # Vowel
             u"\u0ACD": u"\xE8",  # Halant
             u"\u0AE0": u"\xAA",  # Vowel Sanskrit
-            u"\u0AE4": u"\xEA",  # PURNA VIRAM Reserved #ADDED
-            u"\u0AE5": u"\xEA",  # DEERGH VIRAM #ADDED
+            u"\u0AE4": u"\xEA",  # PURNA VIRAM Reserved
+            u"\u0AE5": u"\xEA",  # DEERGH VIRAM
             u"\u0AE6": u"\xF1",  # Digit 0
             u"\u0AE7": u"\xF2",  # Digit 1
             u"\u0AE8": u"\xF3",  # Digit 2
@@ -1795,7 +1795,7 @@ class wxilp():
         self.u2i_bn = re.compile(u"([\u09DC\u09DD\u09DF])")
         self.u2i_pn = re.compile(u"([\u0A59-\u0A5B\u0A5E])")
 
-        # NOTE Handle Roman strings
+        # Handle Roman strings
         self.mask_rom = re.compile(
             r'([0-9%s]*[a-zA-Z][0-9a-zA-Z%s]*)' %
             ((self.punctuation,) * 2))
@@ -1828,10 +1828,10 @@ class wxilp():
         eV, EY, oV, OY = (
             u'eV' in my_string, u'EY' in my_string, u'oV' in my_string,
             u'OY' in my_string)
-        if self.lang_tag == 'pan':  # NOTE Added -Irshad
+        if self.lang_tag == 'pan':  # Added -Irshad
             my_string = my_string.replace(u'EY', self.hashv_w2i[u"E"] + 'Y')
         if eV:
-            if Z:  # NOTE added
+            if Z:  # case added -Irshad
                 my_string = self.cZeVmd.sub(
                     lambda m: self.hashc_w2i[
                         m.group(1)] +
@@ -1872,7 +1872,7 @@ class wxilp():
                 self.hashm_w2i[u"EY"],
                 my_string)
         if oV:
-            if Z:  # NOTE added
+            if Z:  # case added -Irshad
                 my_string = self.cZoVmd.sub(
                     lambda m: self.hashc_w2i[
                         m.group(1)] +
@@ -1900,7 +1900,7 @@ class wxilp():
                 self.hashm_w2i[u"oV"],
                 my_string)
         if OY:
-            if Z:  # NOTE Case ZOY added
+            if Z:  # Case ZOY added
                 my_string = self.cZOY.sub(
                     lambda m: self.hashc_w2i[
                         m.group(1)] +
@@ -1956,7 +1956,7 @@ class wxilp():
                     m.group(1)] +
                 self.hashc_w2i[u"Z"],
                 my_string)
-            # NOTE consonant+YZa case added
+            # consonant+YZa case added
             my_string = self.cYZa.sub(
                 lambda m: self.hashc_w2i[
                     m.group(1) +
@@ -1977,7 +1977,7 @@ class wxilp():
                 self.hashmd_w2i[
                     m.group(2)],
                 my_string)
-            # NOTE q+[MHz] case added
+            # q+[MHz] case added
             my_string = self.qmd.sub(
                 lambda m: self.hashv_w2i[u"q"] +
                 self.hashmd_w2i[
@@ -1994,7 +1994,7 @@ class wxilp():
                 self.hashmd_w2i[
                     m.group(1)],
                 my_string)
-            # NOTE q, aq removed from here
+            # q, aq removed from here
         # Added for the case lYYa,lYY[AiIuUeEoO],lYY[MHz]
         if lY:
             if 'lYY' in my_string:
@@ -2366,7 +2366,7 @@ class wxilp():
                 m.group(1)], my_string)
 
         if q:
-            # NOTE q, aq replaced
+            # q, aq replaced
             my_string = my_string.replace(u'aq', self.hashv_w2i[u"aq"])
             my_string = my_string.replace(u'q', self.hashv_w2i[u"aq"])
 
@@ -2441,7 +2441,7 @@ class wxilp():
             my_string = my_string.replace(u'OY', self.hashv_w2i[u"OY"])
 
         if 'a' in my_string:
-            # NOTE non-word boundary added on the left of string
+            # non-word boundary added on the left of string
             my_string = re.sub(u'\BaA', self.hashv_w2i[u"aA"], my_string)
             my_string = re.sub(u'\Bai', self.hashv_w2i[u"ai"], my_string)
             my_string = re.sub(u'\BaI', self.hashv_w2i[u"aI"], my_string)
@@ -2794,7 +2794,7 @@ class wxilp():
             unicode_ = unicode_.decode('utf-8')
 
         unicode_ = self.normalize(unicode_)
-        # NOTE Mask iscii characters (if any)
+        # Mask iscii characters (if any)
         unicode_ = self.mask_isc.sub(
             lambda m: self.iscii_num[
                 m.group(1)], unicode_)
@@ -2802,9 +2802,9 @@ class wxilp():
         iscii = self.unicode2iscii(unicode_)
         # Convert ISCII to WX-Roman
         wx = self.iscii2wx(iscii)
-        # NOTE Consecutive Vowel Normalization
+        # Consecutive Vowel Normalization
         wx = re.sub(u'[\xA0-\xFA]+', u'', wx)
-        # NOTE Unmask iscii characters
+        # Unmask iscii characters
         wx = self.unmask_isc.sub(lambda m: self.num_iscii[m.group(1)], wx)
 
         return wx.encode('utf-8')
@@ -2820,14 +2820,14 @@ class wxilp():
             if not wx:
                 continue
             else:
-                # NOTE Mask iscii characters (if any)
+                # Mask iscii characters (if any)
                 wx = self.mask_isc.sub(
                     lambda m: self.iscii_num[
                         m.group(1)], wx)
                 iscii = self.wx2iscii(wx)
                 # Convert ISCII to Unicode
                 unicode_t = self.iscii2unicode(iscii)
-                # NOTE Unmask iscii characters
+                # Unmask iscii characters
                 unicode_ += self.unmask_isc.sub(
                     lambda m: self.num_iscii[
                         m.group(1)], unicode_t)
