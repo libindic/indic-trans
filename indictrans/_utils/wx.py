@@ -20,7 +20,7 @@ class wxilp():
 
     def fit(self):
         self.punctuation = r'!"#$%&\'()*+,-./:;<=>?@\[\\\]^_`{|}~'
-        # NOTE Handle iscii characters
+        # Handle iscii characters
         self.iscii_num = dict(
             zip(
                 [unichr(i) for i in range(161, 252)],
@@ -42,117 +42,117 @@ class wxilp():
     def initialize_wx2utf_hash(self):
         # CONSONANTS
         self.hashc_w2i = {
-            u"k": u"\xB3",
-            u"K": u"\xB4",
-            u"g": u"\xB5",
-            u"G": u"\xB6",
-            u"f": u"\xB7",
-            u"c": u"\xB8",
-            u"C": u"\xB9",
-            u"j": u"\xBA",
-            u"J": u"\xBB",
-            u"F": u"\xBC",
-            u"t": u"\xBD",
-            u"T": u"\xBE",
-            u"d": u"\xBF",
-            u"D": u"\xC0",
-            u"N": u"\xC1",
-            u"w": u"\xC2",
-            u"W": u"\xC3",
-            u"x": u"\xC4",
-            u"X": u"\xC5",
-            u"n": u"\xC6",
-            u"p": u"\xC8",
-            u"P": u"\xC9",
-            u"b": u"\xCA",
-            u"B": u"\xCB",
-            u"m": u"\xCC",
-            u"y": u"\xCD",
-            u"r": u"\xCF",
-            u"l": u"\xD1",
-            u"v": u"\xD4",
-            u"S": u"\xD5",
-            u"s": u"\xD7",
-            u"R": u"\xD6",
-            u"h": u"\xD8",
-            u"_": u"\xE8",
-            u"Z": u"\xE9",
-            u".": u"\xEA",
-            u"Y": u"\xFB",
-            u"lY": u"\xD2",
+            "k": u"\xB3",
+            "K": u"\xB4",
+            "g": u"\xB5",
+            "G": u"\xB6",
+            "f": u"\xB7",
+            "c": u"\xB8",
+            "C": u"\xB9",
+            "j": u"\xBA",
+            "J": u"\xBB",
+            "F": u"\xBC",
+            "t": u"\xBD",
+            "T": u"\xBE",
+            "d": u"\xBF",
+            "D": u"\xC0",
+            "N": u"\xC1",
+            "w": u"\xC2",
+            "W": u"\xC3",
+            "x": u"\xC4",
+            "X": u"\xC5",
+            "n": u"\xC6",
+            "p": u"\xC8",
+            "P": u"\xC9",
+            "b": u"\xCA",
+            "B": u"\xCB",
+            "m": u"\xCC",
+            "y": u"\xCD",
+            "r": u"\xCF",
+            "l": u"\xD1",
+            "v": u"\xD4",
+            "S": u"\xD5",
+            "s": u"\xD7",
+            "R": u"\xD6",
+            "h": u"\xD8",
+            "_": u"\xE8",
+            "Z": u"\xE9",
+            ".": u"\xEA",
+            "Y": u"\xFB",
+            "lY": u"\xD2",
             # Added for tamil -Rashid
-            u"rY": u"\xD0",
-            u"nY": u"\xC7",
-            u"lYY": u"\xD3",
+            "rY": u"\xD0",
+            "nY": u"\xC7",
+            "lYY": u"\xD3",
         }
         # VOWELS
         self.hashv_w2i = {
-            u"a": u"\xA4",
-            u"A": u"\xA5",
-            u"aA": u"\xA5",
-            u"i": u"\xA6",
-            u"ai": u"\xA6",
-            u"I": u"\xA7",
-            u"aI": u"\xA7",
-            u"u": u"\xA8",
-            u"au": u"\xA8",
-            u"U": u"\xA9",
-            u"aU": u"\xA9",
-            u"q": u"\xAA",
-            u"aq": u"\xAA",
-            u"eV": u"\xAB",
-            u"aeV": u"\xAB",
-            u"e": u"\xAC",
-            u"ae": u"\xAC",
-            u"E": u"\xAD",
-            u"aE": u"\xAD",
-            u"EY": u"\xAE",
-            u"aEY": u"\xAE",
-            u"oV": u"\xAF",
-            u"aoV": u"\xAF",
-            u"o": u"\xB0",
-            u"ao": u"\xB0",
-            u"O": u"\xB1",
-            u"aO": u"\xB1",
-            u"OY": u"\xB2",
-            u"aOY": u"\xB2",
+            "a": u"\xA4",
+            "A": u"\xA5",
+            "aA": u"\xA5",
+            "i": u"\xA6",
+            "ai": u"\xA6",
+            "I": u"\xA7",
+            "aI": u"\xA7",
+            "u": u"\xA8",
+            "au": u"\xA8",
+            "U": u"\xA9",
+            "aU": u"\xA9",
+            "q": u"\xAA",
+            "aq": u"\xAA",
+            "eV": u"\xAB",
+            "aeV": u"\xAB",
+            "e": u"\xAC",
+            "ae": u"\xAC",
+            "E": u"\xAD",
+            "aE": u"\xAD",
+            "EY": u"\xAE",
+            "aEY": u"\xAE",
+            "oV": u"\xAF",
+            "aoV": u"\xAF",
+            "o": u"\xB0",
+            "ao": u"\xB0",
+            "O": u"\xB1",
+            "aO": u"\xB1",
+            "OY": u"\xB2",
+            "aOY": u"\xB2",
         }
         # MATRA
         self.hashm_w2i = {
-            u"A": u"\xDA",
-            u"aA": u"\xDA",
-            u"i": u"\xDB",
-            u"ai": u"\xDB",
-            u"I": u"\xDC",
-            u"aI": u"\xDC",
-            u"u": u"\xDD",
-            u"au": u"\xDD",
-            u"U": u"\xDE",
-            u"aU": u"\xDE",
-            u"q": u"\xDF",
-            u"aq": u"\xDF",
-            u"eV": u"\xE0",
-            u"aeV": u"\xE0",
-            u"e": u"\xE1",
-            u"ae": u"\xE1",
-            u"E": u"\xE2",
-            u"aE": u"\xE2",
-            u"EY": u"\xE3",
-            u"aEY": u"\xE3",
-            u"oV": u"\xE4",
-            u"aoV": u"\xE4",
-            u"o": u"\xE5",
-            u"ao": u"\xE5",
-            u"O": u"\xE6",
-            u"aO": u"\xE6",
-            u"OY": u"\xE7",
-            u"aOY": u"\xE7",
+            "A": u"\xDA",
+            "aA": u"\xDA",
+            "i": u"\xDB",
+            "ai": u"\xDB",
+            "I": u"\xDC",
+            "aI": u"\xDC",
+            "u": u"\xDD",
+            "au": u"\xDD",
+            "U": u"\xDE",
+            "aU": u"\xDE",
+            "q": u"\xDF",
+            "aq": u"\xDF",
+            "eV": u"\xE0",
+            "aeV": u"\xE0",
+            "e": u"\xE1",
+            "ae": u"\xE1",
+            "E": u"\xE2",
+            "aE": u"\xE2",
+            "EY": u"\xE3",
+            "aEY": u"\xE3",
+            "oV": u"\xE4",
+            "aoV": u"\xE4",
+            "o": u"\xE5",
+            "ao": u"\xE5",
+            "O": u"\xE6",
+            "aO": u"\xE6",
+            "OY": u"\xE7",
+            "aOY": u"\xE7",
         }
         # MODIFIERS
         self.hashmd_w2i = {
-            u"z": u"\xA1",
-            u"M": u"\xA2",
-            u"H": u"\xA3",
+            "z": u"\xA1",
+            "M": u"\xA2",
+            "H": u"\xA3",
         }
         self.digits_w2i = {
             u"0": u"\xF1",
@@ -239,7 +239,7 @@ class wxilp():
             u"\xE7": u"\u0949",  # Vowel Sign AWE (Devanagari Script)
             u"\xE8": u"\u094D",  # Vowel Omission Sign (Halant)
             u"\xE9": u"\u093C",  # Diacritic Sign (Nukta)
-            u"\xEA": u".",  # Fullstop
+            u"\xEA": ".",  # Fullstop
             u"\xF1": u"\u0966",  # Digit 0
             u"\xF2": u"\u0967",  # Digit 1
             u"\xF3": u"\u0968",  # Digit 2
@@ -265,12 +265,12 @@ class wxilp():
             u"\xAB": u"\u0C0E",  # Vowel E
             u"\xAC": u"\u0C0F",  # Vowel EY
             u"\xAD": u"\u0C10",  # Vowel AI
-            # u"\xB2":u"\u090D",     #Vowel AYE (Devanagari Script) 7-Mar-11
+            # u"\xB2":u"\u090D",  #Vowel AYE (Devanagari Script) 7-Mar-11
             # -Rashid
             u"\xAF": u"\u0C12",  # Vowel O
             u"\xB0": u"\u0C13",  # Vowel OW
             u"\xB1": u"\u0C14",  # Vowel AU
-            # u"\xB2":u"\u0911",     #Vowel AWE 7-Mar-11 -Rashid
+            # u"\xB2":u"\u0911",  #Vowel AWE 7-Mar-11 -Rashid
             u"\xB3": u"\u0C15",  # Consonant KA
             u"\xB4": u"\u0C16",  # Consonant KHA
             u"\xB5": u"\u0C17",  # Consonant GA
@@ -291,7 +291,7 @@ class wxilp():
             u"\xC4": u"\u0C26",  # Consonant Soft DA
             u"\xC5": u"\u0C27",  # Consonant Soft DHA
             u"\xC6": u"\u0C28",  # Consonant Soft NA
-            # u"\xC7":u"\u0929",     #Consonant NA (Tamil) 28-Feb-11 -Rashid
+            # u"\xC7":u"\u0929",  #Consonant NA (Tamil) 28-Feb-11 -Rashid
             u"\xC8": u"\u0C2A",  # Consonant PA
             u"\xC9": u"\u0C2B",  # Consonant PHA
             u"\xCA": u"\u0C2C",  # Consonant BA
@@ -302,7 +302,7 @@ class wxilp():
             u"\xD0": u"\u0C31",  # Consonant Hard RA (Southern Script)
             u"\xD1": u"\u0C32",  # Consonant LA
             u"\xD2": u"\u0C33",  # Consonant Hard LA
-            # u"\xD3":u"\u0934",     #Consonant LLLA 7-Mar-11 -Rashid
+            # u"\xD3":u"\u0934",  #Consonant LLLA 7-Mar-11 -Rashid
             u"\xD4": u"\u0C35",  # Consonant VA
             u"\xD5": u"\u0C36",  # Consonant SHA
             u"\xD6": u"\u0C37",  # Consonant Hard SHA
@@ -317,16 +317,16 @@ class wxilp():
             u"\xE0": u"\u0C46",  # Vowel Sign E (Southern Scripts)
             u"\xE1": u"\u0C47",  # Vowel Sign EY
             u"\xE2": u"\u0C48",  # Vowel Sign AI
-            # u"\xE3":u"\u0945",     #Vowel Sign AYE (Devanagari Script)
+            # u"\xE3":u"\u0945",  #Vowel Sign AYE (Devanagari Script)
             # 7-Mar-11 -Rashid
             u"\xE4": u"\u0C4A",  # Vowel Sign O
             u"\xE5": u"\u0C4B",  # Vowel Sign OW
             u"\xE6": u"\u0C4C",  # Vowel Sign AU
-            # u"\xE7":u"\u0949",     #Vowel Sign AWE (Devanagari Script)
+            # u"\xE7":u"\u0949",  #Vowel Sign AWE (Devanagari Script)
             # 7-Mar-11 -Rashid
             u"\xE8": u"\u0C4D",  # Vowel Omission Sign (Halant)
-            # u"\xE9":u"\u093C",     #Diacritic Sign (Nukta) 7-Mar-11 -Rashid
-            u"\xEA": u".",  # Fullstop
+            # u"\xE9":u"\u093C",  #Diacritic Sign (Nukta) 7-Mar-11 -Rashid
+            u"\xEA": ".",  # Fullstop
             u"\xF1": u"\u0C66",  # Digit 0
             u"\xF2": u"\u0C67",  # Digit 1
             u"\xF3": u"\u0C68",  # Digit 2
@@ -340,7 +340,7 @@ class wxilp():
         }
         self.hashp_i2u = {
             u"\xA1": u"\u0A70",  # Vowel-modifier GURMUKHI TIPPI
-                                 # NOTE Added -Irshad
+                                 # Added -Irshad
             # u"\xA1":u"\u0A01",  #Vowel-modifier CHANDRABINDU
             u"\xA2": u"\u0A02",  # Vowel-modifier ANUSWAR
             u"\xA3": u"\u0A03",  # Vowel-modifier VISARG
@@ -412,7 +412,7 @@ class wxilp():
             u"\xE7": u"\u0A49",  # Vowel Sign AWE (Devanagari Script)
             u"\xE8": u"\u0A4D",  # Vowel Omission Sign (Halant)
             u"\xE9": u"\u0A3C",  # Diacritic Sign (Nukta)
-            u"\xEA": u".",  # Fullstop
+            u"\xEA": ".",  # Fullstop
             u"\xF1": u"\u0A66",  # Digit 0
             u"\xF2": u"\u0A67",  # Digit 1
             u"\xF3": u"\u0A68",  # Digit 2
@@ -423,7 +423,7 @@ class wxilp():
             u"\xF8": u"\u0A6D",  # Digit 7
             u"\xF9": u"\u0A6E",  # Digit 8
             u"\xFA": u"\u0A6F",  # Digit 9
-            u"\xFB": u"\u0A71"  # GURMUKHI ADDAK  NOTE Added -Irshad
+            u"\xFB": u"\u0A71"  # GURMUKHI ADDAK  Added -Irshad
         }
         self.hashk_i2u = {
             u"\xA2": u"\u0C82",
@@ -495,7 +495,7 @@ class wxilp():
             u"\xE5": u"\u0CCB",
             u"\xE6": u"\u0CCC",
             u"\xE8": u"\u0CCD",
-            u"\xEA": u".",  # Fullstop
+            u"\xEA": ".",  # Fullstop
             u"\xF1": u"\u0CE6",
             u"\xF2": u"\u0CE7",
             u"\xF3": u"\u0CE8",
@@ -574,7 +574,7 @@ class wxilp():
             u"\xE5": u"\u0D4B",  # Vowel Sign OW
             u"\xE6": u"\u0D4C",  # Vowel Sign AU
             u"\xE8": u"\u0D4D",  # Vowel Omission Sign (Halant)
-            u"\xEA": u".",  # Fullstop
+            u"\xEA": ".",  # Fullstop
             u"\xF1": u"\u0D66",  # Digit 0
             u"\xF2": u"\u0D67",  # Digit 1
             u"\xF3": u"\u0D68",  # Digit 2
@@ -645,7 +645,7 @@ class wxilp():
             u"\xE6": u"\u09CC",  # Vowel Sign AU
             u"\xE8": u"\u09CD",  # Vowel Omission Sign (Halant)
             u"\xE9": u"\u09BC",
-            u"\xEA": u".",  # Fullstop
+            u"\xEA": ".",  # Fullstop
             u"\xF1": u"\u09E6",  # Digit 0
             u"\xF2": u"\u09E7",  # Digit 1
             u"\xF3": u"\u09E8",  # Digit 2
@@ -658,7 +658,7 @@ class wxilp():
             u"\xFA": u"\u09EF",  # Digit 9
         }
         self.hashcta_i2u = {
-            # u"\xA2":u"\u0B82",     #Vowel-modifier ANUSWAR commented
+            # u"\xA2":u"\u0B82",  #Vowel-modifier ANUSWAR commented
             # 14-March-11 -Rashid
             u"\xA2": u"\u0BAE\u0BCD",  # Vowel-modifier ANUSWAR is m + halant
             u"\xA3": u"\u0B83",  # Vowel-modifier VISARG
@@ -693,7 +693,7 @@ class wxilp():
             u"\xD2": u"\u0BB3",  # Consonant Hard LA
             u"\xD3": u"\u0BB4",  # Consonant ZHA (Tamil & Malyalam)
             u"\xD4": u"\u0BB5",  # Consonant VA
-            # u"\xD5":u"\u0BB6",     #Consonant SHA commented because it have
+            # u"\xD5":u"\u0BB6",  #Consonant SHA commented because it have
             # same sence of 0BB7 14-Mar-11
             u"\xD5": u"\u0BB7",  # Consonant SHA is nomore use in tamil
             u"\xD6": u"\u0BB7",  # Consonant Hard SHA
@@ -711,7 +711,7 @@ class wxilp():
             u"\xE5": u"\u0BCB",  # Vowel Sign OW
             u"\xE6": u"\u0BCC",  # Vowel Sign AU
             u"\xE8": u"\u0BCD",  # Vowel Omission Sign (Halant)
-            u"\xEA": u".",  # Fullstop
+            u"\xEA": ".",  # Fullstop
             u"\xF1": u"\u0BE6",  # Digit 0
             u"\xF2": u"\u0BE7",  # Digit 1
             u"\xF3": u"\u0BE8",  # Digit 2
@@ -734,13 +734,13 @@ class wxilp():
             u"\xA8": u"\u0B09",  # Vowel U
             u"\xA9": u"\u0B0A",  # Vowel UU
             u"\xAA": u"\u0B0B",  # Vowel RI
-            # u"\xAB":u"\u090E",     #Vowel E
+            # u"\xAB":u"\u090E",  #Vowel E
             u"\xAC": u"\u0B0F",  # Vowel EY
             u"\xAD": u"\u0B10",  # Vowel AI
-            # u"\xB2":u"\u0911",     #Vowel AWE
-            # u"\xAE":u"\u090D",     #Vowel AI -Rashid added
-            # u"\xB2":u"\u090D",     #Vowel AYE (Devanagari Script)
-            # u"\xAF":u"\u0912",     #Vowel O
+            # u"\xB2":u"\u0911",  #Vowel AWE
+            # u"\xAE":u"\u090D",  #Vowel AI -Rashid added
+            # u"\xB2":u"\u090D",  #Vowel AYE (Devanagari Script)
+            # u"\xAF":u"\u0912",  #Vowel O
             u"\xB0": u"\u0B13",  # Vowel OW
             u"\xB1": u"\u0B14",  # Vowel AU
             u"\xB3": u"\u0B15",  # Consonant KA
@@ -789,7 +789,7 @@ class wxilp():
             u"\xE6": u"\u0B4C",  # Vowel Sign AU
             u"\xE8": u"\u0B4D",  # Vowel Omission Sign (Halant)
             u"\xE9": u"\u0B3C",  # Diacritic Sign (Nukta)
-            u"\xEA": u".",  # Fullstop
+            u"\xEA": ".",  # Fullstop
             u"\xF1": u"\u0B66",  # Digit 0
             u"\xF2": u"\u0B67",  # Digit 1
             u"\xF3": u"\u0B68",  # Digit 2
@@ -867,7 +867,7 @@ class wxilp():
             u"\xE6": u"\u0ACC",  # Vowel Sign AU
             u"\xE7": u"\u0AC9",  # Vowel Sign AWE (Devanagari Script)
             u"\xE8": u"\u0ACD",  # Vowel Omission Sign (Halant)
-            u"\xEA": u".",  # Fullstop
+            u"\xEA": ".",  # Fullstop
             u"\xF1": u"\u0AE6",  # Digit 0
             u"\xF2": u"\u0AE7",  # Digit 1
             u"\xF3": u"\u0AE8",  # Digit 2
@@ -885,9 +885,9 @@ class wxilp():
         self.ceVmd = re.compile(u"([%s])eV([MHz])" % const)
 
         self.ceV = re.compile(u"([%s])eV" % const)
-        # NOTE const+nukta+eV added for Bengali -Irshad
+        # const+nukta+eV added for Bengali -Irshad
         self.cZeV = re.compile(u"([%s])ZeV" % const)
-        # NOTE const+nukta+eV+modifier added for Bengali -Irshad
+        # const+nukta+eV+modifier added for Bengali -Irshad
         self.cZeVmd = re.compile(u"([%s])ZeV([MHz])" % const)
 
         self.cEYmd = re.compile(u"([%s])EY([MHz])" % const)
@@ -899,14 +899,14 @@ class wxilp():
         self.coVmd = re.compile(u"([%s])oV([MHz])" % const)
 
         self.coV = re.compile(u"([%s])oV" % const)
-        # NOTE const+nukta+oV added for Bengali -Irshad
+        # const+nukta+oV added for Bengali -Irshad
         self.cZoV = re.compile(u"([%s])ZoV" % const)
-        # NOTE const+nukta+oV+modifier added for Bengali -Irshad
+        # const+nukta+oV+modifier added for Bengali -Irshad
         self.cZoVmd = re.compile(u"([%s])ZoV([MHz])" % const)
 
         self.cOY = re.compile(u"([%s])OY" % const)
         self.cZOY = re.compile(u"([%s])ZOY" %
-                               const)  # NOTE consonant+ZOY case added
+                               const)  # consonant+ZOY case added
 
         self.cvmd = re.compile(u"([%s])([AiIuUeEoO])([MHz])" % const)
         self.cZvmd = re.compile(u"([%s])Z([AiIuUeEoO])([MHz])" % const)
@@ -918,12 +918,12 @@ class wxilp():
         self.cZamd = re.compile(u"([%s])Za([MHz])" % const)
         self.cZmd = re.compile(
             u"([%s])Z([MHz])" %
-            const)  # NOTE consonant+Z+[MHz] case added
+            const)  # consonant+Z+[MHz] case added
 
         self.ca = re.compile(u"([%s])a" % const)
         self.cZa = re.compile(u"([%s])Za" % const)
         self.cYZa = re.compile(u"([%s])YZa" %
-                               const)  # NOTE consonant+YZa case added
+                               const)  # consonant+YZa case added
 
         self.c = re.compile(u"([%s])" % const)
         self.cZ = re.compile(u"([%s])Z" % const)
@@ -931,98 +931,98 @@ class wxilp():
         self.aqmd = re.compile(u"aq([MHz])")
         self.cq = re.compile(u"([%s])q" % const)
         self.cqmd = re.compile(u"([%s])q([MHz])" % const)
-        self.qmd = re.compile(u"q([MHz])")  # NOTE q+[MHz]
+        self.qmd = re.compile(u"q([MHz])")  # q+[MHz]
 
         self.dig = re.compile(u"([0-9])")
         self.i2u = re.compile(u'([\xA1-\xFB])')
 
-        # NOTE Handle Roman strings
+        # Handle Roman strings
         self.unmask_rom = re.compile(
             r'(_[a-zA-Z0-9%s]+_)' %
             (self.punctuation))
 
     def initialize_utf2wx_hash(self):
         self.hashc_i2w = {
-            u"\xB3": u"k",
-            u"\xB4": u"K",
-            u"\xB5": u"g",
-            u"\xB6": u"G",
-            u"\xB7": u"f",
-            u"\xB8": u"c",
-            u"\xB9": u"C",
-            u"\xBA": u"j",
-            u"\xBB": u"J",
-            u"\xBC": u"F",
-            u"\xBD": u"t",
-            u"\xBE": u"T",
-            u"\xBF": u"d",
-            u"\xC0": u"D",
-            u"\xC1": u"N",
-            u"\xC2": u"w",
-            u"\xC3": u"W",
-            u"\xC4": u"x",
-            u"\xC5": u"X",
-            u"\xC6": u"n",
+            u"\xB3": "k",
+            u"\xB4": "K",
+            u"\xB5": "g",
+            u"\xB6": "G",
+            u"\xB7": "f",
+            u"\xB8": "c",
+            u"\xB9": "C",
+            u"\xBA": "j",
+            u"\xBB": "J",
+            u"\xBC": "F",
+            u"\xBD": "t",
+            u"\xBE": "T",
+            u"\xBF": "d",
+            u"\xC0": "D",
+            u"\xC1": "N",
+            u"\xC2": "w",
+            u"\xC3": "W",
+            u"\xC4": "x",
+            u"\xC5": "X",
+            u"\xC6": "n",
             # Representation for Consonant NA (Tamil) ??? Refer to ISCII-91.pdf
             # page-16 -Rashid
-            u"\xC7": u"nY",
-            u"\xC8": u"p",
-            u"\xC9": u"P",
-            u"\xCA": u"b",
-            u"\xCB": u"B",
-            u"\xCC": u"m",
-            u"\xCD": u"y",
-            u"\xCF": u"r",
+            u"\xC7": "nY",
+            u"\xC8": "p",
+            u"\xC9": "P",
+            u"\xCA": "b",
+            u"\xCB": "B",
+            u"\xCC": "m",
+            u"\xCD": "y",
+            u"\xCF": "r",
             # Representation for Consonant HARD RA (Southern Script) -Rashid
-            u"\xD0": u"rY",
-            u"\xD1": u"l",
-            u"\xD2": u"lY",
+            u"\xD0": "rY",
+            u"\xD1": "l",
+            u"\xD2": "lY",
             # Representation for Consonant ZHA (Tamil & Malyalam) - Rashid
-            u"\xD3": u"lYY",
-            u"\xD4": u"v",
-            u"\xD5": u"S",
-            u"\xD6": u"R",
-            u"\xD7": u"s",
-            u"\xD8": u"h",
-            u"\xE9": u"Z",  # NUKTA
+            u"\xD3": "lYY",
+            u"\xD4": "v",
+            u"\xD5": "S",
+            u"\xD6": "R",
+            u"\xD7": "s",
+            u"\xD8": "h",
+            u"\xE9": "Z",  # NUKTA
         }
         self.hashv_i2w = {
-            u"\xA4": u"a",
-            u"\xA5": u"A",
-            u"\xA6": u"i",
-            u"\xA7": u"I",
-            u"\xA8": u"u",
-            u"\xA9": u"U",
-            u"\xAA": u"q",
-            u"\xAB": u"eV",
-            u"\xAC": u"e",
-            u"\xAD": u"E",
-            u"\xAE": u"EY",
-            u"\xAF": u"oV",
-            u"\xB0": u"o",
-            u"\xB1": u"O",
-            u"\xB2": u"OY",
+            u"\xA4": "a",
+            u"\xA5": "A",
+            u"\xA6": "i",
+            u"\xA7": "I",
+            u"\xA8": "u",
+            u"\xA9": "U",
+            u"\xAA": "q",
+            u"\xAB": "eV",
+            u"\xAC": "e",
+            u"\xAD": "E",
+            u"\xAE": "EY",
+            u"\xAF": "oV",
+            u"\xB0": "o",
+            u"\xB1": "O",
+            u"\xB2": "OY",
         }
         self.hashm_i2w = {
-            u"\xDA": u"A",
-            u"\xDB": u"i",
-            u"\xDC": u"I",
-            u"\xDD": u"u",
-            u"\xDE": u"U",
-            u"\xDF": u"q",
-            u"\xE0": u"eV",
-            u"\xE1": u"e",
-            u"\xE2": u"E",
-            u"\xE3": u"EY",
-            u"\xE4": u"oV",
-            u"\xE5": u"o",
-            u"\xE6": u"O",
-            u"\xE7": u"OY",
+            u"\xDA": "A",
+            u"\xDB": "i",
+            u"\xDC": "I",
+            u"\xDD": "u",
+            u"\xDE": "U",
+            u"\xDF": "q",
+            u"\xE0": "eV",
+            u"\xE1": "e",
+            u"\xE2": "E",
+            u"\xE3": "EY",
+            u"\xE4": "oV",
+            u"\xE5": "o",
+            u"\xE6": "O",
+            u"\xE7": "OY",
         }
         self.hashmd_i2w = {
-            u"\xA1": u"z",
-            u"\xA2": u"M",
-            u"\xA3": u"H",
+            u"\xA1": "z",
+            u"\xA2": "M",
+            u"\xA3": "H",
         }
         self.digits_i2w = {
             u"\xF1": u"0",
@@ -1213,7 +1213,7 @@ class wxilp():
         }
         self.hashp_u2i = {
             u"\u0A01": u"\xA1",  # Vowel-modifier CHANDRABINDU
-                                 # NOTE Added -Rashid
+                                 # Added -Rashid
             u"\u0A02": u"\xA2",  # Vowel-modifier ANUSWAR
             u"\u0A05": u"\xA4",  # Vowel A
             u"\u0A06": u"\xA5",  # Vowel AA
@@ -1284,7 +1284,7 @@ class wxilp():
             u"\u0A4D": u"\xE8",  # Vowel Omission Sign Halant
             u"\u0A5C": u"\xE8",  # Vowel Omission Sign Halant
             u"\u0A64": u"\xEA",  # PURNA VIRAM Reserved
-            u"\u0A65": u"\xEA",  # DEERGH VIRAM #ADDED
+            u"\u0A65": u"\xEA",  # DEERGH VIRAM
             u"\u0A66": u"\xF1",  # Consonant
             u"\u0A67": u"\xF2",  # Consonant
             u"\u0A68": u"\xF3",  # Consonant
@@ -1375,7 +1375,7 @@ class wxilp():
             u"\u0CCC": u"\xE6",  # Vowel
             u"\u0CCD": u"\xE8",  # Consonant
             u"\u0CE4": u"\xEA",  # PURNA VIRAM Reserved
-            u"\u0CE5": u"\xEA",  # DEERGH VIRAM #ADDED
+            u"\u0CE5": u"\xEA",  # DEERGH VIRAM
             u"\u0CE6": u"\xF1",  # Consonant
             u"\u0CE7": u"\xF2",  # Consonant
             u"\u0CE8": u"\xF3",  # Consonant
@@ -1455,7 +1455,7 @@ class wxilp():
             u"\u0D4C": u"\xE6",  # Vowel
             u"\u0D4D": u"\xE8",  # Consonant
             u"\u0D64": u"\xEA",  # PURNA VIRAM Reserved
-            u"\u0D65": u"\xEA",  # DEERGH VIRAM #ADDED
+            u"\u0D65": u"\xEA",  # DEERGH VIRAM
             u"\u0D66": u"\xF1",  # Consonant
             u"\u0D67": u"\xF2",  # Consonant
             u"\u0D68": u"\xF3",  # Consonant
@@ -1526,8 +1526,8 @@ class wxilp():
             u"\u09CB": u"\xE4",  # Vowel
             u"\u09CC": u"\xE6",  # Vowel
             u"\u09CD": u"\xE8",  # Consonant
-            u"\u09E4": u"\xEA",  # PURNA VIRAM Reserved #ADDED
-            u"\u09E5": u"\xEA",  # DEERGH VIRAM #ADDED
+            u"\u09E4": u"\xEA",  # PURNA VIRAM Reserved
+            u"\u09E5": u"\xEA",  # DEERGH VIRAM
             u"\u09E6": u"\xF1",  # Consonant
             u"\u09E7": u"\xF2",  # Consonant
             u"\u09E8": u"\xF3",  # Consonant
@@ -1590,12 +1590,12 @@ class wxilp():
             u"\u0BC6": u"\xE0",  # Vowel
             u"\u0BC7": u"\xE1",  # Vowel
             u"\u0BC8": u"\xE2",  # Vowel
-            u"\u0BCA": u"\xE4",  # Vowel ொ
-            u"\u0BCB": u"\xE5",  # Vowel ோ
-            u"\u0BCC": u"\xE6",  # Vowel ௌ
+            u"\u0BCA": u"\xE4",  # Vowel
+            u"\u0BCB": u"\xE5",  # Vowel
+            u"\u0BCC": u"\xE6",  # Vowel
             u"\u0BCD": u"\xE8",  # Halant
             u"\u0BE4": u"\xEA",  # PURNA VIRAM Reserved
-            u"\u0BE5": u"\xEA",  # DEERGH VIRAM #ADDED
+            u"\u0BE5": u"\xEA",  # DEERGH VIRAM
             u"\u0BE6": u"\xF1",  # Consonant
             u"\u0BE7": u"\xF2",  # Consonant
             u"\u0BE8": u"\xF3",  # Consonant
@@ -1668,18 +1668,18 @@ class wxilp():
             u"\u0B4B": u"\xE5",  # Vowel O
             u"\u0B4C": u"\xE6",  # Vowel OU
             u"\u0B4D": u"\xE8",  # Halant
-            u"\u0B64": u"\xEA",  # PURNA VIRAM Reserved #ADDED
-            u"\u0B65": u"\xEA",  # DEERGH VIRAM #ADDED
-            u"\u0B66": u"\xF1",      # Digit 0
-            u"\u0B67": u"\xF2",      # Digit 1
-            u"\u0B68": u"\xF3",      # Digit 2
-            u"\u0B69": u"\xF4",      # Digit 3
-            u"\u0B6A": u"\xF5",      # Digit 4
-            u"\u0B6B": u"\xF6",      # Digit 5
-            u"\u0B6C": u"\xF7",      # Digit 6
-            u"\u0B6D": u"\xF8",      # Digit 7
-            u"\u0B6E": u"\xF9",      # Digit 8
-            u"\u0B6F": u"\xFA",      # Digit 9
+            u"\u0B64": u"\xEA",  # PURNA VIRAM Reserved
+            u"\u0B65": u"\xEA",  # DEERGH VIRAM
+            u"\u0B66": u"\xF1",  # Digit 0
+            u"\u0B67": u"\xF2",  # Digit 1
+            u"\u0B68": u"\xF3",  # Digit 2
+            u"\u0B69": u"\xF4",  # Digit 3
+            u"\u0B6A": u"\xF5",  # Digit 4
+            u"\u0B6B": u"\xF6",  # Digit 5
+            u"\u0B6C": u"\xF7",  # Digit 6
+            u"\u0B6D": u"\xF8",  # Digit 7
+            u"\u0B6E": u"\xF9",  # Digit 8
+            u"\u0B6F": u"\xFA",  # Digit 9
         }
         self.unicode_norm_hasho_u2i = {
             u"\u0B5C": u"\u0B21",  # ADDED
@@ -1751,8 +1751,8 @@ class wxilp():
             u"\u0ACC": u"\xE6",  # Vowel
             u"\u0ACD": u"\xE8",  # Halant
             u"\u0AE0": u"\xAA",  # Vowel Sanskrit
-            u"\u0AE4": u"\xEA",  # PURNA VIRAM Reserved #ADDED
-            u"\u0AE5": u"\xEA",  # DEERGH VIRAM #ADDED
+            u"\u0AE4": u"\xEA",  # PURNA VIRAM Reserved
+            u"\u0AE5": u"\xEA",  # DEERGH VIRAM
             u"\u0AE6": u"\xF1",  # Digit 0
             u"\u0AE7": u"\xF2",  # Digit 1
             u"\u0AE8": u"\xF3",  # Digit 2
@@ -1795,7 +1795,7 @@ class wxilp():
         self.u2i_bn = re.compile(u"([\u09DC\u09DD\u09DF])")
         self.u2i_pn = re.compile(u"([\u0A59-\u0A5B\u0A5E])")
 
-        # NOTE Handle Roman strings
+        # Handle Roman strings
         self.mask_rom = re.compile(
             r'([0-9%s]*[a-zA-Z][0-9a-zA-Z%s]*)' %
             ((self.punctuation,) * 2))
@@ -1820,526 +1820,670 @@ class wxilp():
 
         return text
 
+    def map_ZeV(self, my_string):
+        if 'ZeV' not in my_string:
+            return my_string
+        my_string = self.cZeVmd.sub(
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashc_w2i["Z"] +
+            self.hashm_w2i["eV"] +
+            self.hashmd_w2i[
+                m.group(2)],
+            my_string)
+        my_string = self.cZeV.sub(
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashc_w2i["Z"] +
+            self.hashm_w2i["eV"],
+            my_string)
+        return my_string
+
+    def map_eV(self, my_string):
+        if 'eV' not in my_string:
+            return my_string
+        my_string = self.ceVmd.sub(
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i["eV"] +
+            self.hashmd_w2i[
+                m.group(2)],
+            my_string)
+        my_string = self.ceV.sub(
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i["eV"],
+            my_string)
+        return my_string
+
+    def map_EY(self, my_string):
+        if 'EY' not in my_string:
+            return my_string
+        my_string = self.cEYmd.sub(
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i["EY"] +
+            self.hashmd_w2i[
+                m.group(2)],
+            my_string)
+        my_string = self.cEY.sub(
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i["EY"],
+            my_string)
+        return my_string
+
+    def map_ZoV(self, my_string):
+        if 'ZoV' not in my_string:
+            return my_string
+        my_string = self.cZoVmd.sub(
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashc_w2i["Z"] +
+            self.hashm_w2i["oV"] +
+            self.hashmd_w2i[
+                m.group(2)],
+            my_string)
+        my_string = self.cZoV.sub(
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashc_w2i["Z"] +
+            self.hashm_w2i["oV"],
+            my_string)
+        return my_string
+
+    def map_oV(self, my_string):
+        if 'oV' not in my_string:
+            return my_string
+        my_string = self.coVmd.sub(
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i["oV"] +
+            self.hashmd_w2i[
+                m.group(2)],
+            my_string)
+        my_string = self.coV.sub(
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i["oV"],
+            my_string)
+        return my_string
+
+    def map_OY(self, my_string):
+        if 'OY' not in my_string:
+            return my_string
+        if 'Z' in my_string:  # Case ZOY added
+            my_string = self.cZOY.sub(
+                lambda m: self.hashc_w2i[
+                    m.group(1)] +
+                self.hashc_w2i["Z"] +
+                self.hashm_w2i["OY"],
+                my_string)
+        my_string = self.cOYmd.sub(
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i["OY"] +
+            self.hashmd_w2i[
+                m.group(2)],
+            my_string)
+        my_string = self.cOY.sub(
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i["OY"],
+            my_string)
+        return my_string
+
+    def map_Z(self, my_string):
+        if 'Z' not in my_string:
+            return my_string
+        my_string = self.cZvmd.sub(
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashc_w2i["Z"] +
+            self.hashm_w2i[
+                m.group(2)] +
+            self.hashmd_w2i[
+                m.group(3)],
+            my_string)
+        my_string = self.cZv.sub(
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashc_w2i["Z"] +
+            self.hashm_w2i[
+                m.group(2)],
+            my_string)
+        my_string = self.cZamd.sub(
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashc_w2i["Z"] +
+            self.hashmd_w2i[
+                m.group(2)],
+            my_string)
+        my_string = self.cZmd.sub(
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashc_w2i["Z"] +
+            self.hashmd_w2i[
+                m.group(2)],
+            my_string)
+        my_string = self.cZa.sub(
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashc_w2i["Z"],
+            my_string)
+        # consonant+YZa case added
+        my_string = self.cYZa.sub(
+            lambda m: self.hashc_w2i[
+                m.group(1) +
+                "Y"] +
+            self.hashc_w2i["Z"],
+            my_string)
+        my_string = self.cZ.sub(
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashc_w2i["Z"] +
+            self.hashc_w2i["_"],
+            my_string)
+        return my_string
+
+    def map_q(self, my_string):
+        if 'q' not in my_string:
+            return my_string
+        my_string = self.cqmd.sub(
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i["q"] +
+            self.hashmd_w2i[
+                m.group(2)],
+            my_string)
+        # q+[MHz] case added
+        my_string = self.qmd.sub(
+            lambda m: self.hashv_w2i["q"] +
+            self.hashmd_w2i[
+                m.group(1)],
+            my_string)
+        my_string = self.cq.sub(
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i["q"],
+            my_string)
+        # Added for the case Vowel(U090B)+Modifier
+        my_string = self.aqmd.sub(
+            lambda m: self.hashv_w2i["aq"] +
+            self.hashmd_w2i[
+                m.group(1)],
+            my_string)
+        return my_string
+        # q, aq removed from here
+
+    # Added for the case lYYa,lYY[AiIuUeEoO],lYY[MHz]
+    def map_lYY(self, my_string):
+        if 'lYY' not in my_string:
+            return my_string
+        my_string = re.sub(
+            u'(lYY)eV([MHz])',
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i["eV"] +
+            self.hashmd_w2i[
+                m.group(2)],
+            my_string)
+        my_string = re.sub(
+            u'(lYY)eV', lambda m: self.hashc_w2i[
+                m.group(1)] + self.hashm_w2i["eV"], my_string)
+        my_string = re.sub(
+            u'(lYY)EY([MHz])',
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i["EY"] +
+            self.hashmd_w2i[
+                m.group(2)],
+            my_string)
+        my_string = re.sub(
+            u'(lYY)EY', lambda m: self.hashc_w2i[
+                m.group(1)] + self.hashm_w2i["EY"], my_string)
+        my_string = re.sub(
+            u'(lYY)oV([MHz])',
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i["oV"] +
+            self.hashmd_w2i[
+                m.group(2)],
+            my_string)
+        my_string = re.sub(
+            u'(lYY)oV', lambda m: self.hashc_w2i[
+                m.group(1)] + self.hashm_w2i["oV"], my_string)
+        my_string = re.sub(
+            u'(lYY)OY([MHz])',
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i["OY"] +
+            self.hashmd_w2i[
+                m.group(2)],
+            my_string)
+        my_string = re.sub(
+            u'(lYY)OY', lambda m: self.hashc_w2i[
+                m.group(1)] + self.hashm_w2i["OY"], my_string)
+        my_string = re.sub(
+            u'(lYY)([AiIuUeEoO])([MHz])',
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i[
+                m.group(2)] +
+            self.hashmd_w2i[
+                m.group(3)],
+            my_string)
+        my_string = re.sub(
+            u'(lYY)([AiIuUeEoO])',
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i[
+                m.group(2)],
+            my_string)
+        my_string = re.sub(
+            u'(lYY)a([MHz])',
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashmd_w2i[
+                m.group(2)],
+            my_string)
+        my_string = re.sub(
+            u'(lYY)a', lambda m: self.hashc_w2i[
+                m.group(1)], my_string)
+        my_string = re.sub(
+            u'(lYY)', lambda m: self.hashc_w2i[
+                m.group(1)] + self.hashc_w2i["_"], my_string)
+        return my_string
+
+    # Added for the case lYa,lY[AiIuUeEoO],lY[MHz]
+    def map_lY(self, my_string):
+        if 'lY' not in my_string:
+            return my_string
+        my_string = re.sub(
+            u'(lY)eV([MHz])',
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i["eV"] +
+            self.hashmd_w2i[
+                m.group(2)],
+            my_string)
+        my_string = re.sub(
+            u'(lY)eV',
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i["eV"],
+            my_string)
+        my_string = re.sub(
+            u'(lY)EY([MHz])',
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i["EY"] +
+            self.hashmd_w2i[
+                m.group(2)],
+            my_string)
+        my_string = re.sub(
+            u'(lY)EY',
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i["EY"],
+            my_string)
+        my_string = re.sub(
+            u'(lY)oV([MHz])',
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i["oV"] +
+            self.hashmd_w2i[
+                m.group(2)],
+            my_string)
+        my_string = re.sub(
+            u'(lY)oV',
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i["oV"],
+            my_string)
+        my_string = re.sub(
+            u'(lY)OY([MHz])',
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i["OY"] +
+            self.hashmd_w2i[
+                m.group(2)],
+            my_string)
+        my_string = re.sub(
+            u'(lY)OY',
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i["OY"],
+            my_string)
+        my_string = re.sub(
+            u'(lY)([AiIuUeEoO])([MHz])',
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i[
+                m.group(2)] +
+            self.hashmd_w2i[
+                m.group(3)],
+            my_string)
+        my_string = re.sub(
+            u'(lY)([AiIuUeEoO])',
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i[
+                m.group(2)],
+            my_string)
+        my_string = re.sub(
+            u'(lY)a([MHz])',
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashmd_w2i[
+                m.group(2)],
+            my_string)
+        my_string = re.sub(
+            u'(lY)a', lambda m: self.hashc_w2i[
+                m.group(1)], my_string)
+        my_string = re.sub(
+            u'(lY)',
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashc_w2i["_"],
+            my_string)
+        return my_string
+
+    # Added for tamil -by Rashid
+    def map_nY(self, my_string):
+        if 'nY' not in my_string:
+            return my_string
+        my_string = re.sub(
+            u'(nY)eV([MHz])',
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i["eV"] +
+            self.hashmd_w2i[
+                m.group(2)],
+            my_string)
+        my_string = re.sub(
+            u'(nY)eV',
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i["eV"],
+            my_string)
+        my_string = re.sub(
+            u'(nY)EY([MHz])',
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i["EY"] +
+            self.hashmd_w2i[
+                m.group(2)],
+            my_string)
+        my_string = re.sub(
+            u'(nY)EY',
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i["EY"],
+            my_string)
+        my_string = re.sub(
+            u'(nY)oV([MHz])',
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i["oV"] +
+            self.hashmd_w2i[
+                m.group(2)],
+            my_string)
+        my_string = re.sub(
+            u'(nY)oV',
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i["oV"],
+            my_string)
+        my_string = re.sub(
+            u'(nY)OY([MHz])',
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i["OY"] +
+            self.hashmd_w2i[
+                m.group(2)],
+            my_string)
+        my_string = re.sub(
+            u'(nY)OY',
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i["OY"],
+            my_string)
+        my_string = re.sub(
+            u'(nY)([AiIuUeEoO])([MHz])',
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i[
+                m.group(2)] +
+            self.hashmd_w2i[
+                m.group(3)],
+            my_string)
+        my_string = re.sub(
+            u'(nY)([AiIuUeEoO])',
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i[
+                m.group(2)],
+            my_string)
+        my_string = re.sub(
+            u'(nY)a([MHz])',
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashmd_w2i[
+                m.group(2)],
+            my_string)
+        my_string = re.sub(
+            u'(nY)a', lambda m: self.hashc_w2i[
+                m.group(1)], my_string)
+        my_string = re.sub(
+            u'(nY)',
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashc_w2i["_"],
+            my_string)
+        return my_string
+
+    # Added for tamil -by Rashid
+    def map_rY(self, my_string):
+        if 'rY' not in my_string:
+            return my_string
+        my_string = re.sub(
+            u'(rY)eV([MHz])',
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i["eV"] +
+            self.hashmd_w2i[
+                m.group(2)],
+            my_string)
+        my_string = re.sub(
+            u'(rY)eV',
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i["eV"],
+            my_string)
+        my_string = re.sub(
+            u'(rY)EY([MHz])',
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i["EY"] +
+            self.hashmd_w2i[
+                m.group(2)],
+            my_string)
+        my_string = re.sub(
+            u'(rY)EY',
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i["EY"],
+            my_string)
+        my_string = re.sub(
+            u'(rY)oV([MHz])',
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i["oV"] +
+            self.hashmd_w2i[
+                m.group(2)],
+            my_string)
+        my_string = re.sub(
+            u'(rY)oV',
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i["oV"],
+            my_string)
+        my_string = re.sub(
+            u'(rY)OY([MHz])',
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i["OY"] +
+            self.hashmd_w2i[
+                m.group(2)],
+            my_string)
+        my_string = re.sub(
+            u'(rY)OY',
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i["OY"],
+            my_string)
+        my_string = re.sub(
+            u'(rY)([AiIuUeEoO])([MHz])',
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i[
+                m.group(2)] +
+            self.hashmd_w2i[
+                m.group(3)],
+            my_string)
+        my_string = re.sub(
+            u'(rY)([AiIuUeEoO])',
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashm_w2i[
+                m.group(2)],
+            my_string)
+        my_string = re.sub(
+            u'(rY)a([MHz])',
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashmd_w2i[
+                m.group(2)],
+            my_string)
+        my_string = re.sub(
+            u'(rY)a', lambda m: self.hashc_w2i[
+                m.group(1)], my_string)
+        my_string = re.sub(
+            u'(rY)',
+            lambda m: self.hashc_w2i[
+                m.group(1)] +
+            self.hashc_w2i["_"],
+            my_string)
+        return my_string
+
+    def map_eV2(self, my_string):
+        if 'eV' not in my_string:
+            return my_string
+        my_string = re.sub(
+            u'aeV([MHz])',
+            lambda m: self.hashv_w2i["aeV"] +
+            self.hashmd_w2i[
+                m.group(1)],
+            my_string)
+        my_string = my_string.replace('aeV', self.hashv_w2i["aeV"])
+        my_string = re.sub(
+            u'eV([MHz])',
+            lambda m: self.hashv_w2i["eV"] +
+            self.hashmd_w2i[
+                m.group(1)],
+            my_string)
+        my_string = my_string.replace('eV', self.hashv_w2i["eV"])
+        return my_string
+
+    def map_EY2(self, my_string):
+        if 'EY' not in my_string:
+            return my_string
+        my_string = re.sub(
+            u'aEY([MHz])',
+            lambda m: self.hashv_w2i["aEY"] +
+            self.hashmd_w2i[
+                m.group(1)],
+            my_string)
+        my_string = my_string.replace('aEY', self.hashv_w2i["aEY"])
+        my_string = re.sub(
+            u'EY([MHz])',
+            lambda m: self.hashv_w2i["EY"] +
+            self.hashmd_w2i[
+                m.group(1)],
+            my_string)
+        my_string = my_string.replace('EY', self.hashv_w2i["EY"])
+        return my_string
+
+    def map_oV2(self, my_string):
+        if 'oV' not in my_string:
+            return my_string
+        my_string = re.sub(
+            u'aoV([MHz])',
+            lambda m: self.hashv_w2i["aoV"] +
+            self.hashmd_w2i[
+                m.group(1)],
+            my_string)
+        my_string = my_string.replace('aoV', self.hashv_w2i["aoV"])
+        my_string = re.sub(
+            u'oV([MHz])',
+            lambda m: self.hashv_w2i["oV"] +
+            self.hashmd_w2i[
+                m.group(1)],
+            my_string)
+        my_string = my_string.replace('oV', self.hashv_w2i["oV"])
+        return my_string
+
+    def map_OY2(self, my_string):
+        if 'OY' not in my_string:
+            return my_string
+        my_string = re.sub(
+            u'aOY([MHz])',
+            lambda m: self.hashv_w2i["aOY"] +
+            self.hashmd_w2i[
+                m.group(1)],
+            my_string)
+        my_string = my_string.replace('aOY', self.hashv_w2i["aOY"])
+        my_string = re.sub(
+            u'OY([MHz])',
+            lambda m: self.hashv_w2i["OY"] +
+            self.hashmd_w2i[
+                m.group(1)],
+            my_string)
+        my_string = my_string.replace('OY', self.hashv_w2i["OY"])
+        return my_string
+
+    def map_a(self, my_string):
+        if 'a' not in my_string:
+            return my_string
+        # non-word boundary added on the left of string
+        my_string = re.sub(u'\BaA', self.hashv_w2i["aA"], my_string)
+        my_string = re.sub(u'\Bai', self.hashv_w2i["ai"], my_string)
+        my_string = re.sub(u'\BaI', self.hashv_w2i["aI"], my_string)
+        my_string = re.sub(u'\Bau', self.hashv_w2i["au"], my_string)
+        my_string = re.sub(u'\BaU', self.hashv_w2i["aU"], my_string)
+        my_string = re.sub(u'\Bae', self.hashv_w2i["ae"], my_string)
+        my_string = re.sub(u'\BaE', self.hashv_w2i["aE"], my_string)
+        my_string = re.sub(u'\Bao', self.hashv_w2i["ao"], my_string)
+        my_string = re.sub(u'\BaO', self.hashv_w2i["aO"], my_string)
+        return my_string
+
     def wx2iscii(self, my_string):
         """Convert WX to ISCII"""
-        q, Z = u'q' in my_string, u'Z' in my_string
-        lY, nY, rY, = (
-            u'lY' in my_string, u'nY' in my_string, u'rY' in my_string)
-        eV, EY, oV, OY = (
-            u'eV' in my_string, u'EY' in my_string, u'oV' in my_string,
-            u'OY' in my_string)
-        if self.lang_tag == 'pan':  # NOTE Added -Irshad
-            my_string = my_string.replace(u'EY', self.hashv_w2i[u"E"] + 'Y')
-        if eV:
-            if Z:  # NOTE added
-                my_string = self.cZeVmd.sub(
-                    lambda m: self.hashc_w2i[
-                        m.group(1)] +
-                    self.hashc_w2i[u"Z"] +
-                    self.hashm_w2i[u"eV"] +
-                    self.hashmd_w2i[
-                        m.group(2)],
-                    my_string)
-                my_string = self.cZeV.sub(
-                    lambda m: self.hashc_w2i[
-                        m.group(1)] +
-                    self.hashc_w2i[u"Z"] +
-                    self.hashm_w2i[u"eV"],
-                    my_string)
-            my_string = self.ceVmd.sub(
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashm_w2i[u"eV"] +
-                self.hashmd_w2i[
-                    m.group(2)],
-                my_string)
-            my_string = self.ceV.sub(
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashm_w2i[u"eV"],
-                my_string)
-        if EY:
-            my_string = self.cEYmd.sub(
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashm_w2i[u"EY"] +
-                self.hashmd_w2i[
-                    m.group(2)],
-                my_string)
-            my_string = self.cEY.sub(
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashm_w2i[u"EY"],
-                my_string)
-        if oV:
-            if Z:  # NOTE added
-                my_string = self.cZoVmd.sub(
-                    lambda m: self.hashc_w2i[
-                        m.group(1)] +
-                    self.hashc_w2i[u"Z"] +
-                    self.hashm_w2i[u"oV"] +
-                    self.hashmd_w2i[
-                        m.group(2)],
-                    my_string)
-                my_string = self.cZoV.sub(
-                    lambda m: self.hashc_w2i[
-                        m.group(1)] +
-                    self.hashc_w2i[u"Z"] +
-                    self.hashm_w2i[u"oV"],
-                    my_string)
-            my_string = self.coVmd.sub(
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashm_w2i[u"oV"] +
-                self.hashmd_w2i[
-                    m.group(2)],
-                my_string)
-            my_string = self.coV.sub(
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashm_w2i[u"oV"],
-                my_string)
-        if OY:
-            if Z:  # NOTE Case ZOY added
-                my_string = self.cZOY.sub(
-                    lambda m: self.hashc_w2i[
-                        m.group(1)] +
-                    self.hashc_w2i[u"Z"] +
-                    self.hashm_w2i[u"OY"],
-                    my_string)
-            my_string = self.cOYmd.sub(
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashm_w2i[u"OY"] +
-                self.hashmd_w2i[
-                    m.group(2)],
-                my_string)
-            my_string = self.cOY.sub(
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashm_w2i[u"OY"],
-                my_string)
-
-        if Z:
-            my_string = self.cZvmd.sub(
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashc_w2i[u"Z"] +
-                self.hashm_w2i[
-                    m.group(2)] +
-                self.hashmd_w2i[
-                    m.group(3)],
-                my_string)
-            my_string = self.cZv.sub(
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashc_w2i[u"Z"] +
-                self.hashm_w2i[
-                    m.group(2)],
-                my_string)
-            my_string = self.cZamd.sub(
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashc_w2i[u"Z"] +
-                self.hashmd_w2i[
-                    m.group(2)],
-                my_string)
-            my_string = self.cZmd.sub(
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashc_w2i[u"Z"] +
-                self.hashmd_w2i[
-                    m.group(2)],
-                my_string)
-            my_string = self.cZa.sub(
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashc_w2i[u"Z"],
-                my_string)
-            # NOTE consonant+YZa case added
-            my_string = self.cYZa.sub(
-                lambda m: self.hashc_w2i[
-                    m.group(1) +
-                    u"Y"] +
-                self.hashc_w2i[u"Z"],
-                my_string)
-            my_string = self.cZ.sub(
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashc_w2i[u"Z"] +
-                self.hashc_w2i[u"_"],
-                my_string)
-        if q:
-            my_string = self.cqmd.sub(
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashm_w2i[u"q"] +
-                self.hashmd_w2i[
-                    m.group(2)],
-                my_string)
-            # NOTE q+[MHz] case added
-            my_string = self.qmd.sub(
-                lambda m: self.hashv_w2i[u"q"] +
-                self.hashmd_w2i[
-                    m.group(1)],
-                my_string)
-            my_string = self.cq.sub(
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashm_w2i[u"q"],
-                my_string)
-            # Added for the case Vowel(U090B)+Modifier
-            my_string = self.aqmd.sub(
-                lambda m: self.hashv_w2i[u"aq"] +
-                self.hashmd_w2i[
-                    m.group(1)],
-                my_string)
-            # NOTE q, aq removed from here
-        # Added for the case lYYa,lYY[AiIuUeEoO],lYY[MHz]
-        if lY:
-            if 'lYY' in my_string:
-                my_string = re.sub(
-                    u'(lYY)eV([MHz])',
-                    lambda m: self.hashc_w2i[
-                        m.group(1)] +
-                    self.hashm_w2i[u"eV"] +
-                    self.hashmd_w2i[
-                        m.group(2)],
-                    my_string)
-                my_string = re.sub(
-                    u'(lYY)eV', lambda m: self.hashc_w2i[
-                        m.group(1)] + self.hashm_w2i[u"eV"], my_string)
-                my_string = re.sub(
-                    u'(lYY)EY([MHz])',
-                    lambda m: self.hashc_w2i[
-                        m.group(1)] +
-                    self.hashm_w2i[u"EY"] +
-                    self.hashmd_w2i[
-                        m.group(2)],
-                    my_string)
-                my_string = re.sub(
-                    u'(lYY)EY', lambda m: self.hashc_w2i[
-                        m.group(1)] + self.hashm_w2i[u"EY"], my_string)
-                my_string = re.sub(
-                    u'(lYY)oV([MHz])',
-                    lambda m: self.hashc_w2i[
-                        m.group(1)] +
-                    self.hashm_w2i[u"oV"] +
-                    self.hashmd_w2i[
-                        m.group(2)],
-                    my_string)
-                my_string = re.sub(
-                    u'(lYY)oV', lambda m: self.hashc_w2i[
-                        m.group(1)] + self.hashm_w2i[u"oV"], my_string)
-                my_string = re.sub(
-                    u'(lYY)OY([MHz])',
-                    lambda m: self.hashc_w2i[
-                        m.group(1)] +
-                    self.hashm_w2i[u"OY"] +
-                    self.hashmd_w2i[
-                        m.group(2)],
-                    my_string)
-                my_string = re.sub(
-                    u'(lYY)OY', lambda m: self.hashc_w2i[
-                        m.group(1)] + self.hashm_w2i[u"OY"], my_string)
-                my_string = re.sub(
-                    u'(lYY)([AiIuUeEoO])([MHz])',
-                    lambda m: self.hashc_w2i[
-                        m.group(1)] +
-                    self.hashm_w2i[
-                        m.group(2)] +
-                    self.hashmd_w2i[
-                        m.group(3)],
-                    my_string)
-                my_string = re.sub(
-                    u'(lYY)([AiIuUeEoO])',
-                    lambda m: self.hashc_w2i[
-                        m.group(1)] +
-                    self.hashm_w2i[
-                        m.group(2)],
-                    my_string)
-                my_string = re.sub(
-                    u'(lYY)a([MHz])',
-                    lambda m: self.hashc_w2i[
-                        m.group(1)] +
-                    self.hashmd_w2i[
-                        m.group(2)],
-                    my_string)
-                my_string = re.sub(
-                    u'(lYY)a', lambda m: self.hashc_w2i[
-                        m.group(1)], my_string)
-                my_string = re.sub(
-                    u'(lYY)', lambda m: self.hashc_w2i[
-                        m.group(1)] + self.hashc_w2i[u"_"], my_string)
-            # Added for the case lYa,lY[AiIuUeEoO],lY[MHz]
-            my_string = re.sub(
-                u'(lY)eV([MHz])',
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashm_w2i[u"eV"] +
-                self.hashmd_w2i[
-                    m.group(2)],
-                my_string)
-            my_string = re.sub(
-                u'(lY)eV',
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashm_w2i[u"eV"],
-                my_string)
-            my_string = re.sub(
-                u'(lY)EY([MHz])',
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashm_w2i[u"EY"] +
-                self.hashmd_w2i[
-                    m.group(2)],
-                my_string)
-            my_string = re.sub(
-                u'(lY)EY',
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashm_w2i[u"EY"],
-                my_string)
-            my_string = re.sub(
-                u'(lY)oV([MHz])',
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashm_w2i[u"oV"] +
-                self.hashmd_w2i[
-                    m.group(2)],
-                my_string)
-            my_string = re.sub(
-                u'(lY)oV',
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashm_w2i[u"oV"],
-                my_string)
-            my_string = re.sub(
-                u'(lY)OY([MHz])',
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashm_w2i[u"OY"] +
-                self.hashmd_w2i[
-                    m.group(2)],
-                my_string)
-            my_string = re.sub(
-                u'(lY)OY',
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashm_w2i[u"OY"],
-                my_string)
-            my_string = re.sub(
-                u'(lY)([AiIuUeEoO])([MHz])',
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashm_w2i[
-                    m.group(2)] +
-                self.hashmd_w2i[
-                    m.group(3)],
-                my_string)
-            my_string = re.sub(
-                u'(lY)([AiIuUeEoO])',
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashm_w2i[
-                    m.group(2)],
-                my_string)
-            my_string = re.sub(
-                u'(lY)a([MHz])',
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashmd_w2i[
-                    m.group(2)],
-                my_string)
-            my_string = re.sub(
-                u'(lY)a', lambda m: self.hashc_w2i[
-                    m.group(1)], my_string)
-            my_string = re.sub(
-                u'(lY)',
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashc_w2i[u"_"],
-                my_string)
-        # Added for tamil -by Rashid
-        if nY:
-            my_string = re.sub(
-                u'(nY)eV([MHz])',
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashm_w2i[u"eV"] +
-                self.hashmd_w2i[
-                    m.group(2)],
-                my_string)
-            my_string = re.sub(
-                u'(nY)eV',
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashm_w2i[u"eV"],
-                my_string)
-            my_string = re.sub(
-                u'(nY)EY([MHz])',
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashm_w2i[u"EY"] +
-                self.hashmd_w2i[
-                    m.group(2)],
-                my_string)
-            my_string = re.sub(
-                u'(nY)EY',
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashm_w2i[u"EY"],
-                my_string)
-            my_string = re.sub(
-                u'(nY)oV([MHz])',
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashm_w2i[u"oV"] +
-                self.hashmd_w2i[
-                    m.group(2)],
-                my_string)
-            my_string = re.sub(
-                u'(nY)oV',
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashm_w2i[u"oV"],
-                my_string)
-            my_string = re.sub(
-                u'(nY)OY([MHz])',
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashm_w2i[u"OY"] +
-                self.hashmd_w2i[
-                    m.group(2)],
-                my_string)
-            my_string = re.sub(
-                u'(nY)OY',
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashm_w2i[u"OY"],
-                my_string)
-            my_string = re.sub(
-                u'(nY)([AiIuUeEoO])([MHz])',
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashm_w2i[
-                    m.group(2)] +
-                self.hashmd_w2i[
-                    m.group(3)],
-                my_string)
-            my_string = re.sub(
-                u'(nY)([AiIuUeEoO])',
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashm_w2i[
-                    m.group(2)],
-                my_string)
-            my_string = re.sub(
-                u'(nY)a([MHz])',
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashmd_w2i[
-                    m.group(2)],
-                my_string)
-            my_string = re.sub(
-                u'(nY)a', lambda m: self.hashc_w2i[
-                    m.group(1)], my_string)
-            my_string = re.sub(
-                u'(nY)',
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashc_w2i[u"_"],
-                my_string)
-        # Added for tamil -by Rashid
-        if rY:
-            my_string = re.sub(
-                u'(rY)eV([MHz])',
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashm_w2i[u"eV"] +
-                self.hashmd_w2i[
-                    m.group(2)],
-                my_string)
-            my_string = re.sub(
-                u'(rY)eV',
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashm_w2i[u"eV"],
-                my_string)
-            my_string = re.sub(
-                u'(rY)EY([MHz])',
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashm_w2i[u"EY"] +
-                self.hashmd_w2i[
-                    m.group(2)],
-                my_string)
-            my_string = re.sub(
-                u'(rY)EY',
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashm_w2i[u"EY"],
-                my_string)
-            my_string = re.sub(
-                u'(rY)oV([MHz])',
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashm_w2i[u"oV"] +
-                self.hashmd_w2i[
-                    m.group(2)],
-                my_string)
-            my_string = re.sub(
-                u'(rY)oV',
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashm_w2i[u"oV"],
-                my_string)
-            my_string = re.sub(
-                u'(rY)OY([MHz])',
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashm_w2i[u"OY"] +
-                self.hashmd_w2i[
-                    m.group(2)],
-                my_string)
-            my_string = re.sub(
-                u'(rY)OY',
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashm_w2i[u"OY"],
-                my_string)
-            my_string = re.sub(
-                u'(rY)([AiIuUeEoO])([MHz])',
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashm_w2i[
-                    m.group(2)] +
-                self.hashmd_w2i[
-                    m.group(3)],
-                my_string)
-            my_string = re.sub(
-                u'(rY)([AiIuUeEoO])',
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashm_w2i[
-                    m.group(2)],
-                my_string)
-            my_string = re.sub(
-                u'(rY)a([MHz])',
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashmd_w2i[
-                    m.group(2)],
-                my_string)
-            my_string = re.sub(
-                u'(rY)a', lambda m: self.hashc_w2i[
-                    m.group(1)], my_string)
-            my_string = re.sub(
-                u'(rY)',
-                lambda m: self.hashc_w2i[
-                    m.group(1)] +
-                self.hashc_w2i[u"_"],
-                my_string)
+        if self.lang_tag == 'pan':  # Added -Irshad
+            my_string = my_string.replace('EY', self.hashv_w2i["E"] + 'Y')
+        my_string = self.map_ZeV(my_string)
+        my_string = self.map_eV(my_string)
+        my_string = self.map_EY(my_string)
+        my_string = self.map_ZoV(my_string)
+        my_string = self.map_oV(my_string)
+        my_string = self.map_OY(my_string)
+        my_string = self.map_Z(my_string)
+        my_string = self.map_q(my_string)
+        my_string = self.map_lYY(my_string)
+        my_string = self.map_lY(my_string)
+        my_string = self.map_nY(my_string)
+        my_string = self.map_rY(my_string)
 
         my_string = self.cvmd.sub(
             lambda m: self.hashc_w2i[
@@ -2365,92 +2509,24 @@ class wxilp():
             lambda m: self.hashc_w2i[
                 m.group(1)], my_string)
 
-        if q:
-            # NOTE q, aq replaced
-            my_string = my_string.replace(u'aq', self.hashv_w2i[u"aq"])
-            my_string = my_string.replace(u'q', self.hashv_w2i[u"aq"])
+        # q, aq replaced
+        my_string = my_string.replace('aq', self.hashv_w2i["aq"])
+        my_string = my_string.replace('q', self.hashv_w2i["aq"])
 
         my_string = self.c.sub(
             lambda m: self.hashc_w2i[
                 m.group(1)] +
-            self.hashc_w2i[u"_"],
+            self.hashc_w2i["_"],
             my_string)
         # Added for the case of U0946
-        if eV:
-            my_string = re.sub(
-                u'aeV([MHz])',
-                lambda m: self.hashv_w2i[u"aeV"] +
-                self.hashmd_w2i[
-                    m.group(1)],
-                my_string)
-            my_string = my_string.replace(u'aeV', self.hashv_w2i[u"aeV"])
-            my_string = re.sub(
-                u'eV([MHz])',
-                lambda m: self.hashv_w2i[u"eV"] +
-                self.hashmd_w2i[
-                    m.group(1)],
-                my_string)
-            my_string = my_string.replace(u'eV', self.hashv_w2i[u"eV"])
+        my_string = self.map_eV2(my_string)
         # Added for the case of U0945
-        if EY:
-            my_string = re.sub(
-                u'aEY([MHz])',
-                lambda m: self.hashv_w2i[u"aEY"] +
-                self.hashmd_w2i[
-                    m.group(1)],
-                my_string)
-            my_string = my_string.replace(u'aEY', self.hashv_w2i[u"aEY"])
-            my_string = re.sub(
-                u'EY([MHz])',
-                lambda m: self.hashv_w2i[u"EY"] +
-                self.hashmd_w2i[
-                    m.group(1)],
-                my_string)
-            my_string = my_string.replace(u'EY', self.hashv_w2i[u"EY"])
+        my_string = self.map_EY2(my_string)
         # Added for the case of U094A
-        if oV:
-            my_string = re.sub(
-                u'aoV([MHz])',
-                lambda m: self.hashv_w2i[u"aoV"] +
-                self.hashmd_w2i[
-                    m.group(1)],
-                my_string)
-            my_string = my_string.replace(u'aoV', self.hashv_w2i[u"aoV"])
-            my_string = re.sub(
-                u'oV([MHz])',
-                lambda m: self.hashv_w2i[u"oV"] +
-                self.hashmd_w2i[
-                    m.group(1)],
-                my_string)
-            my_string = my_string.replace(u'oV', self.hashv_w2i[u"oV"])
+        my_string = self.map_oV2(my_string)
         # Added for the case of U0949
-        if OY:
-            my_string = re.sub(
-                u'aOY([MHz])',
-                lambda m: self.hashv_w2i[u"aOY"] +
-                self.hashmd_w2i[
-                    m.group(1)],
-                my_string)
-            my_string = my_string.replace(u'aOY', self.hashv_w2i[u"aOY"])
-            my_string = re.sub(
-                u'OY([MHz])',
-                lambda m: self.hashv_w2i[u"OY"] +
-                self.hashmd_w2i[
-                    m.group(1)],
-                my_string)
-            my_string = my_string.replace(u'OY', self.hashv_w2i[u"OY"])
-
-        if 'a' in my_string:
-            # NOTE non-word boundary added on the left of string
-            my_string = re.sub(u'\BaA', self.hashv_w2i[u"aA"], my_string)
-            my_string = re.sub(u'\Bai', self.hashv_w2i[u"ai"], my_string)
-            my_string = re.sub(u'\BaI', self.hashv_w2i[u"aI"], my_string)
-            my_string = re.sub(u'\Bau', self.hashv_w2i[u"au"], my_string)
-            my_string = re.sub(u'\BaU', self.hashv_w2i[u"aU"], my_string)
-            my_string = re.sub(u'\Bae', self.hashv_w2i[u"ae"], my_string)
-            my_string = re.sub(u'\BaE', self.hashv_w2i[u"aE"], my_string)
-            my_string = re.sub(u'\Bao', self.hashv_w2i[u"ao"], my_string)
-            my_string = re.sub(u'\BaO', self.hashv_w2i[u"aO"], my_string)
+        my_string = self.map_OY2(my_string)
+        my_string = self.map_a(my_string)
 
         my_string = re.sub(
             u'([aAiIuUeEoO])([MHz])',
@@ -2464,16 +2540,13 @@ class wxilp():
             lambda m: self.hashv_w2i[
                 m.group(1)],
             my_string)
-        my_string = my_string.replace(u'.', self.hashc_w2i[u"."])
-
+        my_string = my_string.replace(u'.', self.hashc_w2i["."])
         # For PUNJABI ADDAK
-        my_string = my_string.replace(u"Y", u"\xFB")
-
+        my_string = my_string.replace("Y", u"\xFB")
         # Replace Roman Digits with ISCII
         my_string = self.dig.sub(
             lambda m: self.digits_w2i[
                 m.group(1)], my_string)
-
         return my_string
 
     def iscii2unicode(self, iscii):
@@ -2505,57 +2578,57 @@ class wxilp():
     def iscii2unicode_hin(self, iscii):
         unicode_ = self.i2u.sub(
             lambda m: self.hashh_i2u.get(
-                m.group(1), u""), iscii)
+                m.group(1), ""), iscii)
         return unicode_
 
     def iscii2unicode_tel(self, iscii):
         unicode_ = self.i2u.sub(
             lambda m: self.hasht_i2u.get(
-                m.group(1), u""), iscii)
+                m.group(1), ""), iscii)
         return unicode_
 
     def iscii2unicode_pan(self, iscii):
         unicode_ = self.i2u.sub(
             lambda m: self.hashp_i2u.get(
-                m.group(1), u""), iscii)
+                m.group(1), ""), iscii)
         return unicode_
 
     def iscii2unicode_kan(self, iscii):
         unicode_ = self.i2u.sub(
             lambda m: self.hashk_i2u.get(
-                m.group(1), u""), iscii)
+                m.group(1), ""), iscii)
         unicode_ = unicode_.replace(u'\u0CAB\u0CBC', u'\u0CDE')
         return unicode_
 
     def iscii2unicode_mal(self, iscii):
         unicode_ = self.i2u.sub(
             lambda m: self.hashm_i2u.get(
-                m.group(1), u""), iscii)
+                m.group(1), ""), iscii)
         return unicode_
 
     def iscii2unicode_ben(self, iscii):
         unicode_ = self.i2u.sub(
             lambda m: self.hashb_i2u.get(
-                m.group(1), u""), iscii)
+                m.group(1), ""), iscii)
         return unicode_
 
     def iscii2unicode_tam(self, iscii):
         unicode_ = self.i2u.sub(
             lambda m: self.hashcta_i2u.get(
-                m.group(1), u""), iscii)
+                m.group(1), ""), iscii)
         return unicode_
 
     def iscii2unicode_ori(self, iscii):
         unicode_ = self.i2u.sub(
             lambda m: self.hasho_i2u.get(
-                m.group(1), u""), iscii)
+                m.group(1), ""), iscii)
         unicode_ = unicode_.replace(u'\u0B2F\u0B3C', u'\u0B5F')
         return unicode_
 
     def iscii2unicode_guj(self, iscii):
         unicode_ = self.i2u.sub(
             lambda m: self.hashg_i2u.get(
-                m.group(1), u""), iscii)
+                m.group(1), ""), iscii)
         return unicode_
 
     def unicode2iscii(self, unicode_):
@@ -2627,7 +2700,7 @@ class wxilp():
             lambda m: self.hashc_i2w[
                 m.group(1)] +
             self.hashc_i2w[u"\xE9"] +
-            u"a",
+            "a",
             my_string)
         # CONSONANT+MATRA+MODIFIER
         my_string = self.cmmd.sub(
@@ -2649,14 +2722,14 @@ class wxilp():
         my_string = self.cmd.sub(
             lambda m: self.hashc_i2w[
                 m.group(1)] +
-            u"a" +
+            "a" +
             self.hashmd_i2w[
                 m.group(2)],
             my_string)
         # CONSONANT
         my_string = self.c.sub(
             lambda m: self.hashc_i2w[
-                m.group(1)] + u"a", my_string)
+                m.group(1)] + "a", my_string)
         # VOWEL+MODIFIER, VOWEL, MATRA
         my_string = self.vmd.sub(
             lambda m: self.hashv_i2w[
@@ -2665,16 +2738,16 @@ class wxilp():
                 m.group(2)],
             my_string)
         my_string = self.amd.sub(
-            lambda m: u"a" +
+            lambda m: "a" +
             self.hashmd_i2w[
                 m.group(1)],
             my_string)
         my_string = self.v.sub(lambda m: self.hashv_i2w[m.group(1)], my_string)
         # VOWEL A, FULL STOP or VIRAM Northern Scripts
-        my_string = my_string.replace(u"\xA4", u"a")
-        my_string = my_string.replace(u"\xEA", u".")
+        my_string = my_string.replace(u"\xA4", "a")
+        my_string = my_string.replace(u"\xEA", ".")
         # For PUNJABI ADDAK
-        my_string = my_string.replace(u"\xFB", u"Y")
+        my_string = my_string.replace(u"\xFB", "Y")
         # Replace ISCII Digits with Roman
         my_string = self.dig.sub(
             lambda m: self.digits_i2w[
@@ -2686,11 +2759,11 @@ class wxilp():
         # Normalize Unicode values (NUKTA variations)
         unicode_ = self.u2i_hn.sub(
             lambda m: self.unicode_norm_hashh_u2i.get(
-                m.group(1), u"") + u"\u093C", unicode_)
+                m.group(1), "") + u"\u093C", unicode_)
         # Convert Unicode values to ISCII values
         iscii_hin = self.u2i_h.sub(
             lambda m: self.hashh_u2i.get(
-                m.group(1), u""), unicode_)
+                m.group(1), ""), unicode_)
         return iscii_hin
 
     def unicode2iscii_tel(self, unicode_):
@@ -2699,20 +2772,20 @@ class wxilp():
         # Convert Telugu Unicode values to ISCII values
         iscii_tel = self.u2i_t.sub(
             lambda m: self.hasht_u2i.get(
-                m.group(1), u""), unicode_)
+                m.group(1), ""), unicode_)
         return iscii_tel
 
     def unicode2iscii_pan(self, unicode_):
         # Normalize Unicode values (NUKTA variations)
         unicode_ = self.u2i_pn.sub(
             lambda m: self.unicode_norm_hashp_u2i.get(
-                m.group(1), u"") + u"\u0A3C", unicode_)
+                m.group(1), "") + u"\u0A3C", unicode_)
         # Convert Unicode values 0x0A5C to ISCII
         unicode_ = unicode_.replace(u"\u0A5C", u"\xBF\xE9")
         # Convert Unicode Punjabi values to ISCII values
         iscii_pan = self.u2i_p.sub(
             lambda m: self.hashp_u2i.get(
-                m.group(1), u""), unicode_)
+                m.group(1), ""), unicode_)
         return iscii_pan
 
     def unicode2iscii_kan(self, unicode_):
@@ -2727,7 +2800,7 @@ class wxilp():
         # Convert Unicode values to ISCII values
         iscii_kan = self.u2i_k.sub(
             lambda m: self.hashk_u2i.get(
-                m.group(1), u""), unicode_)
+                m.group(1), ""), unicode_)
         return iscii_kan
 
     def unicode2iscii_mal(self, unicode_):
@@ -2738,21 +2811,21 @@ class wxilp():
         # Convert Unicode values to ISCII values
         iscii_mal = self.u2i_m.sub(
             lambda m: self.hashm_u2i.get(
-                m.group(1), u""), unicode_)
+                m.group(1), ""), unicode_)
         return iscii_mal
 
     def unicode2iscii_ben(self, unicode_):
         # Normalize Unicode values (NUKTA variations)
         unicode_ = self.u2i_bn.sub(
             lambda m: self.unicode_norm_hashb_u2i.get(
-                m.group(1), u"") + u"\u09BC", unicode_)
+                m.group(1), "") + u"\u09BC", unicode_)
         # Normalize two part dependent vowels
         unicode_ = unicode_.replace(u'\u09c7\u09be', u'\u09cb')
         unicode_ = unicode_.replace(u'\u09c7\u0bd7', u'\u09cc')
         # Convert Unicode values to ISCII values
         iscii_ben = self.u2i_b.sub(
             lambda m: self.hashb_u2i.get(
-                m.group(1), u""), unicode_)
+                m.group(1), ""), unicode_)
         return iscii_ben
 
     def unicode2iscii_tam(self, unicode_):
@@ -2764,28 +2837,28 @@ class wxilp():
         # Convert Unicode values to ISCII values
         iscii_tam = self.u2i_ta.sub(
             lambda m: self.hashta_u2i.get(
-                m.group(1), u""), unicode_)
+                m.group(1), ""), unicode_)
         return iscii_tam
 
     def unicode2iscii_ori(self, unicode_):
         # Normalize Unicode values (NUKTA variations)
         unicode_ = self.u2i_on.sub(
             lambda m: self.unicode_norm_hasho_u2i.get(
-                m.group(1), u"") + u"\u0B3C", unicode_)
+                m.group(1), "") + u"\u0B3C", unicode_)
         # Normalize two part dependent vowels
         unicode_ = unicode_.replace(u'\u0b47\u0b3e', u'\u0b4b')
         unicode_ = unicode_.replace(u'\u0b47\u0b57', u'\u0b4c')
         # Convert Unicode values to ISCII values
         iscii_ori = self.u2i_o.sub(
             lambda m: self.hasho_u2i.get(
-                m.group(1), u""), unicode_)
+                m.group(1), ""), unicode_)
         return iscii_ori
 
     def unicode2iscii_guj(self, unicode_):
         # Convert Gujurati Unicode values to ISCII values
         iscii_guj = self.u2i_g.sub(
             lambda m: self.hashg_u2i.get(
-                m.group(1), u""), unicode_)
+                m.group(1), ""), unicode_)
         return iscii_guj
 
     def utf2wx(self, unicode_):
@@ -2794,7 +2867,7 @@ class wxilp():
             unicode_ = unicode_.decode('utf-8')
 
         unicode_ = self.normalize(unicode_)
-        # NOTE Mask iscii characters (if any)
+        # Mask iscii characters (if any)
         unicode_ = self.mask_isc.sub(
             lambda m: self.iscii_num[
                 m.group(1)], unicode_)
@@ -2802,9 +2875,9 @@ class wxilp():
         iscii = self.unicode2iscii(unicode_)
         # Convert ISCII to WX-Roman
         wx = self.iscii2wx(iscii)
-        # NOTE Consecutive Vowel Normalization
-        wx = re.sub(u'[\xA0-\xFA]+', u'', wx)
-        # NOTE Unmask iscii characters
+        # Consecutive Vowel Normalization
+        wx = re.sub(u'[\xA0-\xFA]+', '', wx)
+        # Unmask iscii characters
         wx = self.unmask_isc.sub(lambda m: self.num_iscii[m.group(1)], wx)
 
         return wx.encode('utf-8')
@@ -2820,14 +2893,14 @@ class wxilp():
             if not wx:
                 continue
             else:
-                # NOTE Mask iscii characters (if any)
+                # Mask iscii characters (if any)
                 wx = self.mask_isc.sub(
                     lambda m: self.iscii_num[
                         m.group(1)], wx)
                 iscii = self.wx2iscii(wx)
                 # Convert ISCII to Unicode
                 unicode_t = self.iscii2unicode(iscii)
-                # NOTE Unmask iscii characters
+                # Unmask iscii characters
                 unicode_ += self.unmask_isc.sub(
                     lambda m: self.num_iscii[
                         m.group(1)], unicode_t)
