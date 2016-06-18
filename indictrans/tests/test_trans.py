@@ -11,7 +11,7 @@ class TestTransliterator(TestCase):
 
     def setUp(self):
         super(TestTransliterator, self).setUp()
-        source = ['hin', 'ben', 'mal', 'guj']
+        source = ['hin', 'ben', 'mal', 'guj', 'pan']
         target = ['eng'] * len(source)
         self.src2trg = zip(source, target)
         self.trg2src = zip(target, source)
