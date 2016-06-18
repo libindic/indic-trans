@@ -78,22 +78,10 @@ class ind_to_rom():
         for i in range(ngram, len(context) - ngram):
             unigrams = context[i - ngram: i] + \
                 [context[i]] + context[i + 1: i + (ngram + 1)]
-            bigrams = ["%s|%s" % (p, q)
-                       for p, q in zip(unigrams[:-1], unigrams[1:])]
-            trigrams = [
-                "%s|%s|%s" %
-                (r,
-                 s,
-                 t) for r,
-                s,
-                t in zip(
-                    unigrams[
-                        :-
-                        2],
-                    unigrams[
-                        1:],
-                    unigrams[
-                        2:])]
+            bigrams = ["%s|%s" % (p, q) for p, q in zip(
+                unigrams[:-1], unigrams[1:])]
+            trigrams = ["%s|%s|%s" % (r, s, t) for r, s, t in zip(
+                unigrams[:-2], unigrams[1:], unigrams[2:])]
             quadgrams = ["%s|%s|%s|%s" % (u, v, w, x) for u, v, w, x in zip(
                 unigrams[:-3], unigrams[1:], unigrams[2:], unigrams[3:])]
             ngram_context = unigrams + bigrams + trigrams + quadgrams
@@ -120,6 +108,8 @@ class ind_to_rom():
             word_feats = re.sub(r' ([aZ])', r'\1', word_feats)
         else:
             word_feats = re.sub(r' ([VYZ])', r'\1', word_feats)
+        if self.lang == 'mal':
+            word_feats = word_feats.replace('rY rY', 'rYrY')
         word_feats = word_feats.encode('utf-8').split()
         word_feats = self.feature_extraction(word_feats)
         op_word = self.predict(word_feats)

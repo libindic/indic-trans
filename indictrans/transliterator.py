@@ -10,7 +10,7 @@ from .rom2ind import rom_to_ind
 class transliterator():
 
     def __init__(self, source='hin', target='eng'):
-        indic = 'hin ben'.split()
+        indic = 'hin guj pan ben mal'.split()
         source = source.lower()
         target = target.lower()
         if source == "eng":

@@ -11,7 +11,7 @@ __version__ = "1.0"
 
 
 def main():
-    languages = 'hin ben eng'.split()
+    languages = 'hin ben guj pan mal eng'.split()
     # help messages
     lang_help = "select language (3 letter ISO-639 code) [%s]" % (
         '|'.join(languages))
