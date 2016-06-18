@@ -116,7 +116,7 @@ class ind_to_rom():
         if word in self.lookup:
             return self.lookup[word]
         word_feats = ' '.join(word)
-        if self.lang == 'hin:':
+        if self.lang == 'hin':
             word_feats = re.sub(r' ([aZ])', r'\1', word_feats)
         else:
             word_feats = re.sub(r' ([VYZ])', r'\1', word_feats)
