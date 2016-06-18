@@ -11,9 +11,10 @@ __version__ = "1.0"
 
 
 def main():
-    languages = ["hin", "eng"]
+    languages = 'hin ben eng'.split()
     # help messages
-    lang_help = "select language (3 letter ISO-639 code) [hin|eng]"
+    lang_help = "select language (3 letter ISO-639 code) [%s]" % (
+        '|'.join(languages))
     # parse command line arguments
     parser = argparse.ArgumentParser(
         prog="indictrans",

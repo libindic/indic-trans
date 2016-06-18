@@ -10,17 +10,18 @@ from .rom2ind import rom_to_ind
 class transliterator():
 
     def __init__(self, source='hin', target='eng'):
+        indic = 'hin ben'.split()
         source = source.lower()
         target = target.lower()
         if source == "eng":
-            if target not in ['hin']:
+            if target not in indic:
                 raise NotImplementedError(
                     'Language pair `%s-%s` is not implemented.' %
                     (source, target))
             r2i_trans = rom_to_ind(target)
             self.transform = r2i_trans.transliterate
         elif target == 'eng':
-            if source not in ['hin']:
+            if source not in indic:
                 raise NotImplementedError(
                     'Language pair `%s-%s` is not implemented.' %
                     (source, target))

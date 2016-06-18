@@ -26,20 +26,21 @@ class ind_to_rom():
     """Transliterates words from Indic to Roman script"""
 
     def __init__(self, lang):
+        self.lang = lang
         self.lookup = dict()
         self.esc_ch = '\x00'
         self.tab = '\x01\x03'
         self.space = '\x02\x04'
 
-        self.fit(lang)
+        self.fit()
 
-    def fit(self, lang):
-        wxp = wxilp(order='utf2wx', lang=lang)
+    def fit(self):
+        wxp = wxilp(order='utf2wx', lang=self.lang)
         self.wx_process = wxp.utf2wx
         dist_dir = os.path.dirname(os.path.abspath(__file__))
 
         # load models
-        lg = lang[0]
+        lg = self.lang[0]
         self.vectorizer_ = enc(sparse=True)
         with open('%s/models/%se_sparse.vec' % (dist_dir, lg)) as jfp:
             self.vectorizer_.unique_feats = json.load(jfp)
@@ -114,8 +115,11 @@ class ind_to_rom():
     def case_trans(self, word):
         if word in self.lookup:
             return self.lookup[word]
-        word_feats = ' '.join(word).replace(' a', 'a')
-        word_feats = word_feats.replace(' Z', 'Z')
+        word_feats = ' '.join(word)
+        if self.lang == 'hin:':
+            word_feats = re.sub(r' ([aZ])', r'\1', word_feats)
+        else:
+            word_feats = re.sub(r' ([VYZ])', r'\1', word_feats)
         word_feats = word_feats.encode('utf-8').split()
         word_feats = self.feature_extraction(word_feats)
         op_word = self.predict(word_feats)
