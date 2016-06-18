@@ -11,8 +11,8 @@ class TestTransliterator(TestCase):
 
     def setUp(self):
         super(TestTransliterator, self).setUp()
-        source = ['hin', 'ben']
-        target = ['eng', 'eng']
+        source = ['hin', 'ben', 'mal']
+        target = ['eng', 'eng', 'eng']
         self.src2trg = zip(source, target)
         self.trg2src = zip(target, source)
         self.test_dir = os.path.dirname(os.path.abspath(__file__))
