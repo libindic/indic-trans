@@ -1,6 +1,14 @@
 CHANGES
 =======
 
+* updated `indictrans` help message
+* fixed a typo
+* ori-eng test pairs
+* added tests for Oriya
+* added support for Oriya
+* Oriya-to-English models
+* English-to-Oriya models
+* changelog
 * added tests for Kanadda, Tamil and Telugu
 * tel-eng test pairs
 * tam-eng test pairs
