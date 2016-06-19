@@ -41,6 +41,8 @@ class ind_to_rom():
 
         # load models
         lg = self.lang[0]
+        if self.lang == 'tam':
+            lg += 'a'  # Tamil models start with ta (t is for Telugu)
         self.vectorizer_ = enc(sparse=True)
         with open('%s/models/%se_sparse.vec' % (dist_dir, lg)) as jfp:
             self.vectorizer_.unique_feats = json.load(jfp)
@@ -87,7 +89,8 @@ class ind_to_rom():
     def predict(self, word):
         X = self.vectorizer_.transform(word)
         scores = X.dot(self.coef_.T).toarray()
-        y = viterbi.decode(scores,
+        y = viterbi.decode(
+                           scores,
                            self.intercept_trans_,
                            self.intercept_init_,
                            self.intercept_final_)

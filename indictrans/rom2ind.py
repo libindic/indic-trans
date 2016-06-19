@@ -41,6 +41,8 @@ class rom_to_ind():
 
         # load models
         lg = lang[0]
+        if lang == 'tam':
+            lg += 'a'  # Tamil models start with ta (t is for Telugu)
         self.vectorizer_ = enc(sparse=True)
         with open('%s/models/e%s_sparse.vec' % (dist_dir, lg)) as jfp:
             self.vectorizer_.unique_feats = json.load(jfp)
@@ -49,21 +51,16 @@ class rom_to_ind():
             (dist_dir, lg))[0]
         self.coef_ = np.load(
             '%s/models/e%s_coef.npy' %
-            (dist_dir,
-             lg))[0].astype(
-            np.float64)
+            (dist_dir, lg))[0].astype(np.float64)
         self.intercept_init_ = np.load(
             '%s/models/e%s_intercept_init.npy' %
-            (dist_dir, lg)).astype(
-            np.float64)
+            (dist_dir, lg)).astype(np.float64)
         self.intercept_trans_ = np.load(
             '%s/models/e%s_intercept_trans.npy' %
-            (dist_dir, lg)).astype(
-            np.float64)
+            (dist_dir, lg)).astype(np.float64)
         self.intercept_final_ = np.load(
             '%s/models/e%s_intercept_final.npy' %
-            (dist_dir, lg)).astype(
-            np.float64)
+            (dist_dir, lg)).astype(np.float64)
 
     def feature_extraction(self, letters):
         ngram = 4
@@ -75,20 +72,9 @@ class rom_to_ind():
                 [context[i]] + context[i + 1: i + (ngram + 1)]
             bigrams = ["%s|%s" % (p, q)
                        for p, q in zip(unigrams[:-1], unigrams[1:])]
-            trigrams = [
-                "%s|%s|%s" %
-                (r,
-                 s,
-                 t) for r,
-                s,
-                t in zip(
-                    unigrams[
-                        :-
-                        2],
-                    unigrams[
-                        1:],
-                    unigrams[
-                        2:])]
+            trigrams = ["%s|%s|%s" % (r, s, t)
+                        for r, s, t in zip(
+                        unigrams[:-2], unigrams[1:], unigrams[2:])]
             quadgrams = ["%s|%s|%s|%s" % (u, v, w, x) for u, v, w, x in zip(
                 unigrams[:-3], unigrams[1:], unigrams[2:], unigrams[3:])]
             ngram_context = unigrams + bigrams + trigrams + quadgrams
@@ -99,8 +85,11 @@ class rom_to_ind():
     def predict(self, word):
         X = self.vectorizer_.transform(word)
         scores = X.dot(self.coef_.T).toarray()
-        y = viterbi.decode(scores, self.intercept_trans_,
-                           self.intercept_init_, self.intercept_final_)
+        y = viterbi.decode(
+                           scores,
+                           self.intercept_trans_,
+                           self.intercept_init_,
+                           self.intercept_final_)
 
         y = [self.classes_[pid] for pid in y]
         y = ''.join(y)
