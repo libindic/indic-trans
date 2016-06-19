@@ -22,28 +22,24 @@ def main():
     parser.add_argument('--v', action="version", version="%(prog)s 1.0")
     parser.add_argument(
         '--source',
-        metavar='source',
         dest="source",
         choices=languages,
         default="hin",
         help="%s" % lang_help)
     parser.add_argument(
         '--target',
-        metavar='target',
         dest="target",
         choices=languages,
         default="eng",
         help="%s" % lang_help)
     parser.add_argument(
         '--input',
-        metavar='input',
         dest="INFILE",
         type=argparse.FileType('r'),
         default=sys.stdin,
         help="<input-file>")
     parser.add_argument(
         '--ootput',
-        metavar='output',
         dest="OUTFILE",
         type=argparse.FileType('w'),
         default=sys.stdout,
