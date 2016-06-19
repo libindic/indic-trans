@@ -11,7 +11,7 @@ __version__ = "1.0"
 
 
 def main():
-    languages = 'hin ben guj pan mal eng'.split()
+    languages = 'hin ben guj pan mal kan tam tel eng'.split()
     # help messages
     lang_help = "select language (3 letter ISO-639 code) [%s]" % (
         '|'.join(languages))
@@ -21,28 +21,28 @@ def main():
         description="Transliterator for Indian Languages including English")
     parser.add_argument('--v', action="version", version="%(prog)s 1.0")
     parser.add_argument(
-        '--s',
+        '--source',
         metavar='source',
         dest="source",
         choices=languages,
         default="hin",
         help="%s" % lang_help)
     parser.add_argument(
-        '--t',
+        '--target',
         metavar='target',
         dest="target",
         choices=languages,
         default="eng",
         help="%s" % lang_help)
     parser.add_argument(
-        '--i',
+        '--input',
         metavar='input',
         dest="INFILE",
         type=argparse.FileType('r'),
         default=sys.stdin,
         help="<input-file>")
     parser.add_argument(
-        '--o',
+        '--ootput',
         metavar='output',
         dest="OUTFILE",
         type=argparse.FileType('w'),
@@ -53,7 +53,7 @@ def main():
     if args.source == args.target:
         sys.stderr.write(parser.format_usage())
         sys.stderr.write(
-            'indictrans: error: either source and target must be different\n')
+            'indictrans: error: source must be different from target\n')
         sys.exit(0)
 
     # initialize transliterator object

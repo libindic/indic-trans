@@ -49,21 +49,16 @@ class ind_to_rom():
             (dist_dir, lg))[0]
         self.coef_ = np.load(
             '%s/models/%se_coef.npy' %
-            (dist_dir,
-             lg))[0].astype(
-            np.float64)
+            (dist_dir, lg))[0].astype(np.float64)
         self.intercept_init_ = np.load(
             '%s/models/%se_intercept_init.npy' %
-            (dist_dir, lg)).astype(
-            np.float64)
+            (dist_dir, lg)).astype(np.float64)
         self.intercept_trans_ = np.load(
             '%s/models/%se_intercept_trans.npy' %
-            (dist_dir, lg)).astype(
-            np.float64)
+            (dist_dir, lg)).astype(np.float64)
         self.intercept_final_ = np.load(
             '%s/models/%se_intercept_final.npy' %
-            (dist_dir, lg)).astype(
-            np.float64)
+            (dist_dir, lg)).astype(np.float64)
 
         # initialize character maps
         self.letters = set(string.ascii_letters)
@@ -92,8 +87,10 @@ class ind_to_rom():
     def predict(self, word):
         X = self.vectorizer_.transform(word)
         scores = X.dot(self.coef_.T).toarray()
-        y = viterbi.decode(scores, self.intercept_trans_,
-                           self.intercept_init_, self.intercept_final_)
+        y = viterbi.decode(scores,
+                           self.intercept_trans_,
+                           self.intercept_init_,
+                           self.intercept_final_)
 
         y = [self.classes_[pid] for pid in y]
         y = ''.join(y)
