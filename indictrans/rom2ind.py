@@ -43,6 +43,10 @@ class rom_to_ind():
         lg = lang[0]
         if lang == 'tam':
             lg += 'a'  # Tamil models start with ta (t is for Telugu)
+        elif lang in ['mar', 'nep', 'kok', 'bod']:
+            lg = 'h'
+        elif lang == 'asm':
+            lg = 'b'
         self.vectorizer_ = enc(sparse=True)
         with open('%s/models/e%s_sparse.vec' % (dist_dir, lg)) as jfp:
             self.vectorizer_.unique_feats = json.load(jfp)
