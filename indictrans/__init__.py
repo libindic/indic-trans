@@ -39,7 +39,7 @@ def main():
         default=sys.stdin,
         help="<input-file>")
     parser.add_argument(
-        '--ootput',
+        '--output',
         dest="OUTFILE",
         type=argparse.FileType('w'),
         default=sys.stdout,
