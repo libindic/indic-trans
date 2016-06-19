@@ -13,6 +13,24 @@ indic-trans
 
 The project aims on adding a state-of-the-art transliteration module for cross transliterations among all Indian languages including English.
 
+The module currently supports the following languages:
+
+  * Hindi       
+  * Bengali
+  * Gujarati
+  * Punjabi
+  * Malayalam
+  * Kannada
+  * Tamil
+  * Telugu
+  * Oriya
+  * Marathi
+  * Assamese
+  * Konkani
+  * Bodo
+  * Nepali
+  * English
+
 Installation
 ============
 
@@ -59,9 +77,9 @@ Examples
 
     --v         show program's version number and exit
     --source    select language (3 letter ISO-639 code)
-                [hin|ben|guj|pan|mal|kan|tam|tel|ori|eng]
+                [hin|ben|guj|pan|mal|kan|tam|tel|ori|eng|mar|asm|kok|bod|nep]
     --target    select language (3 letter ISO-639 code)
-                [hin|ben|guj|pan|mal|kan|tam|tel|ori|eng]
+                [hin|ben|guj|pan|mal|kan|tam|tel|ori|eng|mar|asm|kok|bod|nep]
     --input     <input-file>
     --output    <output-file>
 
