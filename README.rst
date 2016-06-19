@@ -27,12 +27,11 @@ Dependencies
 
 .. _`Scipy`: http://www.scipy.org/install.html
 
-To install the dependencies do something like (Ubuntu):
+Install dependencies:
 
 ::
 
-    pip install cython
-    pip install python-scipy
+    pip install -r requirements.txt
 
 Download
 ~~~~~~~~
@@ -58,16 +57,19 @@ Examples
 
     indictrans --h
 
-    --v           show program's version number and exit
-    --s source    select language (3 letter ISO-639 code) [hin|eng]
-    --t target    select language (3 letter ISO-639 code) [hin|eng]
-    --i input     <input-file>
-    --o output    <output-file>
+    --v         show program's version number and exit
+    --source    select language (3 letter ISO-639 code)
+                [hin|ben|guj|pan|mal|kan|tam|tel|ori|eng]
+    --target    select language (3 letter ISO-639 code)
+                [hin|ben|guj|pan|mal|kan|tam|tel|ori|eng]
+    --input     <input-file>
+    --output    <output-file>
+
 
     Example ::
 
-	indictrans < tests/hindi.txt --s hin --t eng > tests/hindi-rom.txt
-	indictrans < tests/roman.txt --s hin --t eng > tests/roman-hin.txt
+	indictrans < hindi.txt --s hin --t eng > hindi-rom.txt
+	indictrans < roman.txt --s hin --t eng > roman-hin.txt
 
 2. Using Python:
 ^^^^^^^^^^^^^^^^
