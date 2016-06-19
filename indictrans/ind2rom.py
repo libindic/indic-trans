@@ -43,6 +43,10 @@ class ind_to_rom():
         lg = self.lang[0]
         if self.lang == 'tam':
             lg += 'a'  # Tamil models start with ta (t is for Telugu)
+        elif self.lang in ['mar', 'nep', 'kok', 'bod']:
+            lg = 'h'
+        elif self.lang == 'asm':
+            lg = 'b'
         self.vectorizer_ = enc(sparse=True)
         with open('%s/models/%se_sparse.vec' % (dist_dir, lg)) as jfp:
             self.vectorizer_.unique_feats = json.load(jfp)
@@ -104,7 +108,7 @@ class ind_to_rom():
         if word in self.lookup:
             return self.lookup[word]
         word_feats = ' '.join(word)
-        if self.lang == 'hin':
+        if self.lang in ['hin', 'mar', 'nep', 'kok', 'bod']:
             word_feats = re.sub(r' ([aZ])', r'\1', word_feats)
         else:
             word_feats = re.sub(r' ([VYZ])', r'\1', word_feats)
@@ -120,6 +124,9 @@ class ind_to_rom():
     def transliterate(self, text):
         if isinstance(text, str):
             text = text.decode('utf-8')
+        if self.lang == 'asm':
+            text = text.replace(u'\u09f0', u'\u09b0')
+            text = text.replace(u'\u09f1', u'\u09ac')
         trans_list = list()
         text = self.mask_roman.sub(r'%s\1' % (self.esc_ch), text)
         text = self.wx_process(text).decode('utf-8')  # Convert to wx
