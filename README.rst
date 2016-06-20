@@ -10,7 +10,7 @@ indic-trans
 
 .. |coverage| image:: https://coveralls.io/repos/github/irshadbhat/indic-trans/badge.svg?branch=master 
    :target: https://coveralls.io/github/irshadbhat/indic-trans?branch=master
-   :alt: coveralls.io build status
+   :alt: coveralls.io coverage status
 
 
 The project aims on adding a state-of-the-art transliteration module for cross transliterations among all Indian languages including English.
