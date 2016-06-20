@@ -2,13 +2,15 @@
 indic-trans
 ===========
 
-|Build Status| |Coverage Status|
+|travis| |coverage|
 
-.. |Build Status| image:: https://travis-ci.org/irshadbhat/indic-trans.svg?branch=master
+.. |travis| image:: https://travis-ci.org/irshadbhat/indic-trans.svg?branch=master
    :target: https://travis-ci.org/irshadbhat/indic-trans
+   :alt: travis-ci build status
 
-.. |Coverage Status| image:: https://coveralls.io/repos/github/irshadbhat/indic-trans/badge.svg?branch=master 
+.. |coverage| image:: https://coveralls.io/repos/github/irshadbhat/indic-trans/badge.svg?branch=master 
    :target: https://coveralls.io/github/irshadbhat/indic-trans?branch=master
+   :alt: coveralls.io build status
 
 
 The project aims on adding a state-of-the-art transliteration module for cross transliterations among all Indian languages including English.
@@ -63,6 +65,7 @@ Install
 
 ::
 
+    pip install git+git://github.com/irshadbhat/indic-trans.git   or 
     pip install git+git://github.com/libindic/indic-trans.git    
 
 Examples
