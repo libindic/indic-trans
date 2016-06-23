@@ -36,3 +36,9 @@ class TestTransliterator(TestCase):
                 for line in fp:
                     expected, word = line.split()
                     self.assertEqual(trans.transform(word), expected)
+
+    def test_kbest(self):
+        k_best = range(2,15)
+        for k in k_best:
+            trans = transliterator(source='eng', target='hin', decode='beamsearch', k_best=k)
+            assert len(trans.transform('indictrans')) == k
