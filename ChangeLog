@@ -1,6 +1,16 @@
 CHANGES
 =======
 
+* fixed a typo
+* changelog
+* test k-best transliterations (k=2-15)
+* test k-best transliterations
+* K-Best transliterations (how to!)
+* removed cython build
+* added beamsearch decoding to output k-best transliterations
+* added beamsearch decoding
+* viterbi decoding
+* beamsearch decoding for k-best transliterations
 * install either from libindic or irshadbhat
 * readme
 * Added all Indic-Roman transliteration systems
