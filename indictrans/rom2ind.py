@@ -77,8 +77,8 @@ class rom_to_ind():
         text = re.sub(r'([DPK])([Mz])', r'\1Z\2', text)
         text = re.sub(r'([rm])M', r'\1n', text)
         text = re.sub(r'([gw])M', r'\1af', text)
-        text = re.sub(r'\BM', r'f', text)
-        text = re.sub(r'\Bz', r'n', text)
+        text = re.sub(r'\bM', r'f', text)
+        text = re.sub(r'\bz', r'n', text)
         text = re.sub(r'([bcdhjklpstvy])M', r'\1aM', text)
 
         return text
