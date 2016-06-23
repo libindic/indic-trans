@@ -16,7 +16,6 @@ import warnings
 
 import numpy as np
 
-from ._decode import viterbi
 from ._utils import (wxilp, enc)
 
 warnings.filterwarnings("ignore")
@@ -25,12 +24,14 @@ warnings.filterwarnings("ignore")
 class ind_to_rom():
     """Transliterates words from Indic to Roman script"""
 
-    def __init__(self, lang):
+    def __init__(self, lang, decoder, k_best):
         self.lang = lang
+        self.k_best = k_best
         self.lookup = dict()
         self.esc_ch = '\x00'
         self.tab = '\x01\x03'
         self.space = '\x02\x04'
+        self.decode, self.decoder = decoder
 
         self.fit()
 
@@ -93,16 +94,28 @@ class ind_to_rom():
     def predict(self, word):
         X = self.vectorizer_.transform(word)
         scores = X.dot(self.coef_.T).toarray()
-        y = viterbi.decode(
-                           scores,
-                           self.intercept_trans_,
-                           self.intercept_init_,
-                           self.intercept_final_)
-
-        y = [self.classes_[pid] for pid in y]
-        y = ''.join(y)
-
-        return y.replace('_', '')
+        if self.decode == 'viterbi':
+            y = self.decoder.decode(
+                               scores,
+                               self.intercept_trans_,
+                               self.intercept_init_,
+                               self.intercept_final_)
+            y = [self.classes_[pid] for pid in y]
+            y = ''.join(y).replace('_', '')
+            return y
+        else:
+            top_seq = list()
+            y = self.decoder.decode(
+                               scores,
+                               self.intercept_trans_,
+                               self.intercept_init_,
+                               self.intercept_final_,
+                               self.k_best)
+            for path in y:
+                w = [self.classes_[pid] for pid in path]
+                w = ''.join(w).replace('_', '')
+                top_seq.append(w)
+            return top_seq
 
     def case_trans(self, word):
         if word in self.lookup:
@@ -117,19 +130,25 @@ class ind_to_rom():
         word_feats = word_feats.encode('utf-8').split()
         word_feats = self.feature_extraction(word_feats)
         op_word = self.predict(word_feats)
-        self.lookup[word] = op_word
+        if self.decode == 'viterbi':
+            self.lookup[word] = op_word
 
         return op_word
 
-    def transliterate(self, text):
+    def convert_to_wx(self, text):
         if isinstance(text, str):
             text = text.decode('utf-8')
         if self.lang == 'asm':
             text = text.replace(u'\u09f0', u'\u09b0')
             text = text.replace(u'\u09f1', u'\u09ac')
-        trans_list = list()
         text = self.mask_roman.sub(r'%s\1' % (self.esc_ch), text)
         text = self.wx_process(text).decode('utf-8')  # Convert to wx
+        return text
+
+    def transliterate(self, text):
+        """single best transliteration using viterbi decoding"""
+        trans_list = list()
+        text = self.convert_to_wx(text)
         text = text.replace('\t', self.tab)
         text = text.replace(' ', self.space)
         lines = text.split("\n")
@@ -157,3 +176,22 @@ class ind_to_rom():
         trans_line = trans_line.replace(self.tab, '\t')
 
         return trans_line
+
+    def top_n_trans(self, text):
+        """k-best transliterations using beamsearch decoding"""
+        trans_word = []
+        text = self.convert_to_wx(text)
+        words = self.non_alpha.split(text)
+        for word in words:
+            if not word:
+                continue
+            elif word[0] == self.esc_ch:
+                word = word[1:].encode('utf-8')
+                trans_word.append([word] * self.k_best)
+            elif word[0] not in self.letters:
+                trans_word.append([word.encode('utf-8')] * self.k_best)
+            else:
+                op_word = self.case_trans(word)
+                trans_word.append(op_word)
+
+        return [''.join(w) for w in zip(*trans_word)]
