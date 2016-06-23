@@ -1,6 +1,13 @@
 CHANGES
 =======
 
+* install either from libindic or irshadbhat
+* readme
+* Added all Indic-Roman transliteration systems
+* For Marathi, Nepali, Konkani, Bodo use Hindi models; for Assamese use Bengali models
+* Assamese ra and wa replaced with that of Bengali
+* added support for Marathi, Nepali, Konkani, Bodo and Assamese
+* changelog
 * updated `indictrans` help message
 * fixed a typo
 * ori-eng test pairs
