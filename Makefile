@@ -1,5 +1,5 @@
 travis:
-	[-d .testrepository ] && \
+	[ -d .testrepository ] && \
 		find .testrepository -name "times.dbm*" -delete
 	python setup.py build_ext -i
 	python setup.py test --coverage \
