@@ -4,19 +4,23 @@ from setuptools import setup
 from setuptools.extension import Extension
 from Cython.Build import cythonize
 
+import numpy
+
 
 extensions = [
     Extension(
         "indictrans._decode.beamsearch",
         [
             "indictrans/_decode/beamsearch.pyx"
-        ]
+        ],
+        include_dir=[numpy.get_include()]
     ),
     Extension(
         "indictrans._decode.viterbi",
         [
             "indictrans/_decode/viterbi.pyx"
-        ]
+        ],
+        include_dir=[numpy.get_include()]
     )
 
 ]
