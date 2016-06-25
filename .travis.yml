@@ -24,10 +24,10 @@ script:
 
 after_success: coveralls
 
-#notifications:
-  #email: silpa-discuss@nongnu.org
-  #irc:
-  #  channels:
-  #  on_success: #silpa
-  #  on_failure: #silpa
-  #  use_notice: true
+notifications:
+  email: silpa-discuss@nongnu.org
+  irc:
+    channels:
+    on_success: #silpa
+    on_failure: #silpa
+    use_notice: true
