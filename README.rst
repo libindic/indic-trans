@@ -2,11 +2,13 @@
 indic-trans
 ===========
 
-.. |Build Status| image:: https://travis-ci.org/libindic/indic-trans.svg?branch=master
+|travis| |coverage|
+
+.. |travis| image:: https://travis-ci.org/libindic/indic-trans.svg?branch=master
    :target: https://travis-ci.org/libindic/indic-trans
    :alt: travis-ci build status
 
-.. |Coverage Status| image:: https://coveralls.io/repos/github/libindic/indic-trans/badge.svg?branch=master 
+.. |coverage| image:: https://coveralls.io/repos/github/libindic/indic-trans/badge.svg?branch=master 
    :target: https://coveralls.io/github/libindic/indic-trans?branch=master
    :alt: coveralls.io coverage status
 
