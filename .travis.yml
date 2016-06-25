@@ -6,8 +6,14 @@ python:
 
 sudo: false
 
-before_install:
-  - sudo apt-get install gfortran python-all-dev python3-all-dev libblas-dev liblapack-dev -y
+addons:
+  apt:
+    packages:
+      - gfortran
+      - libblas-dev
+      - liblapack-dev
+      - python-all-dev
+      - python3-all-dev
 
 install:
   - pip install -r requirements.txt
