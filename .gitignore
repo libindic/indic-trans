@@ -63,3 +63,9 @@ target/
 
 #backup files
 *~
+
+# Ignore testrepository db
+.testrepository/
+
+# ignore cython generated c files
+indictrans/_decode/*.c
