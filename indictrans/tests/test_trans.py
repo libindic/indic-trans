@@ -11,8 +11,8 @@ class TestTransliterator(TestCase):
 
     def setUp(self):
         super(TestTransliterator, self).setUp()
-        source = ['hin']
-        target = ['eng']
+        source = 'hin ben mal guj pan kan tam tel ori'.split()
+        target = ['eng'] * len(source)
         self.src2trg = zip(source, target)
         self.trg2src = zip(target, source)
         self.test_dir = os.path.dirname(os.path.abspath(__file__))
@@ -36,3 +36,21 @@ class TestTransliterator(TestCase):
                 for line in fp:
                     expected, word = line.split()
                     self.assertEqual(trans.transform(word), expected)
+
+    def test_kbest(self):
+        k_best = range(2, 15)
+        for k in k_best:
+            r2i = transliterator(
+                                source='eng',
+                                target='hin',
+                                decode='beamsearch',
+                                k_best=k)
+            i2r = transliterator(
+                                source='hin',
+                                target='eng',
+                                decode='beamsearch',
+                                k_best=k)
+            hin = r2i.transform('indictrans')
+            eng = i2r.transform(hin[0])
+            assert len(hin) == k
+            assert len(eng) == k
