@@ -2,8 +2,6 @@
 indic-trans
 ===========
 
-|travis| |coverage|
-
 .. |Build Status| image:: https://travis-ci.org/libindic/indic-trans.svg?branch=master
    :target: https://travis-ci.org/libindic/indic-trans
    :alt: travis-ci build status
