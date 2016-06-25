@@ -2,8 +2,8 @@
 
 """Decoding (inference) algorithms."""
 
-import viterbi
-import beamsearch
+from indictrans._decode import viterbi
+from indictrans._decode import beamsearch
 
 DECODERS = {"viterbi": viterbi,
             "beamsearch": beamsearch}
