@@ -6,18 +6,9 @@ python:
 
 sudo: false
 
-addons:
-  apt:
-    packages:
-      - gfortran
-      - libblas-dev
-      - liblapack-dev
-      - python-all-dev
-      - python3-all-dev
-
 install:
-  - pip install -r requirements.txt
-  - pip install -r test-requirements.txt
+  - pip install --user -r requirements.txt
+  - pip install --user -r test-requirements.txt
 
 script:
   - make travis
