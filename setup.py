@@ -13,14 +13,14 @@ extensions = [
         [
             "indictrans/_decode/beamsearch.pyx"
         ],
-        include_dir=[numpy.get_include()]
+        include_dirs=[numpy.get_include()]
     ),
     Extension(
         "indictrans._decode.viterbi",
         [
             "indictrans/_decode/viterbi.pyx"
         ],
-        include_dir=[numpy.get_include()]
+        include_dirs=[numpy.get_include()]
     )
 
 ]
