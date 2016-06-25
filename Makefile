@@ -1,4 +1,5 @@
 travis:
+	python setup.py build_ext -i
 	python setup.py test --coverage \
 		--coverage-package-name=indictrans
 	flake8 --max-complexity 10 indictrans
