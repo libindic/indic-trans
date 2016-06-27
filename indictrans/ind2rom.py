@@ -7,6 +7,7 @@
 Transliteration Tool:
 Indic to Roman transliterator
 """
+from __future__ import unicode_literals
 
 import re
 import json
@@ -55,8 +56,8 @@ class ind_to_rom():
             '%s/models/%se_classes.npy' %
             (dist_dir, lg))[0]
         self.coef_ = np.load(
-            '%s/models/%se_coef.npy' %
-            (dist_dir, lg))[0].astype(np.float64)
+            '%s/models/%se_coef.npy' % (dist_dir, lg),
+            encoding='latin1')[0].astype(np.float64)  # FIXME why latin1?
         self.intercept_init_ = np.load(
             '%s/models/%se_intercept_init.npy' %
             (dist_dir, lg)).astype(np.float64)
@@ -100,7 +101,7 @@ class ind_to_rom():
                                self.intercept_trans_,
                                self.intercept_init_,
                                self.intercept_final_)
-            y = [self.classes_[pid] for pid in y]
+            y = [self.classes_[pid].decode('utf-8') for pid in y]
             y = ''.join(y).replace('_', '')
             return y
         else:
@@ -112,7 +113,7 @@ class ind_to_rom():
                                self.intercept_final_,
                                self.k_best)
             for path in y:
-                w = [self.classes_[pid] for pid in path]
+                w = [self.classes_[pid].decode('utf-8') for pid in path]
                 w = ''.join(w).replace('_', '')
                 top_seq.append(w)
             return top_seq
@@ -127,7 +128,7 @@ class ind_to_rom():
             word_feats = re.sub(r' ([VYZ])', r'\1', word_feats)
         if self.lang == 'mal':
             word_feats = word_feats.replace('rY rY', 'rYrY')
-        word_feats = word_feats.encode('utf-8').split()
+        word_feats = word_feats.split()
         word_feats = self.feature_extraction(word_feats)
         op_word = self.predict(word_feats)
         if self.decode == 'viterbi':
@@ -136,13 +137,11 @@ class ind_to_rom():
         return op_word
 
     def convert_to_wx(self, text):
-        if isinstance(text, str):
-            text = text.decode('utf-8')
         if self.lang == 'asm':
-            text = text.replace(u'\u09f0', u'\u09b0')
-            text = text.replace(u'\u09f1', u'\u09ac')
+            text = text.replace('\u09f0', '\u09b0')
+            text = text.replace('\u09f1', '\u09ac')
         text = self.mask_roman.sub(r'%s\1' % (self.esc_ch), text)
-        text = self.wx_process(text).decode('utf-8')  # Convert to wx
+        text = self.wx_process(text)
         return text
 
     def transliterate(self, text):
@@ -154,7 +153,7 @@ class ind_to_rom():
         lines = text.split("\n")
         for line in lines:
             if not line.strip():
-                trans_list.append(line.encode('utf-8'))
+                trans_list.append(line)
                 continue
             trans_line = str()
             line = self.non_alpha.split(line)
@@ -162,10 +161,10 @@ class ind_to_rom():
                 if not word:
                     continue
                 elif word[0] == self.esc_ch:
-                    word = word[1:].encode('utf-8')
+                    word = word[1:]
                     trans_line += word
                 elif word[0] not in self.letters:
-                    trans_line += word.encode('utf-8')
+                    trans_line += word
                 else:
                     op_word = self.case_trans(word)
                     trans_line += op_word
@@ -186,10 +185,10 @@ class ind_to_rom():
             if not word:
                 continue
             elif word[0] == self.esc_ch:
-                word = word[1:].encode('utf-8')
+                word = word[1:]
                 trans_word.append([word] * self.k_best)
             elif word[0] not in self.letters:
-                trans_word.append([word.encode('utf-8')] * self.k_best)
+                trans_word.append([word] * self.k_best)
             else:
                 op_word = self.case_trans(word)
                 trans_word.append(op_word)
