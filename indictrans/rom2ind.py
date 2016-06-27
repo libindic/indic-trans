@@ -7,6 +7,7 @@
 Transliteration Tool:
 Roman to Indic transliterator
 """
+from __future__ import unicode_literals
 
 import re
 import json
@@ -55,8 +56,8 @@ class rom_to_ind():
             '%s/models/e%s_classes.npy' %
             (dist_dir, lg))[0]
         self.coef_ = np.load(
-            '%s/models/e%s_coef.npy' %
-            (dist_dir, lg))[0].astype(np.float64)
+            '%s/models/e%s_coef.npy' % (dist_dir, lg),
+            encoding='latin1')[0].astype(np.float64)  # FIXME why latin1?
         self.intercept_init_ = np.load(
             '%s/models/e%s_intercept_init.npy' %
             (dist_dir, lg)).astype(np.float64)
@@ -112,7 +113,7 @@ class rom_to_ind():
                                self.intercept_trans_,
                                self.intercept_init_,
                                self.intercept_final_)
-            y = [self.classes_[pid] for pid in y]
+            y = [self.classes_[pid].decode('utf-8') for pid in y]
             y = ''.join(y).replace('_', '')
             return y
         else:
@@ -124,7 +125,7 @@ class rom_to_ind():
                                self.intercept_final_,
                                self.k_best)
             for path in y:
-                w = [self.classes_[pid] for pid in path]
+                w = [self.classes_[pid].decode('utf-8') for pid in path]
                 w = ''.join(w).replace('_', '')
                 top_seq.append(w)
             return top_seq
@@ -132,7 +133,6 @@ class rom_to_ind():
     def case_trans(self, word):
         if word in self.lookup:
             return self.wx_process(self.lookup[word])
-        word = word.encode('utf-8')
         word = re.sub(r'([a-z])\1\1+', r'\1\1', word)
         word = ' '.join(word).replace('h h', 'hh')
         word = re.sub(r'([bcdgjptsk]) h', r'\1h', word)
@@ -148,8 +148,6 @@ class rom_to_ind():
 
     def transliterate(self, text):
         """single best transliteration using viterbi decoding"""
-        if isinstance(text, str):
-            text = text.decode('utf-8')
         trans_list = list()
         text = text.lower()
         text = text.replace('\t', self.tab)
@@ -157,7 +155,7 @@ class rom_to_ind():
         lines = text.split("\n")
         for line in lines:
             if not line.strip():
-                trans_list.append(line.encode('utf-8'))
+                trans_list.append(line)
                 continue
             trans_line = str()
             line = self.non_alpha.split(line)
@@ -165,7 +163,7 @@ class rom_to_ind():
                 if not word:
                     continue
                 elif word[0] not in self.letters:
-                    trans_line += word.encode('utf-8')
+                    trans_line += word
                 else:
                     op_word = self.case_trans(word)
                     trans_line += op_word
@@ -178,8 +176,6 @@ class rom_to_ind():
 
     def top_n_trans(self, text):
         """k-best transliterations using beamsearch decoding"""
-        if isinstance(text, str):
-            text = text.decode('utf-8')
         text = text.lower()
         words = self.non_alpha.split(text)
         trans_word = []
@@ -187,7 +183,7 @@ class rom_to_ind():
             if not word:
                 continue
             elif word[0] not in self.letters:
-                trans_word.append([word.encode('utf-8')] * self.k_best)
+                trans_word.append([word] * self.k_best)
             else:
                 op_word = self.case_trans(word)
                 trans_word.append(op_word)
