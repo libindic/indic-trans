@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 
+import io
 import os
 
 from testtools import TestCase
@@ -22,7 +24,8 @@ class TestTransliterator(TestCase):
             src = lang_pair[0]
             trg = lang_pair[1]
             trans = transliterator(source=src, target=trg)
-            with open('%s/%s_%s.testpairs' % (self.test_dir, src, trg)) as fp:
+            with io.open('%s/%s_%s.testpairs' % (self.test_dir, src, trg),
+                         encoding='utf-8') as fp:
                 for line in fp:
                     word, expected = line.split()
                     self.assertEqual(trans.transform(word), expected)
@@ -32,7 +35,8 @@ class TestTransliterator(TestCase):
             src = lang_pair[0]
             trg = lang_pair[1]
             trans = transliterator(source=src, target=trg)
-            with open('%s/%s_%s.testpairs' % (self.test_dir, trg, src)) as fp:
+            with io.open('%s/%s_%s.testpairs' % (self.test_dir, trg, src),
+                         encoding='utf-8') as fp:
                 for line in fp:
                     expected, word = line.split()
                     self.assertEqual(trans.transform(word), expected)
@@ -41,15 +45,15 @@ class TestTransliterator(TestCase):
         k_best = range(2, 15)
         for k in k_best:
             r2i = transliterator(
-                                source='eng',
-                                target='hin',
-                                decode='beamsearch',
-                                k_best=k)
+                source='eng',
+                target='hin',
+                decode='beamsearch',
+                k_best=k)
             i2r = transliterator(
-                                source='hin',
-                                target='eng',
-                                decode='beamsearch',
-                                k_best=k)
+                source='hin',
+                target='eng',
+                decode='beamsearch',
+                k_best=k)
             hin = r2i.transform('indictrans')
             eng = i2r.transform(hin[0])
             assert len(hin) == k
