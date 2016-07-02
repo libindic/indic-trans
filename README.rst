@@ -126,11 +126,11 @@ Examples
 .. code:: python
 
     >>> from indictrans import transliterator
-    >>> r2i = transliterator(source='eng', target='mal', decode='beamsearch', k_best=5)
+    >>> r2i = transliterator(source='eng', target='mal', decode='beamsearch')
     >>> words = '''sereleskar morocco calendar bhagyalakshmi bhoolokanathan medical
     ...            ernakulam kilometer vitamin management university naukuchiatal'''.split()
     >>> for word in words:
-    ...     print('%s -> %s' % (word, '  '.join(r2i.transform(word))))
+    ...     print('%s -> %s' % (word, '  '.join(r2i.transform(word, k_best=5))))
     ... 
     sereleskar -> സേറെലേസ്കാര്  സെറെലേസ്കാര്  സേറെലേസ്കാര  സെറെലേസ്കാര  സേറെലേസ്കര്
     morocco -> മൊറോക്കോ  മൊറോക്ഡോ  മൊരോക്കോ  മോറോക്കോ  മൊറോക്കൂ
