@@ -16,20 +16,18 @@ def _get_decoder(decode):
 
 
 class transliterator():
-    def __init__(self, source='hin', target='eng', decode='viterbi', k_best=5):
+    def __init__(self, source='hin', target='eng', decode='viterbi'):
         indic = '''hin guj pan ben mal kan tam tel ori
                    mar nep bod kok asm'''.split()
         source = source.lower()
         target = target.lower()
         decoder = (decode, _get_decoder(decode))
-        if k_best < 2:
-            raise ValueError('`k_best` value should be >= 2')
         if source == "eng":
             if target not in indic:
                 raise NotImplementedError(
                     'Language pair `%s-%s` is not implemented.' %
                     (source, target))
-            r2i_trans = rom_to_ind(target, decoder, k_best)
+            r2i_trans = rom_to_ind(source, target, decoder)
             if decode == 'viterbi':
                 self.transform = r2i_trans.transliterate
             else:
@@ -39,7 +37,7 @@ class transliterator():
                 raise NotImplementedError(
                     'Language pair `%s-%s` is not implemented.' %
                     (source, target))
-            i2r_trans = ind_to_rom(source, decoder, k_best)
+            i2r_trans = ind_to_rom(source, target, decoder)
             if decode == 'viterbi':
                 self.transform = i2r_trans.transliterate
             else:
