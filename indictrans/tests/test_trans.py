@@ -43,18 +43,16 @@ class TestTransliterator(TestCase):
 
     def test_kbest(self):
         k_best = range(2, 15)
+        r2i = transliterator(
+            source='eng',
+            target='hin',
+            decode='beamsearch')
+        i2r = transliterator(
+            source='hin',
+            target='eng',
+            decode='beamsearch')
         for k in k_best:
-            r2i = transliterator(
-                source='eng',
-                target='hin',
-                decode='beamsearch',
-                k_best=k)
-            i2r = transliterator(
-                source='hin',
-                target='eng',
-                decode='beamsearch',
-                k_best=k)
-            hin = r2i.transform('indictrans')
-            eng = i2r.transform(hin[0])
+            hin = r2i.transform('indictrans', k_best=k)
+            eng = i2r.transform(hin[0], k_best=k)
             assert len(hin) == k
             assert len(eng) == k
