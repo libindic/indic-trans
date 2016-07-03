@@ -31,6 +31,7 @@ The module currently supports the following languages:
   * Konkani
   * Bodo
   * Nepali
+  * Urdu
   * English
 
 Installation
@@ -78,13 +79,17 @@ Examples
 
     indictrans --h
 
-    --v         show program's version number and exit
-    --source    select language (3 letter ISO-639 code)
-                [hin|ben|guj|pan|mal|kan|tam|tel|ori|eng|mar|asm|kok|bod|nep]
-    --target    select language (3 letter ISO-639 code)
-                [hin|ben|guj|pan|mal|kan|tam|tel|ori|eng|mar|asm|kok|bod|nep]
-    --input     <input-file>
-    --output    <output-file>
+    -h, --help          show this help message and exit
+    -v, --version       show program's version number and exit
+    -s, --source        select language (3 letter ISO-639 code) {hin, guj, pan,
+                        ben, mal, kan, tam, tel, ori, eng, mar, nep, bod, kok,
+                        asm, urd}
+    -t, --target        select language (3 letter ISO-639 code) {hin, guj, pan,
+                        ben, mal, kan, tam, tel, ori, eng, mar, nep, bod, kok,
+                        asm, urd}
+    -b, --build-lookup  build lookup to fasten transliteration
+    -i, --input         <input-file>
+    -o, --output        <output-file>
 
 
     Example ::
