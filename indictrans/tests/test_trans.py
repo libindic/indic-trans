@@ -1,22 +1,22 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
 from __future__ import unicode_literals
 
 import io
 import os
 
 from testtools import TestCase
-from indictrans import transliterator
+from indictrans import (transliterator, parse_args)
 
 
 class TestTransliterator(TestCase):
-
     def setUp(self):
         super(TestTransliterator, self).setUp()
         source = 'hin ben mal guj pan kan tam tel ori'.split()
         target = ['eng'] * len(source)
-        self.src2trg = zip(source, target)
-        self.trg2src = zip(target, source)
+        self.src2trg = zip(source, target) + [('pan', 'urd')]
+        self.trg2src = zip(target, source) + [('urd', 'pan')]
         self.test_dir = os.path.dirname(os.path.abspath(__file__))
 
     def test_src2trg(self):
@@ -56,3 +56,15 @@ class TestTransliterator(TestCase):
             eng = i2r.transform(hin[0], k_best=k)
             assert len(hin) == k
             assert len(eng) == k
+
+    def test_parser(self):
+        parser = parse_args(['--input', 'infile',
+                             '--output', 'outfile',
+                             '--source', 'hin',
+                             '--target', 'eng',
+                             '--build-lookup'])
+        self.assertEqual(parser.infile, 'infile')
+        self.assertEqual(parser.outfile, 'outfile')
+        self.assertEqual(parser.source, 'hin')
+        self.assertEqual(parser.target, 'eng')
+        self.assertTrue(parser.build_lookup)
