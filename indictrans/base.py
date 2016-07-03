@@ -9,17 +9,14 @@ Indic to Roman transliterator
 """
 from __future__ import unicode_literals
 
+import io
 import re
 import json
-import string
 import os.path
-import warnings
 
 import numpy as np
 
-from ._utils import (wxilp, enc)
-
-warnings.filterwarnings("ignore")
+from ._utils import (WX, OneHotEncoder, UrduNormalizer)
 
 
 class BaseTransliterator(object):
@@ -42,42 +39,65 @@ class BaseTransliterator(object):
         self.tab = '\x01\x03'  # mask tabs
         self.space = '\x02\x04'  # mask spaces
         self.esc_ch = '\x00'  # escape-sequence for Roman in WX
+        self.dist_dir = os.path.dirname(os.path.abspath(__file__))
         self.base_fit()
 
-    def base_fit(self):
-        dist_dir = os.path.dirname(os.path.abspath(__file__))
-        # load models
+    def load_models(self):
+        self.vectorizer_ = OneHotEncoder(sparse=True)
         model = '%s-%s' % (self.source, self.target)
-        self.vectorizer_ = enc(sparse=True)
-        with open('%s/models/%s/sparse.vec' % (dist_dir, model)) as jfp:
+        with open('%s/models/%s/sparse.vec' % (self.dist_dir, model)) as jfp:
             self.vectorizer_.unique_feats = json.load(jfp)
         self.classes_ = np.load(
             '%s/models/%s/classes.npy' %
-            (dist_dir, model))[0]
+            (self.dist_dir, model),
+            encoding='latin1')[0]
         self.coef_ = np.load(
-            '%s/models/%s/coef.npy' % (dist_dir, model),
-            encoding='latin1')[0].astype(np.float64)  # FIXME why latin1?
+            '%s/models/%s/coef.npy' % (self.dist_dir, model),
+            encoding='latin1')[0].astype(np.float64)
         self.intercept_init_ = np.load(
             '%s/models/%s/intercept_init.npy' %
-            (dist_dir, model)).astype(np.float64)
+            (self.dist_dir, model),
+            encoding='latin1').astype(np.float64)
         self.intercept_trans_ = np.load(
             '%s/models/%s/intercept_trans.npy' %
-            (dist_dir, model)).astype(np.float64)
+            (self.dist_dir, model),
+            encoding='latin1').astype(np.float64)
         self.intercept_final_ = np.load(
             '%s/models/%s/intercept_final.npy' %
-            (dist_dir, model)).astype(np.float64)
+            (self.dist_dir, model),
+            encoding='latin1').astype(np.float64)
+
+    def load_mappings(self):
+        # initialize punctuation map table
+        self.punkt_tbl = dict()
+        with io.open('%s/mappings/punkt.map' % self.dist_dir,
+                     encoding='utf-8') as punkt_fp:
+            for line in punkt_fp:
+                s, t = line.split()
+                if self.target == 'urd':
+                    if s in ["'", '"']:
+                        continue
+                    self.punkt_tbl[ord(s)] = t
+                else:
+                    self.punkt_tbl[ord(t)] = s
+
+    def base_fit(self):
+        # load models
+        self.load_models()
+        # load mapping tables for Urdu
+        if 'urd' in [self.source, self.target]:
+            self.load_mappings()
+        # initialize Urdu Normalizer
+        if self.source == 'urd':
+            self.nu = UrduNormalizer()
         # initialize wx-converter and character-maps
         if self.source in ['eng', 'urd']:
-            wxp = wxilp(order='wx2utf', lang=self.target)
+            wxp = WX(order='wx2utf', lang=self.target)
             self.wx_process = wxp.wx2utf
-            self.non_alpha = re.compile(r"([^a-z]+)")
-            self.letters = set(string.ascii_letters[:26])
         else:
-            wxp = wxilp(order='utf2wx', lang=self.source)
+            wxp = WX(order='utf2wx', lang=self.source)
             self.wx_process = wxp.utf2wx
-            self.letters = set(string.ascii_letters)
             self.mask_roman = re.compile(r'([a-zA-Z]+)')
-            self.non_alpha = re.compile(r"([^a-zA-Z%s]+)" % (self.esc_ch))
 
     def feature_extraction(self, letters, n=4):
         feats = []
@@ -120,8 +140,10 @@ class BaseTransliterator(object):
             return top_seq
 
     def convert_to_wx(self, text):
-        if self.source in ['eng', 'urd']:
+        if self.source == 'eng':
             return text.lower()
+        if self.source == 'urd':
+            return self.nu.normalize(text)
         if self.source == 'ben':
             text = text.replace('\u09f0', '\u09b0')
             text = text.replace('\u09f1', '\u09ac')
