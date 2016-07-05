@@ -33,10 +33,10 @@ class Ind2RU(BaseTransliterator):
         if word in self.lookup:
             return self.lookup[word]
         word = ' '.join(word)
-        if self.source == 'hin':
-            word = re.sub(r' ([aZ])', r'\1', word)
-        elif self.source == 'pan' and self.target == 'urd':
+        if self.target == 'urd':
             word = re.sub(r' ([aVYZ])', r'\1', word)
+        elif self.source == 'hin':
+            word = re.sub(r' ([aZ])', r'\1', word)
         else:
             word = re.sub(r' ([VYZ])', r'\1', word)
         if self.source == 'mal':
