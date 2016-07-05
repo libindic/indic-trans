@@ -14,9 +14,13 @@ class TestTransliterator(TestCase):
     def setUp(self):
         super(TestTransliterator, self).setUp()
         source = 'hin ben mal guj pan kan tam tel ori'.split()
-        target = ['eng'] * len(source)
-        self.src2trg = list(zip(source, target)) + [('pan', 'urd')]
-        self.trg2src = list(zip(target, source)) + [('urd', 'pan')]
+        target_rom = ['eng'] * len(source)
+        self.src2trg = list(zip(source, target_rom))
+        self.trg2src = list(zip(target_rom, source))
+        source = 'hin pan'.split()
+        target_urd = ['urd'] * len(source)
+        self.src2trg += list(zip(source, target_urd))
+        self.trg2src += list(zip(target_urd, source))
         self.test_dir = os.path.dirname(os.path.abspath(__file__))
 
     def test_src2trg(self):
