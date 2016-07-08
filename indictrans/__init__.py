@@ -12,9 +12,9 @@ __author__ = "Irshad Ahmad Bhat"
 __version__ = "1.0"
 
 
-def main():
-    languages = '''hin guj pan ben mal kan tam tel ori eng
-                   mar nep bod kok asm'''.split()
+def parse_args(args):
+    languages = '''hin guj pan ben mal kan tam tel ori
+                   eng mar nep bod kok asm urd'''.split()
     # help messages
     lang_help = "select language (3 letter ISO-639 code) {%s}" % (
         ', '.join(languages))
@@ -23,7 +23,7 @@ def main():
         prog="indictrans",
         description="Transliterator for Indian Languages including English")
     parser.add_argument('-v',
-                        '--vserion',
+                        '--version',
                         action="version",
                         version="%(prog)s 1.0")
     parser.add_argument(
@@ -43,6 +43,12 @@ def main():
         metavar='',
         help="%s" % lang_help)
     parser.add_argument(
+        '-b',
+        '--build-lookup',
+        dest="build_lookup",
+        action='store_true',
+        help='build lookup to fasten transliteration')
+    parser.add_argument(
         '-i',
         '--input',
         dest="infile",
@@ -56,13 +62,16 @@ def main():
         type=str,
         metavar='',
         help="<output-file>")
-
-    args = parser.parse_args()
+    args = parser.parse_args(args)
     if args.source == args.target:
         sys.stderr.write(
             'indictrans: error: source must be different from target\n')
         sys.stderr.write(parser.parse_args(['-h']))
+    return args
 
+
+def main():
+    args = parse_args(sys.argv[1:])
     if args.infile:
         ifp = io.open(args.infile, encoding='utf-8')
     else:
@@ -80,7 +89,10 @@ def main():
             ofp = codecs.getwriter('utf8')(sys.stdout)
 
     # initialize transliterator object
-    trn = transliterator(args.source, args.target)
+    trn = transliterator(
+                        args.source,
+                        args.target,
+                        build_lookup=args.build_lookup)
 
     # transliterate text
     for line in ifp:

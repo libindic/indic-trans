@@ -31,6 +31,7 @@ The module currently supports the following languages:
   * Konkani
   * Bodo
   * Nepali
+  * Urdu
   * English
 
 Installation
@@ -78,13 +79,17 @@ Examples
 
     indictrans --h
 
-    --v         show program's version number and exit
-    --source    select language (3 letter ISO-639 code)
-                [hin|ben|guj|pan|mal|kan|tam|tel|ori|eng|mar|asm|kok|bod|nep]
-    --target    select language (3 letter ISO-639 code)
-                [hin|ben|guj|pan|mal|kan|tam|tel|ori|eng|mar|asm|kok|bod|nep]
-    --input     <input-file>
-    --output    <output-file>
+    -h, --help          show this help message and exit
+    -v, --version       show program's version number and exit
+    -s, --source        select language (3 letter ISO-639 code) {hin, guj, pan,
+                        ben, mal, kan, tam, tel, ori, eng, mar, nep, bod, kok,
+                        asm, urd}
+    -t, --target        select language (3 letter ISO-639 code) {hin, guj, pan,
+                        ben, mal, kan, tam, tel, ori, eng, mar, nep, bod, kok,
+                        asm, urd}
+    -b, --build-lookup  build lookup to fasten transliteration
+    -i, --input         <input-file>
+    -o, --output        <output-file>
 
 
     Example ::
@@ -126,11 +131,11 @@ Examples
 .. code:: python
 
     >>> from indictrans import transliterator
-    >>> r2i = transliterator(source='eng', target='mal', decode='beamsearch', k_best=5)
+    >>> r2i = transliterator(source='eng', target='mal', decode='beamsearch')
     >>> words = '''sereleskar morocco calendar bhagyalakshmi bhoolokanathan medical
     ...            ernakulam kilometer vitamin management university naukuchiatal'''.split()
     >>> for word in words:
-    ...     print('%s -> %s' % (word, '  '.join(r2i.transform(word))))
+    ...     print('%s -> %s' % (word, '  '.join(r2i.transform(word, k_best=5))))
     ... 
     sereleskar -> സേറെലേസ്കാര്  സെറെലേസ്കാര്  സേറെലേസ്കാര  സെറെലേസ്കാര  സേറെലേസ്കര്
     morocco -> മൊറോക്കോ  മൊറോക്ഡോ  മൊരോക്കോ  മോറോക്കോ  മൊറോക്കൂ

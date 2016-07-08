@@ -4,8 +4,7 @@
 # Copyright (C) 2016 Irshad Ahmad Bhat
 
 from ._decode import DECODERS
-from .ind2rom import ind_to_rom
-from .rom2ind import rom_to_ind
+from .script_trans import (Ind2RU, Rom2Ind, Urd2Ind)
 
 
 def _get_decoder(decode):
@@ -16,34 +15,40 @@ def _get_decoder(decode):
 
 
 class transliterator():
-    def __init__(self, source='hin', target='eng', decode='viterbi', k_best=5):
-        indic = '''hin guj pan ben mal kan tam tel ori
-                   mar nep bod kok asm'''.split()
+    def __init__(
+                self,
+                source='hin',
+                target='eng',
+                decode='viterbi',
+                build_lookup=False):
+        indic = '''hin guj pan ben mal kan tam tel
+                ori mar nep bod kok asm'''.split()
         source = source.lower()
         target = target.lower()
         decoder = (decode, _get_decoder(decode))
-        if k_best < 2:
-            raise ValueError('`k_best` value should be >= 2')
-        if source == "eng":
+        if source in ['eng', 'urd']:
             if target not in indic:
                 raise NotImplementedError(
                     'Language pair `%s-%s` is not implemented.' %
                     (source, target))
-            r2i_trans = rom_to_ind(target, decoder, k_best)
-            if decode == 'viterbi':
-                self.transform = r2i_trans.transliterate
+            if source == 'eng':
+                ru2i_trans = Rom2Ind(source, target, decoder, build_lookup)
             else:
-                self.transform = r2i_trans.top_n_trans
-        elif target == 'eng':
+                ru2i_trans = Urd2Ind(source, target, decoder, build_lookup)
+            if decode == 'viterbi':
+                self.transform = ru2i_trans.transliterate
+            else:
+                self.transform = ru2i_trans.top_n_trans
+        elif target in ['eng', 'urd']:
             if source not in indic:
                 raise NotImplementedError(
                     'Language pair `%s-%s` is not implemented.' %
                     (source, target))
-            i2r_trans = ind_to_rom(source, decoder, k_best)
+            i2o_trans = Ind2RU(source, target, decoder, build_lookup)
             if decode == 'viterbi':
-                self.transform = i2r_trans.transliterate
+                self.transform = i2o_trans.transliterate
             else:
-                self.transform = i2r_trans.top_n_trans
+                self.transform = i2o_trans.top_n_trans
         else:
             raise NotImplementedError(
                 'Language pair `%s-%s` is not implemented.' %

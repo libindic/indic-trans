@@ -3,18 +3,14 @@
 
 # Copyright Irshad Ahmad Bhat 2016.
 
-"""
-An implementation for converting unicode strings in Indian languages to
-WX-Roman and vice-versa.
-"""
 from __future__ import unicode_literals
 
 import re
 from six import unichr
 
 
-class wxilp():
-
+class WX():
+    """WX-converter for UTF to WX conversion of Indic scripts and vice-versa"""
     def __init__(self, order='utf2wx', lang='hin'):
         self.order = order
         self.lang_tag = lang.lower()
