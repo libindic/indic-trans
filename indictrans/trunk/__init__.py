@@ -11,8 +11,8 @@ from builtins import input
 import numpy as np
 from six.moves import xrange
 
-from .._utils import OneHotEncoder
-from .._utils import ngram_context
+from indictrans._utils import OneHotEncoder
+from indictrans._utils import ngram_context
 from .perceptron import StructuredPerceptron
 
 

@@ -9,8 +9,8 @@ import numpy as np
 from six.moves import xrange
 from scipy.sparse import csc_matrix, issparse
 
-from .._decode import DECODERS
-from .._utils import count_tranxn, sparse_add
+from indictrans._decode import DECODERS
+from indictrans._utils import count_tranxn, sparse_add
 
 
 class StructuredPerceptron():
