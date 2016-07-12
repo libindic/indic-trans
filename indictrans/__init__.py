@@ -102,6 +102,3 @@ def main():
     # close files
     ifp.close()
     ofp.close()
-
-if __name__ == "__main__":
-    main()
