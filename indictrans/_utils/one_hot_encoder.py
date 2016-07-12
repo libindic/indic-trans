@@ -10,9 +10,6 @@ from scipy import sparse as sp
 class OneHotEncoder():
     """Transforms categorical features to continuous numeric features"""
 
-    def __init__(self, sparse=True):
-        self.sparse = sparse
-
     def fit(self, X):
         data = np.asarray(X)
         unique_feats = []
@@ -26,9 +23,9 @@ class OneHotEncoder():
         self.unique_feats = unique_feats
         return self
 
-    def transform(self, X):
+    def transform(self, X, sparse=True):
         X = np.atleast_2d(X)
-        if self.sparse:
+        if sparse:
             one_hot_matrix = sp.lil_matrix(
                 (len(X), sum(len(i) for i in self.unique_feats)))
         else:
@@ -39,4 +36,4 @@ class OneHotEncoder():
                 if val in self.unique_feats[j]:
                     one_hot_matrix[i, self.unique_feats[j][val]] = 1.0
 
-        return sp.csr_matrix(one_hot_matrix) if self.sparse else one_hot_matrix
+        return sp.csr_matrix(one_hot_matrix) if sparse else one_hot_matrix
