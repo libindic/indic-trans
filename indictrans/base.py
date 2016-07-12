@@ -15,6 +15,7 @@ import json
 import os.path
 
 import numpy as np
+from scipy.sparse import issparse
 
 from ._utils import (WX, OneHotEncoder, UrduNormalizer)
 
@@ -43,7 +44,7 @@ class BaseTransliterator(object):
         self.base_fit()
 
     def load_models(self):
-        self.vectorizer_ = OneHotEncoder(sparse=True)
+        self.vectorizer_ = OneHotEncoder()
         model = '%s-%s' % (self.source, self.target)
         with open('%s/models/%s/sparse.vec' % (self.dist_dir, model)) as jfp:
             self.vectorizer_.unique_feats = json.load(jfp)
@@ -99,23 +100,12 @@ class BaseTransliterator(object):
             self.wx_process = wxp.utf2wx
             self.mask_roman = re.compile(r'([a-zA-Z]+)')
 
-    def feature_extraction(self, letters, n=4):
-        feats = []
-        dummies = ["_"] * n
-        context = dummies + letters + dummies
-        for i in range(n, len(context) - n):
-            unigrams = context[i - n: i] +\
-                [context[i]] +\
-                context[i + 1: i + (n + 1)]
-            ngrams = ['|'.join(ng) for k in range(2, n + 1)
-                      for ng in zip(*[unigrams[j:]
-                                      for j in range(k)])]
-            feats.append(unigrams + ngrams)
-        return feats
-
     def predict(self, word, k_best=5):
         X = self.vectorizer_.transform(word)
-        scores = X.dot(self.coef_.T).toarray()
+        if issparse(X):
+            scores = X.dot(self.coef_.T).toarray()
+        else:
+            scores = self.coef_.dot(X.T).T
         if self.decode == 'viterbi':
             y = self.decoder.decode(
                 scores,
