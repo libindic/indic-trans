@@ -34,8 +34,7 @@ class UrduNormalizer():
                 self.norm_tbl[ord(s)] = t
 
     def cnorm(self, text):
-        """
-        Normalize NO_BREAK_SPACE, SOFT_HYPHEN, WORD_JOINER, H_SPACE,
+        """Normalize NO_BREAK_SPACE, SOFT_HYPHEN, WORD_JOINER, H_SPACE,
         ZERO_WIDTH[SPACE, NON_JOINER, JOINER],
         MARK[LEFT_TO_RIGHT, RIGHT_TO_LEFT, BYTE_ORDER, BYTE_ORDER_2]
         """
@@ -54,6 +53,7 @@ class UrduNormalizer():
         return text
 
     def normalize(self, text):
+        """normalize text"""
         text = self.cnorm(text)
         # matra normalizations
         text = re.sub('[\u064d\u0652\u0654-\u065b]', '', text)
