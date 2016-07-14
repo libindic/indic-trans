@@ -14,11 +14,12 @@ def _get_decoder(decode):
         raise ValueError('Unknown decoder {0!r}'.format(decode))
 
 
-class transliterator():
+class Transliterator():
     """Transliterator for Indic scripts including English and Urdu.
 
     Parameters
     ----------
+
     source : str, default: hin
         Source Language (3 letter ISO-639 code)
 
@@ -34,8 +35,9 @@ class transliterator():
 
     Examples
     --------
-    >>> from indictrans import transliterator
-    >>> trn = transliterator(source='hin', target='eng')
+
+    >>> from indictrans import Transliterator
+    >>> trn = Transliterator(source='hin', target='eng', build_lookup=True)
     >>> hin = '''कांग्रेस पार्टी अध्यक्ष सोनिया गांधी, तमिलनाडु की मुख्यमंत्री
     ... जयललिता और रिज़र्व बैंक के गवर्नर रघुराम राजन के बीच एक
     ... समानता है. ये सभी अलग-अलग कारणों से भारतीय जनता पार्टी के
@@ -50,7 +52,6 @@ class transliterator():
     rajyasabha saansad subramanyam swami ke nishane par hain. unke
     jayalalita our sonia gandhi ke peeche padane ka kaaran kathith
     bhrashtachar hai.
-
     """
     def __init__(
                 self,
