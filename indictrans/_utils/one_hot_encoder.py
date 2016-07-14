@@ -8,8 +8,25 @@ from scipy import sparse as sp
 
 
 class OneHotEncoder():
-    """Transforms categorical features to continuous numeric features"""
+    """Transforms categorical features to continuous numeric features.
 
+    Examples
+    --------
+    >>> from one_hot_encoder import OneHotEncoder
+    >>> enc = OneHotEncoder()
+    >>> sequences = [list('bat'), list('cat'), list('rat')]
+    >>> enc.fit(sequences)
+    <one_hot_encoder.OneHotEncoder instance at 0x7f346d71c200>
+    >>> enc.transform(sequences, sparse=False).astype(int)
+    array([[0, 1, 0, 1, 1],
+           [1, 0, 0, 1, 1],
+           [0, 0, 1, 1, 1]])
+    >>> enc.transform(list('cat'), sparse=False).astype(int)
+    array([[1, 0, 0, 1, 1]])
+    >>> enc.transform(list('bat'), sparse=True)
+    <1x5 sparse matrix of type '<type 'numpy.float64'>'
+        with 3 stored elements in Compressed Sparse Row format>
+    """
     def fit(self, X):
         data = np.asarray(X)
         unique_feats = []

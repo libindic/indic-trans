@@ -7,7 +7,23 @@ import re
 
 
 class UrduNormalizer():
+    """Normalizer for Urdu scripts. Normalizes different unicode canonical
+    equivalances to a single unicode code-point.
 
+    Examples
+    --------
+    >>> from script_normalizer import UrduNormalizer
+    >>> text = u'''ﺎﻧ کﻭ ﻍیﺮﻗﺎﻧﻮﻧی ﺝگہ کﺱ ﻥے ﺩی؟
+    ... ﻝﻭگﻭں کﻭ ﻖﺘﻟ کیﺍ ﺝﺍﺭ ہﺍ ہے ۔
+    ... ﺏڑے ﻡﺎﻣﻭں ﺎﻧ ﺪﻧﻭں ﻢﺤﻟہ ﺥﺩﺍﺩﺍﺩ ﻡیں ﺭہﺕے ﺕھے۔
+    ... ﻉﻭﺎﻣی یﺍ ﻑﻼﺣی ﺥﺪﻣﺎﺗ ﺍیک ﺎﻟگ ﺩﺎﺋﺭہ ﻊﻤﻟ ہے۔'''
+    >>> nu = UrduNormalizer()
+    >>> print(nu.normalize(text))
+    ان کو غیرقانونی جگہ کس نے دی؟
+    لوگوں کو قتل کیا جار ہا ہے ۔
+    بڑے ماموں ان دنوں محلہ خداداد میں رہتے تھے۔
+    عوامی یا فلاحی خدمات ایک الگ دائرہ عمل ہے۔
+    """
     def __init__(self):
         self.norm_tbl = dict()
         dist_dir = os.path.dirname(os.path.abspath(__file__))
