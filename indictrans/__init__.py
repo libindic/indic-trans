@@ -6,7 +6,7 @@ import sys
 import codecs
 import argparse
 
-from .transliterator import transliterator
+from .transliterator import Transliterator
 
 __author__ = "Irshad Ahmad Bhat"
 __version__ = "1.0"
@@ -89,7 +89,7 @@ def main():
             ofp = codecs.getwriter('utf8')(sys.stdout)
 
     # initialize transliterator object
-    trn = transliterator(
+    trn = Transliterator(
                         args.source,
                         args.target,
                         build_lookup=args.build_lookup)
