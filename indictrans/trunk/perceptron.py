@@ -21,9 +21,10 @@ class StructuredPerceptron():
 
     Parameters
     ----------
+
     lr_exp : float, default: 0.1
         The Exponent used for inverse scaling of learning rate. Given iteration
-        number t, the effective learning rate is `1. / (t ** lr_exp)`
+        number t, the effective learning rate is ``1. / (t ** lr_exp)``
 
     n_iter : int, default: 15
         Maximum number of epochs of the structured perceptron algorithm
@@ -32,13 +33,14 @@ class StructuredPerceptron():
         If int, random_state is the seed used by the random number generator;
         If RandomState instance, random_state is the random number generator;
         If None, the random number generator is the RandomState instance used
-        by `np.random`.
+        by ``np.random``.
 
     verbose : int, default: 0 (quiet mode)
         Verbosity mode.
 
     References
     ----------
+
     M. Collins (2002). Discriminative training methods for hidden Markov
     models: Theory and experiments with perceptron algorithms. EMNLP.
     """
