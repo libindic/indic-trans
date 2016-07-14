@@ -28,6 +28,19 @@ class OneHotEncoder():
         with 3 stored elements in Compressed Sparse Row format>
     """
     def fit(self, X):
+        """Fit OneHotEncoder to X.
+
+        Parameters
+        ----------
+
+        X : array-like, shape [n_samples, n_feature]
+            Input array of type int.
+
+        Returns
+        -------
+
+        self
+        """
         data = np.asarray(X)
         unique_feats = []
         offset = 0
@@ -41,6 +54,22 @@ class OneHotEncoder():
         return self
 
     def transform(self, X, sparse=True):
+        """Transform X using one-hot encoding.
+
+        Parameters
+        ----------
+
+        X : array-like, shape [n_samples, n_features]
+            Input array of categorical features.
+
+        sparse : bool, default: True
+            Return sparse matrix if set True else return an array.
+
+        Returns
+        -------
+        X_out : sparse matrix if sparse=True else a 2-d array, dtype=int
+            Transformed input.
+        """
         X = np.atleast_2d(X)
         if sparse:
             one_hot_matrix = sp.lil_matrix(
