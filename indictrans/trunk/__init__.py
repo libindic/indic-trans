@@ -15,6 +15,8 @@ from indictrans._utils import OneHotEncoder
 from indictrans._utils import ngram_context
 from .perceptron import StructuredPerceptron
 
+__all__ = ["StructuredPerceptron"]
+
 
 def save_models(clf, enc, out_dir):
     if os.path.isdir(out_dir):
