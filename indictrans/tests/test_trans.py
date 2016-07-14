@@ -7,7 +7,7 @@ import io
 import os
 
 from testtools import TestCase
-from indictrans import (transliterator, parse_args)
+from indictrans import (Transliterator, parse_args)
 
 
 class TestTransliterator(TestCase):
@@ -27,7 +27,7 @@ class TestTransliterator(TestCase):
         for lang_pair in self.src2trg:
             src = lang_pair[0]
             trg = lang_pair[1]
-            trans = transliterator(source=src, target=trg)
+            trans = Transliterator(source=src, target=trg)
             with io.open('%s/%s_%s.testpairs' % (self.test_dir, src, trg),
                          encoding='utf-8') as fp:
                 for line in fp:
@@ -38,7 +38,7 @@ class TestTransliterator(TestCase):
         for lang_pair in self.trg2src:
             src = lang_pair[0]
             trg = lang_pair[1]
-            trans = transliterator(source=src, target=trg)
+            trans = Transliterator(source=src, target=trg)
             with io.open('%s/%s_%s.testpairs' % (self.test_dir, trg, src),
                          encoding='utf-8') as fp:
                 for line in fp:
@@ -47,11 +47,11 @@ class TestTransliterator(TestCase):
 
     def test_kbest(self):
         k_best = range(2, 15)
-        r2i = transliterator(
+        r2i = Transliterator(
             source='eng',
             target='hin',
             decode='beamsearch')
-        i2r = transliterator(
+        i2r = Transliterator(
             source='hin',
             target='eng',
             decode='beamsearch')
