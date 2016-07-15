@@ -14,7 +14,45 @@ def _get_decoder(decode):
         raise ValueError('Unknown decoder {0!r}'.format(decode))
 
 
-class transliterator():
+class Transliterator():
+    """Transliterator for Indic scripts including English and Urdu.
+
+    Parameters
+    ----------
+
+    source : str, default: hin
+        Source Language (3 letter ISO-639 code)
+
+    target : str, default: eng
+        Target Language (3 letter ISO-639 code)
+
+    decode : str, default: viterbi
+        Decoding algorithm, either "viterbi" or "beamsearch".
+
+    build_lookup : bool, default: False
+        Flag to build lookup-table. Fastens the transliteration
+        process if the input text contains repeating words.
+
+    Examples
+    --------
+
+    >>> from indictrans import Transliterator
+    >>> trn = Transliterator(source='hin', target='eng', build_lookup=True)
+    >>> hin = '''कांग्रेस पार्टी अध्यक्ष सोनिया गांधी, तमिलनाडु की मुख्यमंत्री
+    ... जयललिता और रिज़र्व बैंक के गवर्नर रघुराम राजन के बीच एक
+    ... समानता है. ये सभी अलग-अलग कारणों से भारतीय जनता पार्टी के
+    ... राज्यसभा सांसद सुब्रमण्यम स्वामी के निशाने पर हैं. उनके
+    ... जयललिता और सोनिया गांधी के पीछे पड़ने का कारण कथित
+    ... भ्रष्टाचार है.'''
+    >>> eng = trn.transform(hin)
+    >>> print(eng)
+    congress party adhyaksh sonia gandhi, tamilnadu kii mukhyamantri
+    jayalalita our reserve baink ke governor raghuram rajan ke beech ek
+    samanta hai. ye sabi alag-alag carnon se bharatiya janata party ke
+    rajyasabha saansad subramanyam swami ke nishane par hain. unke
+    jayalalita our sonia gandhi ke peeche padane ka kaaran kathith
+    bhrashtachar hai.
+    """
     def __init__(
                 self,
                 source='hin',

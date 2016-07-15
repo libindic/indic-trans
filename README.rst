@@ -1,19 +1,11 @@
-===========
 indic-trans
 ===========
 
 |travis| |coverage|
 
-.. |travis| image:: https://travis-ci.org/libindic/indic-trans.svg?branch=master
-   :target: https://travis-ci.org/libindic/indic-trans
-   :alt: travis-ci build status
+----
 
-.. |coverage| image:: https://coveralls.io/repos/github/libindic/indic-trans/badge.svg?branch=master 
-   :target: https://coveralls.io/github/libindic/indic-trans?branch=master
-   :alt: coveralls.io coverage status
-
-
-The project aims on adding a state-of-the-art transliteration module for cross transliterations among all Indian languages including English.
+The project aims on adding a state-of-the-art transliteration module for cross transliterations among all Indian languages including English and Urdu.
 
 The module currently supports the following languages:
 
@@ -35,7 +27,7 @@ The module currently supports the following languages:
   * English
 
 Installation
-============
+------------
 
 Dependencies
 ~~~~~~~~~~~~
@@ -66,14 +58,16 @@ Install
 
 ::
 
-    pip install git+git://github.com/irshadbhat/indic-trans.git   or 
+    pip install git+git://github.com/irshadbhat/indic-trans.git
+    ----------------------------OR-----------------------------
     pip install git+git://github.com/libindic/indic-trans.git    
 
+
 Examples
-~~~~~~~~
+--------
 
 1. From Console:
-^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~
 
 .. parsed-literal::
 
@@ -94,48 +88,58 @@ Examples
 
     Example ::
 
-	indictrans < hindi.txt --s hin --t eng > hindi-rom.txt
-	indictrans < roman.txt --s hin --t eng > roman-hin.txt
+	indictrans < hindi.txt --s hin --t eng --build-lookup > hindi-rom.txt
+	indictrans < roman.txt --s hin --t eng --build-lookup > roman-hin.txt
+
+If the input text contains repeating words, which raw text generally does, make sure to set ``build_lookup``. As the name indicates this builds lookup for transliterated words and thus avoids repeated transliteration of same words. This saves a lot of time if the input corpus is too big.
 
 2. Using Python:
-^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~
 
 .. code:: python
 
-    >>> from indictrans import transliterator
-    >>> trn = transliterator(source='hin', target='eng')
+    >>> from indictrans import Transliterator
+    >>> trn = Transliterator(source='hin', target='eng', build_lookup=True)
     >>> 
-    >>> hin = """कांग्रेस पार्टी अध्यक्ष सोनिया गांधी, तमिलनाडु की मुख्यमंत्री जयललिता और रिज़र्व बैंक के गवर्नर रघुराम राजन के बीच एक समानता है.
-    ... ये सभी अलग-अलग कारणों से भारतीय जनता पार्टी के राज्यसभा सांसद सुब्रमण्यम स्वामी के निशाने पर हैं.
-    ... उनके जयललिता और सोनिया गांधी के पीछे पड़ने का कारण कथित भ्रष्टाचार है."""
+    >>> hin = """कांग्रेस पार्टी अध्यक्ष सोनिया गांधी, तमिलनाडु की मुख्यमंत्री
+    ... जयललिता और रिज़र्व बैंक के गवर्नर रघुराम राजन के बीच एक समानता
+    ... है. ये सभी अलग-अलग कारणों से भारतीय जनता पार्टी के राज्यसभा सांसद
+    ... सुब्रमण्यम स्वामी के निशाने पर हैं. उनके जयललिता और सोनिया गांधी के
+    ... पीछे पड़ने का कारण कथित भ्रष्टाचार है."""
     >>>
     >>> eng = trn.transform(hin)
     >>> print(eng)
-    congress party adhyaksh sonia gandhi, tamilnadu kii mukhyamantri jayalalita our reserve baink ke governor raghuram rajan ke beech ek samanta hai.
-    ye sabi alag-alag carnon se bharatiya janata party ke rajyasabha saansad subramanyam swami ke nishane par hain.
-    unke jayalalita our sonia gandhi ke peeche padane ka kaaran kathith bhrashtachar hai.
+    congress party adhyaksh sonia gandhi, tamilnadu kii mukhyamantri
+    jayalalita our reserve baink ke governor raghuram rajan ke beech ek samanta
+    hai. ye sabi alag-alag carnon se bharatiya janata party ke rajyasabha saansad
+    subramanyam swami ke nishane par hain. unke jayalalita our sonia gandhi ke
+    peeche padane ka kaaran kathith bhrashtachar hai.
     >>> 
-    >>> trn = transliterator(source='eng', target='hin')
+    >>> trn = Transliterator(source='eng', target='hin')
     >>> 
     >>> hin_ = trn.transform(eng)
     >>> 
     >>> print(hin_)
-    कांग्रेस पार्टी अध्यक्ष सोनिया गांधी, तमिलनाडु की मुख्यमांत्री जयललिता और रिज़र्व बैंक के गवर्नर रघुराम राजन के बीच एक समानता है.
-    ये सभी अलग-अलग कार्नों से भारतीय जनता पार्टी के राज्यसभा स्Mसद सुब्रमण्यम स्वामी के निशाने पर हैं.
-    उनके जयललिता और सोनिया गांधी के पीछे पड़ने का कारण कथित भ्रष्टाचार है.
+    कांग्रेस पार्टी अध्यक्ष सोनिया गांधी, तमिलनाडु की मुख्यमांत्री
+    जयललिता और रिज़र्व बैंक के गवर्नर रघुराम राजन के बीच एक समानता
+    है. ये सभी अलग-अलग कार्नों से भारतीय जनता पार्टी के राज्यसभा संसद
+    सुब्रमण्यम स्वामी के निशाने पर हैं. उनके जयललिता और सोनिया गांधी के
+    पीछे पड़ने का कारण कथित भ्रष्टाचार है.
     >>>
 
 3. K-Best Transliterations
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: python
 
-    >>> from indictrans import transliterator
-    >>> r2i = transliterator(source='eng', target='mal', decode='beamsearch')
-    >>> words = '''sereleskar morocco calendar bhagyalakshmi bhoolokanathan medical
-    ...            ernakulam kilometer vitamin management university naukuchiatal'''.split()
+    >>> from indictrans import Transliterator
+    >>> r2i = Transliterator(source='eng', target='mal', decode='beamsearch')
+    >>> words = '''sereleskar morocco calendar bhagyalakshmi bhoolokanathan
+    ...         medical ernakulam kilometer vitamin management university
+    ...         naukuchiatal'''.split()
     >>> for word in words:
-    ...     print('%s -> %s' % (word, '  '.join(r2i.transform(word, k_best=5))))
+    ...     print('%s -> %s' % (word, 
+    ...                         '  '.join(r2i.transform(word, k_best=5))))
     ... 
     sereleskar -> സേറെലേസ്കാര്  സെറെലേസ്കാര്  സേറെലേസ്കാര  സെറെലേസ്കാര  സേറെലേസ്കര്
     morocco -> മൊറോക്കോ  മൊറോക്ഡോ  മൊരോക്കോ  മോറോക്കോ  മൊറോക്കൂ
@@ -149,3 +153,21 @@ Examples
     management -> മാനേജ്മെന്റ്  മാനേജ്ഞ്മെന്റ്  മാനേഗ്മെന്റ്  മാംനേജ്മെന്റ്  മാനേജ്മെതുറ്
     university -> യൂണിവേഴ്സിറ്റി  യൂണിവേര്സിറ്റി  യുണിവേഴ്സിറ്റി  യൂനിവേഴ്സിറ്റി  യൂണിവേഴ്സിറ്റീ
     naukuchiatal -> നകുചിയാറ്റാള്  നകുചിയാറ്റാല്  നകുചിയാറ്റാല  നകുചിയാറ്റള്  നകുചിയറ്റാള്
+
+
+Links & References
+------------------
+
+`Machine Transliteration <http://irshadbhat.github.io/gsoc/>`_
+
+----
+
+|travis| |coverage|
+
+.. |travis| image:: https://travis-ci.org/libindic/indic-trans.svg?branch=master
+   :target: https://travis-ci.org/libindic/indic-trans
+   :alt: travis-ci build status
+
+.. |coverage| image:: https://coveralls.io/repos/github/libindic/indic-trans/badge.svg?branch=master 
+   :target: https://coveralls.io/github/libindic/indic-trans?branch=master
+   :alt: coveralls.io coverage status

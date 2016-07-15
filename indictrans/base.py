@@ -15,12 +15,42 @@ import json
 import os.path
 
 import numpy as np
+from scipy.sparse import issparse
 
 from ._utils import (WX, OneHotEncoder, UrduNormalizer)
 
 
 class BaseTransliterator(object):
-    """Transliterates words from Indic to Roman script"""
+    """Base class for transliterator.
+
+    Attributes
+    ----------
+    vectorizer_ : instance
+        `OneHotEncoder` instance for converting categorical features to
+        one-hot features.
+
+    classes_ : dict
+        Dictionary of set of tags with unique ids ({id: tag}).
+
+    coef_ : array
+        HMM coefficient array
+
+    intercept_init_ : array
+        HMM intercept array for first layer of trellis.
+
+    intercept_trans_ : array
+        HMM intercept/transition array for middle layers of trellis.
+
+    intercept_final_ : array
+        HMM intercept array for last layer of trellis.
+
+    wx_process : method
+        `wx2utf`/`utf2wx` method of `WX` instance
+
+    nu : instance
+        `UrduNormalizer` instance for normalizing Urdu scripts.
+
+    """
 
     def __init__(self, source, target, decoder, build_lookup=False):
         if source in ('mar', 'nep', 'kok', 'bod'):
@@ -43,7 +73,8 @@ class BaseTransliterator(object):
         self.base_fit()
 
     def load_models(self):
-        self.vectorizer_ = OneHotEncoder(sparse=True)
+        """Loads transliteration models."""
+        self.vectorizer_ = OneHotEncoder()
         model = '%s-%s' % (self.source, self.target)
         with open('%s/models/%s/sparse.vec' % (self.dist_dir, model)) as jfp:
             self.vectorizer_.unique_feats = json.load(jfp)
@@ -99,23 +130,14 @@ class BaseTransliterator(object):
             self.wx_process = wxp.utf2wx
             self.mask_roman = re.compile(r'([a-zA-Z]+)')
 
-    def feature_extraction(self, letters, n=4):
-        feats = []
-        dummies = ["_"] * n
-        context = dummies + letters + dummies
-        for i in range(n, len(context) - n):
-            unigrams = context[i - n: i] +\
-                [context[i]] +\
-                context[i + 1: i + (n + 1)]
-            ngrams = ['|'.join(ng) for k in range(2, n + 1)
-                      for ng in zip(*[unigrams[j:]
-                                      for j in range(k)])]
-            feats.append(unigrams + ngrams)
-        return feats
-
     def predict(self, word, k_best=5):
+        """Given encoded word matrix and HMM parameters, predicts output
+        sequence (target word)"""
         X = self.vectorizer_.transform(word)
-        scores = X.dot(self.coef_.T).toarray()
+        if issparse(X):
+            scores = X.dot(self.coef_.T).toarray()
+        else:
+            scores = self.coef_.dot(X.T).T
         if self.decode == 'viterbi':
             y = self.decoder.decode(
                 scores,
@@ -140,6 +162,7 @@ class BaseTransliterator(object):
             return top_seq
 
     def convert_to_wx(self, text):
+        """Converts Indic scripts to WX."""
         if self.source == 'eng':
             return text.lower()
         if self.source == 'urd':
@@ -152,7 +175,7 @@ class BaseTransliterator(object):
         return text
 
     def transliterate(self, text, k_best=None):
-        """single best transliteration using viterbi decoding"""
+        """Single best transliteration using viterbi decoding."""
         trans_list = []
         text = self.convert_to_wx(text)
         text = text.replace('\t', self.tab)
@@ -173,7 +196,13 @@ class BaseTransliterator(object):
         return trans_line
 
     def top_n_trans(self, text, k_best=5):
-        """k-best transliterations using beamsearch decoding"""
+        """Returns k-best transliterations using beamsearch decoding.
+
+        Parameters
+        ----------
+        k_best : int, default: 5, optional
+            Used by `Beamsearch` decoder to return k-best transliterations.
+        """
         if k_best < 2:
             raise ValueError('`k_best` value should be >= 2')
         trans_word = []

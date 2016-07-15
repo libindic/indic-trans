@@ -21,6 +21,20 @@ extensions = [
             "indictrans/_decode/viterbi.pyx"
         ],
         include_dirs=[numpy.get_include()]
+    ),
+    Extension(
+        "indictrans._utils.ctranxn",
+        [
+            "indictrans/_utils/ctranxn.pyx"
+        ],
+        include_dirs=[numpy.get_include()]
+    ),
+    Extension(
+        "indictrans._utils.sparseadd",
+        [
+            "indictrans/_utils/sparseadd.pyx"
+        ],
+        include_dirs=[numpy.get_include()]
     )
 
 ]

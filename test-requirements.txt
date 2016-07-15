@@ -1,3 +1,4 @@
+future
 testrepository
 python-subunit
 flake8

@@ -10,7 +10,47 @@ from six import unichr
 
 
 class WX():
-    """WX-converter for UTF to WX conversion of Indic scripts and vice-versa"""
+    """WX-converter for UTF to WX conversion of Indic scripts and vice-versa.
+
+    Parameters
+    ----------
+    lang : str, default: hin
+        Input script
+
+    order : str, default: utf2wx
+        Order of conversion
+
+    Examples
+    --------
+    >>> from wx import WX
+    >>> wxc = WX(lang='hin', order='utf2wx')
+    >>> hin_utf = u'''बीजेपी के सांसद सुब्रमण्यम स्वामी ने कुछ ही दिन पहले
+    ... अपनी ही सरकार को कठघरे में खड़ा करते हुए जीडीपी आंकड़ों पर
+    ... सवाल उठाए हैं.'''
+    >>> hin_wx = wxc.utf2wx(hin_utf)
+    >>> print(hin_wx)
+    bIjepI ke sAMsaxa subramaNyama svAmI ne kuCa hI xina pahale
+    apanI hI sarakAra ko kaTaGare meM KadZA karawe hue jIdIpI AMkadZoM para
+    savAla uTAe hEM.
+    >>> wxc = WX(lang='hin', order='wx2utf')
+    >>> hin_utf_ = wxc.wx2utf(hin_wx)
+    >>> print(hin_utf_)
+    बीजेपी के सांसद सुब्रमण्यम स्वामी ने कुछ ही दिन पहले
+    अपनी ही सरकार को कठघरे में खड़ा करते हुए जीडीपी आंकड़ों पर
+    सवाल उठाए हैं.
+    >>> wxc = WX(lang='mal', order='utf2wx')
+    >>> mal_utf = u'''വിപണിയിലെ ശുഭാപ്തിവിശ്വാസക്കാരായ കാളകള്‍ക്ക് അനുകൂലമായ
+    ... രീതിയിലാണ് ബി എസ് ഇയില്‍ വ്യാപാരം നടക്കുന്നത്.'''
+    >>> mal_wx = wxc.utf2wx(mal_utf)
+    >>> print(mal_wx)
+    vipaNiyileV SuBApwiviSvAsakkArAya kAlYakalYkk anukUlamAya
+    rIwiyilAN bi eVs iyil vyApAraM natakkunnaw.
+    >>> wxc = WX(lang='mal', order='wx2utf')
+    >>> mal_utf_ = wxc.wx2utf(mal_wx)
+    >>> print(mal_utf_)
+    വിപണിയിലെ ശുഭാപ്തിവിശ്വാസക്കാരായ കാളകള്ക്ക് അനുകൂലമായ
+    രീതിയിലാണ് ബി എസ് ഇയില് വ്യാപാരം നടക്കുന്നത്.
+    """
     def __init__(self, order='utf2wx', lang='hin'):
         self.order = order
         self.lang_tag = lang.lower()
@@ -2860,7 +2900,7 @@ class WX():
         return iscii_guj
 
     def utf2wx(self, unicode_):
-        """Convert UTF-8 string to Unicode"""
+        """Convert UTF string to WX-Roman"""
         unicode_ = self.normalize(unicode_)
         # Mask iscii characters (if any)
         unicode_ = self.mask_isc.sub(
@@ -2874,11 +2914,10 @@ class WX():
         wx = re.sub('[\xA0-\xFA]+', '', wx)
         # Unmask iscii characters
         wx = self.unmask_isc.sub(lambda m: self.num_iscii[m.group(1)], wx)
-
         return wx
 
     def wx2utf(self, wx):
-        """Convert WX-Roman to ISCII"""
+        """Convert WX-Roman to UTF"""
         unicode_ = str()
         wx_list = self.unmask_rom.split(wx)
         for wx in wx_list:
@@ -2896,5 +2935,4 @@ class WX():
                 unicode_ += self.unmask_isc.sub(
                     lambda m: self.num_iscii[
                         m.group(1)], unicode_t)
-        # Convert Unicode to utf-8
         return unicode_

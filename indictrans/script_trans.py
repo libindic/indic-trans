@@ -9,6 +9,7 @@ import re
 import string
 from six import unichr
 
+from ._utils import ngram_context
 from .base import BaseTransliterator
 
 
@@ -29,6 +30,8 @@ class Ind2RU(BaseTransliterator):
         if word[0] == self.esc_ch:
             return word[1:]
         if word[0] not in self.letters:
+            if self.target == 'urd':
+                return word.translate(self.punkt_tbl)
             return word
         if word in self.lookup:
             return self.lookup[word]
@@ -41,7 +44,7 @@ class Ind2RU(BaseTransliterator):
             word = re.sub(r' ([VYZ])', r'\1', word)
         if self.source == 'mal':
             word = word.replace('rY rY', 'rYrY')
-        word_feats = self.feature_extraction(word.split())
+        word_feats = ngram_context(word.split())
         t_word = self.predict(word_feats, k_best)
         if self.build_lookup:
             self.lookup[word] = t_word
@@ -87,7 +90,7 @@ class Rom2Ind(BaseTransliterator):
         word = re.sub(r'([a-z])\1\1+', r'\1\1', word)
         word = ' '.join(word)
         word = re.sub(r'([bcdgjptsk]) h', r'\1h', word)
-        word_feats = self.feature_extraction(word.split(), n=4)
+        word_feats = ngram_context(word.split(), n=4)
         t_word = self.predict(word_feats, k_best)
         if self.decode == 'viterbi':
             t_word = self.handle_matra(t_word)
@@ -127,7 +130,7 @@ class Urd2Ind(BaseTransliterator):
                 return [self.wx_process(w) for w in self.lookup[word]]
         word = ' '.join(word)
         word = word.replace(' \u06be', '\u06be')
-        word_feats = self.feature_extraction(word.split(), n=4)
+        word_feats = ngram_context(word.split(), n=4)
         t_word = self.predict(word_feats, k_best)
         if self.decode == 'viterbi':
             t_word = self.wx_process(t_word)
