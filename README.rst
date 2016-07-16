@@ -26,6 +26,15 @@ The module currently supports the following languages:
   * Urdu
   * English
 
+Links & References
+------------------
+
+* `Official source code repo <https://github.com/libindic/indic-trans>`_
+* `HTML documentation <http://irshadbhat.github.io/indictrans>`_
+* `Transliteration Blog <http://irshadbhat.github.io/gsoc>`_
+* Mailing list: silpa-discuss@nongnu.org
+* IRC channel: ``#silpa`` at ``irc.freenode.net``
+
 Installation
 ------------
 
@@ -153,12 +162,6 @@ If the input text contains repeating words, which raw text generally does, make 
     management -> മാനേജ്മെന്റ്  മാനേജ്ഞ്മെന്റ്  മാനേഗ്മെന്റ്  മാംനേജ്മെന്റ്  മാനേജ്മെതുറ്
     university -> യൂണിവേഴ്സിറ്റി  യൂണിവേര്സിറ്റി  യുണിവേഴ്സിറ്റി  യൂനിവേഴ്സിറ്റി  യൂണിവേഴ്സിറ്റീ
     naukuchiatal -> നകുചിയാറ്റാള്  നകുചിയാറ്റാല്  നകുചിയാറ്റാല  നകുചിയാറ്റള്  നകുചിയറ്റാള്
-
-
-Links & References
-------------------
-
-`Machine Transliteration <http://irshadbhat.github.io/gsoc/>`_
 
 ----
 

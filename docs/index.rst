@@ -8,7 +8,7 @@ Welcome to indictrans's documentation!
 
 The project aims on adding a state-of-the-art transliteration module for cross transliterations among all Indian languages including English and Urdu.
 
-|travis| |coverage|
+|travis| |coverage| |CircleCI|
 
 ----
 
@@ -56,13 +56,12 @@ Indices and tables
 ------------------
 
 * :ref:`genindex`
-* :ref:`modindex`
 * :ref:`search`
 
 
 ----
 
-|travis| |coverage|
+|travis| |coverage| |CircleCI|
 
 .. |travis| image:: https://travis-ci.org/libindic/indic-trans.svg?branch=master
    :target: https://travis-ci.org/libindic/indic-trans
@@ -71,5 +70,6 @@ Indices and tables
 .. |coverage| image:: https://coveralls.io/repos/github/libindic/indic-trans/badge.svg?branch=master 
    :target: https://coveralls.io/github/libindic/indic-trans?branch=master
    :alt: coveralls.io coverage status
-
-
+   
+.. |CircleCI| image:: https://circleci.com/gh/libindic/indic-trans.svg?style=svg
+    :target: https://circleci.com/gh/libindic/indic-trans
