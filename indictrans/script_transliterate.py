@@ -9,12 +9,12 @@ import re
 import string
 from six import unichr
 
-from ._utils import ngram_context
 from .base import BaseTransliterator
+from ._utils import ngram_context, WX
 
 
 class Ind2RU(BaseTransliterator):
-    """Transliterates words from Indic to Roman/Urdu script"""
+    """Transliterates text from Indic to Roman/Urdu script"""
 
     def __init__(self, source, target, decoder, build_lookup=False):
         super(Ind2RU, self).__init__(source,
@@ -52,7 +52,7 @@ class Ind2RU(BaseTransliterator):
 
 
 class Rom2Ind(BaseTransliterator):
-    """Transliterates words from Roman to Indic script"""
+    """Transliterates text from Roman to Indic script"""
 
     def __init__(self, source, target, decoder, build_lookup=False):
         super(Rom2Ind, self).__init__(source,
@@ -104,7 +104,7 @@ class Rom2Ind(BaseTransliterator):
 
 
 class Urd2Ind(BaseTransliterator):
-    """Transliterate words from Persio-Arabic to Indic script"""
+    """Transliterate text from Persio-Arabic to Indic script"""
 
     def __init__(self, source, target, decoder, build_lookup=False):
         super(Urd2Ind, self).__init__(source,
@@ -139,3 +139,131 @@ class Urd2Ind(BaseTransliterator):
         if self.build_lookup:
             self.lookup[word] = t_word
         return t_word
+
+
+class Ind2Ind():
+    """Transliterates text bewteen Indic scripts"""
+    def __init__(self, source, target):
+        self.source = source
+        self.target = target
+        self.get_wx = WX(order='utf2wx', lang=self.source).utf2wx
+        self.get_utf = WX(order='wx2utf', lang=self.target).wx2utf
+        self.esc_ch = '\x00'  # escape-sequence for Roman in WX
+        self.mask_roman = re.compile(r'([a-zA-Z]+)')
+        self.non_alpha = re.compile(r"([^a-zA-Z%s]+)" % (self.esc_ch))
+
+    def _to_ben(self, text):
+        if self.target != 'ben':
+            return text
+        text = text.replace('Y', '')
+        text = text.replace('v', 'b')
+        text = re.sub(r'([oe])([^V])', r'\1V\2', text)
+        return text
+
+    def _to_guj(self, text):
+        if self.target != 'guj':
+            return text
+        if self.source == 'ori':
+            return text
+        text = text.replace('V', '')
+        text = re.sub(r'([^lOE])Y', r'\1', text)
+        return text
+
+    def _to_kan(self, text):
+        if self.target != 'kan':
+            return text
+        if self.source in ('mal', 'tam'):
+            return text
+        text = text.replace('z', 'M')
+        if self.source == 'hin':
+            text = re.sub(r'([^lrY])Y', r'\1', text)
+        return text
+
+    def _to_mal(self, text):
+        if self.target != 'mal':
+            return text
+        if self.source in ('tam', 'tel'):
+            return text
+        text = text.replace('Z', '')
+        if self.source == 'kan':
+            return text
+        text = text.replace('z', 'M')
+        if self.source in ('ori', 'pan', 'ben'):
+            return text
+        text = re.sub(r'([^lrY])Y', r'\1', text)
+        return text
+
+    def _to_ori(self, text):
+        if self.target != 'ori':
+            return text
+        text = text.replace('V', '')
+        text = text.replace('v', 'b')
+        if self.source in ('kan', 'ben', 'pan'):
+            return text
+        text = re.sub(r'([^l])Y', r'\1', text)
+        return text
+
+    def _to_tam(self, text):
+        if self.target != 'tam':
+            return text
+        text = text.replace('Z', '')
+        text = text.replace('J', 'j')
+        text = text.replace('q', 'ru')
+        text = re.sub(r'[CS]', r'c', text)
+        text = re.sub(r'[zM]', r'f', text)
+        text = re.sub(r'[bBP]', r'p', text)
+        text = re.sub(r'[dDT]', r't', text)
+        text = re.sub(r'[gGK]', r'k', text)
+        text = re.sub(r'[xXW]', r'w', text)
+        if self.source in ('guj', 'hin'):
+            text = re.sub(r'([^nrlY])Y', r'\1', text)
+        return text
+
+    def _to_tel(self, text):
+        if not self.target == 'tel':
+            return text
+        text = text.replace('Z', '')
+        if self.source in ('ori', 'pan', 'ben'):
+            return text
+        text = re.sub(r'([^lr])Y', r'\1', text)
+        if self.source == 'hin':
+            text = text.replace('z', 'M')
+        return text
+
+    def apply_rules(self, text):
+        if self.source == 'pan':
+            # remove Punjabi Addak
+            text = text.replace('\u0a71', '')
+        elif self.source == 'ben':
+            # Assamese `ra` to Bengali `ra`
+            text = text.replace('\u09f0', '\u09b0')
+            # Assamese `va` to Bengali `va`
+            text = text.replace('\u09f1', '\u09ac')
+        text = self._to_ben(text)
+        text = self._to_guj(text)
+        text = self._to_kan(text)
+        text = self._to_mal(text)
+        text = self._to_ori(text)
+        text = self._to_tam(text)
+        text = self._to_tel(text)
+        return text
+
+    def rtrans(self, text):
+        """Rule based transliteration."""
+        target = []
+        text = self.mask_roman.sub(r'%s\1' % (self.esc_ch), text)
+        text = text.split('\n')
+        for sent in text:
+            sent = self.non_alpha.split(sent)
+            t_sent = str()
+            for word in sent:
+                if not word:
+                    continue
+                if word[0] == self.esc_ch:
+                    t_sent += word[1:]
+                    continue
+                wx = self.get_wx(word)
+                wx = self.apply_rules(wx)
+                t_sent += self.get_utf(wx)
+            target.append(t_sent)
+        return '\n'.join(target)
