@@ -17,7 +17,7 @@ import os.path
 import numpy as np
 from scipy.sparse import issparse
 
-from ._utils import (WX, OneHotEncoder, UrduNormalizer)
+from ._utils import WX, OneHotEncoder, UrduNormalizer
 
 
 class BaseTransliterator(object):
@@ -168,7 +168,9 @@ class BaseTransliterator(object):
         if self.source == 'urd':
             return self.nu.normalize(text)
         if self.source == 'ben':
+            # Assamese `ra` to Bengali `ra`
             text = text.replace('\u09f0', '\u09b0')
+            # Assamese `va` to Bengali `va`
             text = text.replace('\u09f1', '\u09ac')
         text = self.mask_roman.sub(r'%s\1' % (self.esc_ch), text)
         text = self.wx_process(text)
