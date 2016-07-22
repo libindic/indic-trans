@@ -118,7 +118,7 @@ class WX():
             ".": "\xEA",
             "Y": "\xFB",
             "lY": "\xD2",
-            # Added for tamil -Rashid
+            # Added for tamil
             "rY": "\xD0",
             "nY": "\xC7",
             "lYY": "\xD3",
@@ -218,7 +218,7 @@ class WX():
             "\xAB": "\u090E",  # Vowel E
             "\xAC": "\u090F",  # Vowel EY
             "\xAD": "\u0910",  # Vowel AI
-            "\xAE": "\u090D",  # Vowel AI -Rashid added
+            "\xAE": "\u090D",  # Vowel AI
             "\xB2": "\u090D",  # Vowel AYE (Devanagari Script)
             "\xAF": "\u0912",  # Vowel O
             "\xB0": "\u0913",  # Vowel OW
@@ -303,12 +303,9 @@ class WX():
             "\xAB": "\u0C0E",  # Vowel E
             "\xAC": "\u0C0F",  # Vowel EY
             "\xAD": "\u0C10",  # Vowel AI
-            # "\xB2":"\u090D",  #Vowel AYE (Devanagari Script) 7-Mar-11
-            # -Rashid
             "\xAF": "\u0C12",  # Vowel O
             "\xB0": "\u0C13",  # Vowel OW
             "\xB1": "\u0C14",  # Vowel AU
-            # "\xB2":"\u0911",  #Vowel AWE 7-Mar-11 -Rashid
             "\xB3": "\u0C15",  # Consonant KA
             "\xB4": "\u0C16",  # Consonant KHA
             "\xB5": "\u0C17",  # Consonant GA
@@ -329,7 +326,6 @@ class WX():
             "\xC4": "\u0C26",  # Consonant Soft DA
             "\xC5": "\u0C27",  # Consonant Soft DHA
             "\xC6": "\u0C28",  # Consonant Soft NA
-            # "\xC7":"\u0929",  #Consonant NA (Tamil) 28-Feb-11 -Rashid
             "\xC8": "\u0C2A",  # Consonant PA
             "\xC9": "\u0C2B",  # Consonant PHA
             "\xCA": "\u0C2C",  # Consonant BA
@@ -340,7 +336,6 @@ class WX():
             "\xD0": "\u0C31",  # Consonant Hard RA (Southern Script)
             "\xD1": "\u0C32",  # Consonant LA
             "\xD2": "\u0C33",  # Consonant Hard LA
-            # "\xD3":"\u0934",  #Consonant LLLA 7-Mar-11 -Rashid
             "\xD4": "\u0C35",  # Consonant VA
             "\xD5": "\u0C36",  # Consonant SHA
             "\xD6": "\u0C37",  # Consonant Hard SHA
@@ -355,15 +350,10 @@ class WX():
             "\xE0": "\u0C46",  # Vowel Sign E (Southern Scripts)
             "\xE1": "\u0C47",  # Vowel Sign EY
             "\xE2": "\u0C48",  # Vowel Sign AI
-            # "\xE3":"\u0945",  #Vowel Sign AYE (Devanagari Script)
-            # 7-Mar-11 -Rashid
             "\xE4": "\u0C4A",  # Vowel Sign O
             "\xE5": "\u0C4B",  # Vowel Sign OW
             "\xE6": "\u0C4C",  # Vowel Sign AU
-            # "\xE7":"\u0949",  #Vowel Sign AWE (Devanagari Script)
-            # 7-Mar-11 -Rashid
             "\xE8": "\u0C4D",  # Vowel Omission Sign (Halant)
-            # "\xE9":"\u093C",  #Diacritic Sign (Nukta) 7-Mar-11 -Rashid
             "\xEA": ".",  # Fullstop
             "\xF1": "\u0C66",  # Digit 0
             "\xF2": "\u0C67",  # Digit 1
@@ -378,8 +368,6 @@ class WX():
         }
         self.hashp_i2u = {
             "\xA1": "\u0A70",  # Vowel-modifier GURMUKHI TIPPI
-            # Added -Irshad
-            # "\xA1":"\u0A01",  #Vowel-modifier CHANDRABINDU
             "\xA2": "\u0A02",  # Vowel-modifier ANUSWAR
             "\xA3": "\u0A03",  # Vowel-modifier VISARG
             "\xA4": "\u0A05",  # Vowel A
@@ -461,7 +449,7 @@ class WX():
             "\xF8": "\u0A6D",  # Digit 7
             "\xF9": "\u0A6E",  # Digit 8
             "\xFA": "\u0A6F",  # Digit 9
-            "\xFB": "\u0A71"  # GURMUKHI ADDAK  Added -Irshad
+            "\xFB": "\u0A71"  # GURMUKHI ADDAK
         }
         self.hashk_i2u = {
             "\xA2": "\u0C82",
@@ -696,8 +684,6 @@ class WX():
             "\xFA": "\u09EF",  # Digit 9
         }
         self.hashcta_i2u = {
-            # "\xA2":"\u0B82",  #Vowel-modifier ANUSWAR commented
-            # 14-March-11 -Rashid
             "\xA2": "\u0BAE\u0BCD",  # Vowel-modifier ANUSWAR is m + halant
             "\xA3": "\u0B83",  # Vowel-modifier VISARG
             "\xA4": "\u0B85",  # Vowel A
@@ -731,8 +717,6 @@ class WX():
             "\xD2": "\u0BB3",  # Consonant Hard LA
             "\xD3": "\u0BB4",  # Consonant ZHA (Tamil & Malyalam)
             "\xD4": "\u0BB5",  # Consonant VA
-            # "\xD5":"\u0BB6",  #Consonant SHA commented because it have
-            # same sence of 0BB7 14-Mar-11
             "\xD5": "\u0BB7",  # Consonant SHA is nomore use in tamil
             "\xD6": "\u0BB7",  # Consonant Hard SHA
             "\xD7": "\u0BB8",  # Consonant SA
@@ -772,13 +756,8 @@ class WX():
             "\xA8": "\u0B09",  # Vowel U
             "\xA9": "\u0B0A",  # Vowel UU
             "\xAA": "\u0B0B",  # Vowel RI
-            # "\xAB":"\u090E",  #Vowel E
             "\xAC": "\u0B0F",  # Vowel EY
             "\xAD": "\u0B10",  # Vowel AI
-            # "\xB2":"\u0911",  #Vowel AWE
-            # "\xAE":"\u090D",  #Vowel AI -Rashid added
-            # "\xB2":"\u090D",  #Vowel AYE (Devanagari Script)
-            # "\xAF":"\u0912",  #Vowel O
             "\xB0": "\u0B13",  # Vowel OW
             "\xB1": "\u0B14",  # Vowel AU
             "\xB3": "\u0B15",  # Consonant KA
@@ -923,9 +902,9 @@ class WX():
         self.ceVmd = re.compile("([%s])eV([MHz])" % const)
 
         self.ceV = re.compile("([%s])eV" % const)
-        # const+nukta+eV added for Bengali -Irshad
+        # const+nukta+eV added for Bengali
         self.cZeV = re.compile("([%s])ZeV" % const)
-        # const+nukta+eV+modifier added for Bengali -Irshad
+        # const+nukta+eV+modifier added for Bengali
         self.cZeVmd = re.compile("([%s])ZeV([MHz])" % const)
 
         self.cEYmd = re.compile("([%s])EY([MHz])" % const)
@@ -937,9 +916,9 @@ class WX():
         self.coVmd = re.compile("([%s])oV([MHz])" % const)
 
         self.coV = re.compile("([%s])oV" % const)
-        # const+nukta+oV added for Bengali -Irshad
+        # const+nukta+oV added for Bengali
         self.cZoV = re.compile("([%s])ZoV" % const)
-        # const+nukta+oV+modifier added for Bengali -Irshad
+        # const+nukta+oV+modifier added for Bengali
         self.cZoVmd = re.compile("([%s])ZoV([MHz])" % const)
 
         self.cOY = re.compile("([%s])OY" % const)
@@ -974,11 +953,6 @@ class WX():
         self.dig = re.compile("([0-9])")
         self.i2u = re.compile('([\xA1-\xFB])')
 
-        # Handle Roman strings
-        self.unmask_rom = re.compile(
-            r'(_[a-zA-Z0-9%s]+_)' %
-            (self.punctuation))
-
     def initialize_utf2wx_hash(self):
         self.hashc_i2w = {
             "\xB3": "k",
@@ -1001,8 +975,6 @@ class WX():
             "\xC4": "x",
             "\xC5": "X",
             "\xC6": "n",
-            # Representation for Consonant NA (Tamil) ??? Refer to ISCII-91.pdf
-            # page-16 -Rashid
             "\xC7": "nY",
             "\xC8": "p",
             "\xC9": "P",
@@ -1011,11 +983,11 @@ class WX():
             "\xCC": "m",
             "\xCD": "y",
             "\xCF": "r",
-            # Representation for Consonant HARD RA (Southern Script) -Rashid
+            # Representation for Consonant HARD RA (Southern Script)
             "\xD0": "rY",
             "\xD1": "l",
             "\xD2": "lY",
-            # Representation for Consonant ZHA (Tamil & Malyalam) - Rashid
+            # Representation for Consonant ZHA (Tamil & Malyalam)
             "\xD3": "lYY",
             "\xD4": "v",
             "\xD5": "S",
@@ -1251,8 +1223,8 @@ class WX():
         }
         self.hashp_u2i = {
             "\u0A01": "\xA1",  # Vowel-modifier CHANDRABINDU
-            # Added -Rashid
             "\u0A02": "\xA2",  # Vowel-modifier ANUSWAR
+            "\u0A03": "\xA3",  # Vowel-modifier VISARG
             "\u0A05": "\xA4",  # Vowel A
             "\u0A06": "\xA5",  # Vowel AA
             "\u0A07": "\xA6",  # Vowel I
@@ -1657,7 +1629,7 @@ class WX():
             "\u0B0A": "\xA9",  # Vowel UU
             "\u0B0B": "\xAA",  # Vowel RI
             "\u0B0F": "\xAC",
-            "\u0910": "\xAD",
+            "\u0B10": "\xAD",
             "\u0B13": "\xB0",
             "\u0B14": "\xB1",
             "\u0B15": "\xB3",  # Consonant KA
@@ -1832,11 +1804,6 @@ class WX():
         self.u2i_on = re.compile("([\u0B5C\u0B5D\u0B5F])")
         self.u2i_bn = re.compile("([\u09DC\u09DD\u09DF])")
         self.u2i_pn = re.compile("([\u0A59-\u0A5B\u0A5E])")
-
-        # Handle Roman strings
-        self.mask_rom = re.compile(
-            r'([0-9%s]*[a-zA-Z][0-9a-zA-Z%s]*)' %
-            ((self.punctuation,) * 2))
 
     def normalize(self, text):
         """
@@ -2508,7 +2475,7 @@ class WX():
 
     def wx2iscii(self, my_string):
         """Convert WX to ISCII"""
-        if self.lang_tag == 'pan':  # Added -Irshad
+        if self.lang_tag == 'pan':
             my_string = my_string.replace('EY', self.hashv_w2i["E"] + 'Y')
         my_string = self.map_ZeV(my_string)
         my_string = self.map_eV(my_string)
@@ -2727,7 +2694,7 @@ class WX():
             self.hashmd_i2w[
                 m.group(2)],
             my_string)
-        # CONSONANT+NUKTA+HALANT (added -Rashid 29-December-11 wanaKZvaxara)
+        # CONSONANT+NUKTA+HALANT
         my_string = self.cnh.sub(
             lambda m: self.hashc_i2w[
                 m.group(1)] +
@@ -2918,21 +2885,15 @@ class WX():
 
     def wx2utf(self, wx):
         """Convert WX-Roman to UTF"""
-        unicode_ = str()
-        wx_list = self.unmask_rom.split(wx)
-        for wx in wx_list:
-            if not wx:
-                continue
-            else:
-                # Mask iscii characters (if any)
-                wx = self.mask_isc.sub(
-                    lambda m: self.iscii_num[
-                        m.group(1)], wx)
-                iscii = self.wx2iscii(wx)
-                # Convert ISCII to Unicode
-                unicode_t = self.iscii2unicode(iscii)
-                # Unmask iscii characters
-                unicode_ += self.unmask_isc.sub(
-                    lambda m: self.num_iscii[
-                        m.group(1)], unicode_t)
+        # Mask iscii characters (if any)
+        wx = self.mask_isc.sub(
+            lambda m: self.iscii_num[
+                m.group(1)], wx)
+        iscii = self.wx2iscii(wx)
+        # Convert ISCII to Unicode
+        unicode_ = self.iscii2unicode(iscii)
+        # Unmask iscii characters
+        unicode_ = self.unmask_isc.sub(
+            lambda m: self.num_iscii[
+                m.group(1)], unicode_)
         return unicode_

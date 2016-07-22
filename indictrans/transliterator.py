@@ -4,7 +4,8 @@
 # Copyright (C) 2016 Irshad Ahmad Bhat
 
 from ._decode import DECODERS
-from .script_trans import (Ind2RU, Rom2Ind, Urd2Ind)
+from .script_transliterate import (Ind2RU, Rom2Ind,
+                                   Urd2Ind, Ind2Ind)
 
 
 def _get_decoder(decode):
@@ -53,16 +54,12 @@ class Transliterator():
     jayalalita our sonia gandhi ke peeche padane ka kaaran kathith
     bhrashtachar hai.
     """
-    def __init__(
-                self,
-                source='hin',
-                target='eng',
-                decode='viterbi',
-                build_lookup=False):
-        indic = '''hin guj pan ben mal kan tam tel
-                ori mar nep bod kok asm'''.split()
+    def __init__(self, source='hin', target='eng',
+                 decode='viterbi', build_lookup=False):
         source = source.lower()
         target = target.lower()
+        indic = '''hin guj pan ben mal kan tam tel
+                   ori mar nep kok bod asm'''.split()
         decoder = (decode, _get_decoder(decode))
         if source in ['eng', 'urd']:
             if target not in indic:
@@ -88,9 +85,12 @@ class Transliterator():
             else:
                 self.transform = i2o_trans.top_n_trans
         else:
-            raise NotImplementedError(
-                'Language pair `%s-%s` is not implemented.' %
-                (source, target))
+            if source not in indic or target not in indic or source == target:
+                raise NotImplementedError(
+                    'Language pair `%s-%s` is not implemented.' %
+                    (source, target))
+            i2i_trans = Ind2Ind(source, target)
+            self.transform = i2i_trans.rtrans
 
     def convert(self, line):
         return self.transform(line)

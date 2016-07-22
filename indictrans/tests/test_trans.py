@@ -7,7 +7,7 @@ import io
 import os
 
 from testtools import TestCase
-from indictrans import (Transliterator, parse_args)
+from indictrans import Transliterator, parse_args
 
 
 class TestTransliterator(TestCase):
@@ -58,8 +58,20 @@ class TestTransliterator(TestCase):
         for k in k_best:
             hin = r2i.transform('indictrans', k_best=k)
             eng = i2r.transform(hin[0], k_best=k)
-            assert len(hin) == k
-            assert len(eng) == k
+            self.assertTrue(len(hin) == k)
+            self.assertTrue(len(eng) == k)
+
+    def test_rtrans(self):
+        with io.open('%s/indic-test' % self.test_dir, encoding='utf-8') as fp:
+            indic = fp.readline().split()
+            for line in fp:
+                line = line.split()
+                for i, src in enumerate(indic):
+                    for trg in indic:
+                        if src == trg:
+                            continue
+                        i2i = Transliterator(source=src, target=trg)
+                        i2i.transform(line[i])
 
     def test_parser(self):
         parser = parse_args(['--input', 'infile',

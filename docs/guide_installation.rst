@@ -6,7 +6,7 @@ Dependencies
 
 `indictrans`_ requires `cython`_, and `SciPy`_.
 
-.. _`indictrans`: https://github.com/irshadbhat/indictrans
+.. _`indictrans`: https://github.com/libindic/indic-trans
 
 .. _`cython`: http://docs.cython.org/src/quickstart/install.html
 
