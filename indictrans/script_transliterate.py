@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# Copyright (C) 2015 Irshad Ahmad Bhat
+# Copyright (C) 2016 Irshad Ahmad Bhat
 
 from __future__ import unicode_literals
 
@@ -36,14 +36,7 @@ class Ind2Target(BaseTransliterator):
         if word in self.lookup:
             return self.lookup[word]
         word = ' '.join(word)
-        if self.target == 'urd':
-            word = re.sub(r' ([aVYZ])', r'\1', word)
-        elif self.source == 'hin':
-            word = re.sub(r' ([aVYZ])', r'\1', word)
-        else:
-            word = re.sub(r' ([VYZ])', r'\1', word)
-        if self.source == 'mal':
-            word = word.replace('rY rY', 'rYrY')
+        word = re.sub(r' ([aVYZ])', r'\1', word)
         word_feats = ngram_context(word.split())
         t_word = self.predict(word_feats, k_best)
         if self.build_lookup:
