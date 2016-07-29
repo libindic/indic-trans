@@ -122,7 +122,7 @@ If the input text contains repeating words, which raw text generally does, make 
     jayalalita or reserve bank ke governor raghuram rajan ke bich ek samanta
     he. ye sabhi alag-alag kaarnon se bhartiya janata party ke rajyasabha saansad
     subramanyam swami ke nishane par hai. unke jayalalita or sonia gandhi ke
-    peeche padane kaa kaaran kathith bhrashtachar he."""
+    peeche padane kaa kaaran kathith bhrashtachar he.
     >>> 
     >>> trn = Transliterator(source='eng', target='hin')
     >>> 
@@ -133,7 +133,7 @@ If the input text contains repeating words, which raw text generally does, make 
     जयललिता और रिज़र्व बैंक के गवर्नर रघुराम राजन के बीच एक समनता
     है. ये सभी अलग-अलग कारनों से भारतीय जनता पार्टी के राज्यसभा सांसद
     सुब्रमण्यम स्वामी के निशाने पर हैं. उनके जयललिता और सोनिया गांधी के
-    पीछे पड़ने का कारण कथित भ्रष्टाचार है."""
+    पीछे पड़ने का कारण कथित भ्रष्टाचार है.
     >>>
 
 3. K-Best Transliterations
