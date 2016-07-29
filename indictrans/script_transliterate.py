@@ -13,11 +13,11 @@ from .base import BaseTransliterator
 from ._utils import ngram_context, WX
 
 
-class Ind2RU(BaseTransliterator):
+class Ind2Target(BaseTransliterator):
     """Transliterates text from Indic to Roman/Urdu script"""
 
     def __init__(self, source, target, decoder, build_lookup=False):
-        super(Ind2RU, self).__init__(source,
+        super(Ind2Target, self).__init__(source,
                                      target,
                                      decoder,
                                      build_lookup)
@@ -51,11 +51,11 @@ class Ind2RU(BaseTransliterator):
         return t_word
 
 
-class Rom2Ind(BaseTransliterator):
+class Rom2Target(BaseTransliterator):
     """Transliterates text from Roman to Indic script"""
 
     def __init__(self, source, target, decoder, build_lookup=False):
-        super(Rom2Ind, self).__init__(source,
+        super(Rom2Target, self).__init__(source,
                                       target,
                                       decoder,
                                       build_lookup)
@@ -92,22 +92,23 @@ class Rom2Ind(BaseTransliterator):
         word = re.sub(r'([bcdgjptsk]) h', r'\1h', word)
         word_feats = ngram_context(word.split(), n=4)
         t_word = self.predict(word_feats, k_best)
-        if self.decode == 'viterbi':
-            t_word = self.handle_matra(t_word)
-            t_word = self.wx_process(t_word)
-        else:
-            t_word = [self.handle_matra(w) for w in t_word]
-            t_word = [self.wx_process(w) for w in t_word]
+        if self.target != 'urd':
+            if self.decode == 'viterbi':
+                t_word = self.handle_matra(t_word)
+                t_word = self.wx_process(t_word)
+            else:
+                t_word = [self.handle_matra(w) for w in t_word]
+                t_word = [self.wx_process(w) for w in t_word]
         if self.build_lookup:
             self.lookup[word] = t_word
         return t_word
 
 
-class Urd2Ind(BaseTransliterator):
+class Urd2Target(BaseTransliterator):
     """Transliterate text from Persio-Arabic to Indic script"""
 
     def __init__(self, source, target, decoder, build_lookup=False):
-        super(Urd2Ind, self).__init__(source,
+        super(Urd2Target, self).__init__(source,
                                       target,
                                       decoder,
                                       build_lookup)
@@ -132,10 +133,11 @@ class Urd2Ind(BaseTransliterator):
         word = word.replace(' \u06be', '\u06be')
         word_feats = ngram_context(word.split(), n=4)
         t_word = self.predict(word_feats, k_best)
-        if self.decode == 'viterbi':
-            t_word = self.wx_process(t_word)
-        else:
-            t_word = [self.wx_process(w) for w in t_word]
+        if self.target != 'eng':
+            if self.decode == 'viterbi':
+                t_word = self.wx_process(t_word)
+            else:
+                t_word = [self.wx_process(w) for w in t_word]
         if self.build_lookup:
             self.lookup[word] = t_word
         return t_word

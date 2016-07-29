@@ -13,11 +13,13 @@ from indictrans import Transliterator, parse_args
 class TestTransliterator(TestCase):
     def setUp(self):
         super(TestTransliterator, self).setUp()
+        # test transliterations with English
         source = 'hin ben mal guj pan kan tam tel ori'.split()
         target_rom = ['eng'] * len(source)
         self.src2trg = list(zip(source, target_rom))
         self.trg2src = list(zip(target_rom, source))
-        source = 'hin pan'.split()
+        # test transliterations with Urdu
+        source = 'hin pan eng'.split()
         target_urd = ['urd'] * len(source)
         self.src2trg += list(zip(source, target_urd))
         self.trg2src += list(zip(target_urd, source))
