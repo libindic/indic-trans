@@ -18,9 +18,9 @@ class Ind2Target(BaseTransliterator):
 
     def __init__(self, source, target, decoder, build_lookup=False):
         super(Ind2Target, self).__init__(source,
-                                     target,
-                                     decoder,
-                                     build_lookup)
+                                         target,
+                                         decoder,
+                                         build_lookup)
         self.letters = set(string.ascii_letters)
         self.non_alpha = re.compile(r"([^a-zA-Z%s]+)" % (self.esc_ch))
 
@@ -39,7 +39,7 @@ class Ind2Target(BaseTransliterator):
         if self.target == 'urd':
             word = re.sub(r' ([aVYZ])', r'\1', word)
         elif self.source == 'hin':
-            word = re.sub(r' ([aZ])', r'\1', word)
+            word = re.sub(r' ([aVYZ])', r'\1', word)
         else:
             word = re.sub(r' ([VYZ])', r'\1', word)
         if self.source == 'mal':
@@ -56,9 +56,9 @@ class Rom2Target(BaseTransliterator):
 
     def __init__(self, source, target, decoder, build_lookup=False):
         super(Rom2Target, self).__init__(source,
-                                      target,
-                                      decoder,
-                                      build_lookup)
+                                         target,
+                                         decoder,
+                                         build_lookup)
         self.non_alpha = re.compile(r"([^a-z]+)")
         self.letters = set(string.ascii_letters[:26])
 
@@ -109,9 +109,9 @@ class Urd2Target(BaseTransliterator):
 
     def __init__(self, source, target, decoder, build_lookup=False):
         super(Urd2Target, self).__init__(source,
-                                      target,
-                                      decoder,
-                                      build_lookup)
+                                         target,
+                                         decoder,
+                                         build_lookup)
         self.non_alpha = re.compile(
             '([^\u0621-\u063a\u0641-\u064a\u0674-\u06d3\u064b\u0651\u0670]+)')
         self.letters = set(map(unichr,
