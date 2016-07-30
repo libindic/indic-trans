@@ -97,6 +97,10 @@ class BaseTransliterator(object):
             '%s/models/%s/intercept_final.npy' %
             (self.dist_dir, model),
             encoding='latin1').astype(np.float64)
+        # convert numpy.bytes_/numpy.string_ to numpy.unicode_
+        if not isinstance(self.classes_[0], np.unicode_):
+            self.classes_ = {k: v.decode('utf-8')
+                             for k, v in self.classes_.items()}
 
     def load_mappings(self):
         # initialize punctuation map table
@@ -144,7 +148,7 @@ class BaseTransliterator(object):
                 self.intercept_trans_,
                 self.intercept_init_,
                 self.intercept_final_)
-            y = [self.classes_[pid].decode('utf-8') for pid in y]
+            y = [self.classes_[pid] for pid in y]
             y = ''.join(y).replace('_', '')
             return y
         else:
@@ -156,7 +160,7 @@ class BaseTransliterator(object):
                 self.intercept_final_,
                 k_best)
             for path in y:
-                w = [self.classes_[pid].decode('utf-8') for pid in path]
+                w = [self.classes_[pid] for pid in path]
                 w = ''.join(w).replace('_', '')
                 top_seq.append(w)
             return top_seq
