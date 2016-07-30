@@ -245,6 +245,15 @@ htmlhelp_basename = 'indictransdoc'
 # -- Options for LaTeX output ---------------------------------------------
 
 latex_elements = {
+    'inputenc': '',
+    'utf8extra': '',
+    'preamble': '''
+\usepackage{fontspec}
+\setmainfont{Linux Libertine O}
+%\setmonofont{DejaVu Sans Mono}
+\setmonofont{Courier New}
+%\setmonofont{FreeMono}
+''',
      # The paper size ('letterpaper' or 'a4paper').
      #
      # 'papersize': 'letterpaper',
