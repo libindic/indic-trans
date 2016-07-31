@@ -23,6 +23,12 @@ class Ind2Target(BaseTransliterator):
                                          build_lookup)
         self.letters = set(string.ascii_letters)
         self.non_alpha = re.compile(r"([^a-zA-Z%s]+)" % (self.esc_ch))
+        # initialize WX back-convertor for Indic to Indic transliteration
+        self._to_indic = False
+        if target not in ['eng', 'urd']:
+            wxp = WX(order='wx2utf', lang=target)
+            self._to_utf = wxp.wx2utf
+            self._to_indic = True
 
     def case_trans(self, word, k_best=5):
         if not word:
@@ -36,9 +42,13 @@ class Ind2Target(BaseTransliterator):
         if word in self.lookup:
             return self.lookup[word]
         word = ' '.join(word)
-        word = re.sub(r' ([aVYZ])', r'\1', word)
+        word = re.sub(r' ([VYZ])', r'\1', word)
+        if not self._to_indic:
+            word = word.replace(' a', 'a')
         word_feats = ngram_context(word.split())
         t_word = self.predict(word_feats, k_best)
+        if self._to_indic:
+            t_word = self._to_utf(t_word)
         if self.build_lookup:
             self.lookup[word] = t_word
         return t_word
@@ -136,7 +146,7 @@ class Urd2Target(BaseTransliterator):
         return t_word
 
 
-class Ind2Ind():
+class Ind2IndRB():
     """Transliterates text bewteen Indic scripts"""
     def __init__(self, source, target):
         self.source = source
@@ -244,7 +254,7 @@ class Ind2Ind():
         return text
 
     def rtrans(self, text):
-        """Rule based transliteration."""
+        """Rule based transliteration b/w Indic scripts."""
         target = []
         text = self.mask_roman.sub(r'%s\1' % (self.esc_ch), text)
         text = text.split('\n')
