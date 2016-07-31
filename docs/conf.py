@@ -34,7 +34,7 @@ todo_include_todos = False
 
 # -- Overrides for modules ----------------------------------------------------
 
-from mock import Mock as MagicMock
+from mock import Mock
 
 MOCK_MODULES = ['numpy', 'scipy']
 
