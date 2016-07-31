@@ -91,6 +91,7 @@ Examples
                         ben, mal, kan, tam, tel, ori, eng, mar, nep, bod, kok,
                         asm, urd}
     -b, --build-lookup  build lookup to fasten transliteration
+    -r, --by-rule       use rule-based system for transliteration
     -i, --input         <input-file>
     -o, --output        <output-file>
 
