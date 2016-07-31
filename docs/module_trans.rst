@@ -10,14 +10,14 @@ Module References
 
 
 :mod:`indictrans.base.BaseTransliterator` — BaseTransliterator
--------------------------------------------------------------
+--------------------------------------------------------------
 
 .. autoclass:: indictrans.base.BaseTransliterator
     :members:
 
 
 :mod:`indictrans._utils.WX` — WXConverter
-------------------------------------------
+-----------------------------------------
 
 .. autoclass:: indictrans._utils.WX
     :members:
@@ -31,7 +31,7 @@ Module References
 
 
 :mod:`indictrans._utils.UrduNormalizer` — UrduNormalizer
----------------------------------------------------------
+--------------------------------------------------------
 
 .. autoclass:: indictrans._utils.UrduNormalizer
     :members:

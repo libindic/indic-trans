@@ -119,19 +119,19 @@ If the input text contains repeating words, which raw text generally does, make 
     >>> eng = trn.transform(hin)
     >>> print(eng)
     congress party adhyaksh sonia gandhi, tamilnadu kii mukhyamantri
-    jayalalita our reserve baink ke governor raghuram rajan ke beech ek samanta
-    hai. ye sabi alag-alag carnon se bharatiya janata party ke rajyasabha saansad
-    subramanyam swami ke nishane par hain. unke jayalalita our sonia gandhi ke
-    peeche padane ka kaaran kathith bhrashtachar hai.
+    jayalalita or reserve bank ke governor raghuram rajan ke bich ek samanta
+    he. ye sabhi alag-alag kaarnon se bhartiya janata party ke rajyasabha saansad
+    subramanyam swami ke nishane par hai. unke jayalalita or sonia gandhi ke
+    peeche padane kaa kaaran kathith bhrashtachar he.
     >>> 
     >>> trn = Transliterator(source='eng', target='hin')
     >>> 
     >>> hin_ = trn.transform(eng)
     >>> 
     >>> print(hin_)
-    कांग्रेस पार्टी अध्यक्ष सोनिया गांधी, तमिलनाडु की मुख्यमांत्री
-    जयललिता और रिज़र्व बैंक के गवर्नर रघुराम राजन के बीच एक समानता
-    है. ये सभी अलग-अलग कार्नों से भारतीय जनता पार्टी के राज्यसभा संसद
+    कांग्रेस पार्टी अध्यक्ष सोनिया गांधी, तमिलनाडु की मुख्यमंत्री
+    जयललिता और रिज़र्व बैंक के गवर्नर रघुराम राजन के बीच एक समनता
+    है. ये सभी अलग-अलग कारनों से भारतीय जनता पार्टी के राज्यसभा सांसद
     सुब्रमण्यम स्वामी के निशाने पर हैं. उनके जयललिता और सोनिया गांधी के
     पीछे पड़ने का कारण कथित भ्रष्टाचार है.
     >>>

@@ -24,7 +24,7 @@ def save_models(clf, enc, out_dir):
             "UserWarnning: Output directory '{0}' already exists."
             " Any existing models will get overwritten.".format(out_dir))
         try:
-            input('\n---Press any key to continue---\n'
+            input('\n\n---Press any key to continue---\n'
                   '-----Press Crtl+C to return------\n')
         except KeyboardInterrupt:
             sys.stderr.write('\nModel dump aborted successfully\n')
@@ -32,7 +32,7 @@ def save_models(clf, enc, out_dir):
     else:
         os.makedirs(out_dir)
 
-    with open('%s/sparse.enc' % out_dir, 'w') as j_fp:
+    with open('%s/sparse.vec' % out_dir, 'w') as j_fp:
         json.dump(enc.unique_feats, j_fp)
     np.save('%s/classes' % out_dir, [clf.classes_])
     np.save('%s/coef' % out_dir, [clf.coef_.astype(np.float16)])
