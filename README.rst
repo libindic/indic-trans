@@ -30,7 +30,7 @@ Links & References
 ------------------
 
 * `Official source code repo <https://github.com/libindic/indic-trans>`_
-* `HTML documentation <indic-trans.rtfd.io>`_
+* `HTML documentation <http://indic-trans.readthedocs.org>`_
 * `Transliteration Blog <http://irshadbhat.github.io/gsoc>`_
 * Mailing list: silpa-discuss@nongnu.org
 * IRC channel: ``#silpa`` at ``irc.freenode.net``
