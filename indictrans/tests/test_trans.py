@@ -7,7 +7,7 @@ import io
 import os
 
 from testtools import TestCase
-from indictrans import Transliterator, parse_args
+from indictrans import parse_args, process_args, Transliterator
 
 
 class TestTransliterator(TestCase):
@@ -49,14 +49,12 @@ class TestTransliterator(TestCase):
 
     def test_kbest(self):
         k_best = range(2, 15)
-        r2i = Transliterator(
-            source='eng',
-            target='hin',
-            decode='beamsearch')
-        i2r = Transliterator(
-            source='hin',
-            target='eng',
-            decode='beamsearch')
+        r2i = Transliterator(source='eng',
+                             target='hin',
+                             decode='beamsearch')
+        i2r = Transliterator(source='hin',
+                             target='eng',
+                             decode='beamsearch')
         for k in k_best:
             hin = r2i.transform('indictrans', k_best=k)
             eng = i2r.transform(hin[0], k_best=k)
@@ -72,17 +70,32 @@ class TestTransliterator(TestCase):
                     for trg in indic:
                         if src == trg:
                             continue
-                        i2i = Transliterator(source=src, target=trg)
-                        i2i.transform(line[i])
+                        if src == 'tam' or trg == 'tam':
+                            # ML systems only developed for Tamil yet
+                            i2i_ml = Transliterator(source=src, target=trg,
+                                                    by_rule=False)
+                            i2i_ml.transform(line[i])
+                        i2i_rb = Transliterator(source=src, target=trg,
+                                                by_rule=True)
+                        i2i_rb.transform(line[i])
 
     def test_parser(self):
+        # test parser arguments
         parser = parse_args(['--input', 'infile',
                              '--output', 'outfile',
                              '--source', 'hin',
                              '--target', 'eng',
-                             '--build-lookup'])
+                             '--build-lookup',
+                             '--by-rule'])
         self.assertEqual(parser.infile, 'infile')
         self.assertEqual(parser.outfile, 'outfile')
         self.assertEqual(parser.source, 'hin')
         self.assertEqual(parser.target, 'eng')
         self.assertTrue(parser.build_lookup)
+        self.assertTrue(parser.by_rule)
+        # test parser args processing
+        process_args(parse_args(['-i', '%s/indic-test' % self.test_dir,
+                                 '-o', '/tmp/test.out',
+                                 '-s', 'hin',
+                                 '-t', 'mal',
+                                 '-b', '-r']))
