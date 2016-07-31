@@ -75,6 +75,7 @@ def parse_args(args):
         sys.stderr.write(parser.parse_args(['-h']))
     return args
 
+
 def process_args(args):
     if args.infile:
         ifp = io.open(args.infile, encoding='utf-8')
