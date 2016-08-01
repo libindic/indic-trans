@@ -49,6 +49,12 @@ def parse_args(args):
         action='store_true',
         help='build lookup to fasten transliteration')
     parser.add_argument(
+        '-r',
+        '--by-rule',
+        dest="by_rule",
+        action='store_true',
+        help='use rule-based system for transliteration')
+    parser.add_argument(
         '-i',
         '--input',
         dest="infile",
@@ -70,8 +76,7 @@ def parse_args(args):
     return args
 
 
-def main():
-    args = parse_args(sys.argv[1:])
+def process_args(args):
     if args.infile:
         ifp = io.open(args.infile, encoding='utf-8')
     else:
@@ -89,10 +94,10 @@ def main():
             ofp = codecs.getwriter('utf8')(sys.stdout)
 
     # initialize transliterator object
-    trn = Transliterator(
-                        args.source,
-                        args.target,
-                        build_lookup=args.build_lookup)
+    trn = Transliterator(args.source,
+                         args.target,
+                         by_rule=args.by_rule,
+                         build_lookup=args.build_lookup)
 
     # transliterate text
     for line in ifp:
@@ -102,3 +107,8 @@ def main():
     # close files
     ifp.close()
     ofp.close()
+
+
+def main():
+    args = parse_args(sys.argv[1:])
+    process_args(args)

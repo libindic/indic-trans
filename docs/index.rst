@@ -8,7 +8,7 @@ Welcome to indictrans's documentation!
 
 The project aims on adding a state-of-the-art transliteration module for cross transliterations among all Indian languages including English and Urdu.
 
-|travis| |coverage| |CircleCI|
+|travis| |coverage| |CircleCI| |Documentation Status|
 
 ----
 
@@ -61,7 +61,7 @@ Indices and tables
 
 ----
 
-|travis| |coverage| |CircleCI|
+|travis| |coverage| |CircleCI| |Documentation Status|
 
 .. |travis| image:: https://travis-ci.org/libindic/indic-trans.svg?branch=master
    :target: https://travis-ci.org/libindic/indic-trans
@@ -73,3 +73,7 @@ Indices and tables
    
 .. |CircleCI| image:: https://circleci.com/gh/libindic/indic-trans.svg?style=svg
     :target: https://circleci.com/gh/libindic/indic-trans
+
+.. |Documentation Status| image:: https://readthedocs.org/projects/indic-trans/badge/?version=latest
+    :target: http://indic-trans.readthedocs.io/en/latest/?badge=latest
+    :alt: Documentation Status

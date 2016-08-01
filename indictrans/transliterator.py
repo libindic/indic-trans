@@ -5,7 +5,7 @@
 
 from ._decode import DECODERS
 from .script_transliterate import (Ind2Target, Rom2Target,
-                                   Urd2Target, Ind2Ind)
+                                   Urd2Target, Ind2IndRB)
 
 
 def _get_decoder(decode):
@@ -13,6 +13,13 @@ def _get_decoder(decode):
         return DECODERS[decode]
     except KeyError:
         raise ValueError('Unknown decoder {0!r}'.format(decode))
+
+
+def _get_trans(trans, decode):
+    if decode == 'viterbi':
+        return trans.transliterate
+    else:
+        return trans.top_n_trans
 
 
 class Transliterator():
@@ -34,6 +41,11 @@ class Transliterator():
         Flag to build lookup-table. Fastens the transliteration
         process if the input text contains repeating words.
 
+    by_rule : bool, default: False
+        Decides whether to use rule-based system or ML system for
+        transliteration. This choice is only for Indic to Indic
+        transliterations. If ``True`` uses ruled-based one.
+
     Examples
     --------
 
@@ -54,8 +66,8 @@ class Transliterator():
     jayalalita our sonia gandhi ke peeche padane ka kaaran kathith
     bhrashtachar hai.
     """
-    def __init__(self, source='hin', target='eng',
-                 decode='viterbi', build_lookup=False):
+    def __init__(self, source='hin', target='eng', decode='viterbi',
+                 build_lookup=False, by_rule=False):
         source = source.lower()
         target = target.lower()
         impl = '''hin guj pan ben mal kan tam tel
@@ -67,30 +79,27 @@ class Transliterator():
                     'Language pair `%s-%s` is not implemented.' %
                     (source, target))
             if source == 'eng':
-                ru2i_trans = Rom2Target(source, target, decoder, build_lookup)
+                ru2i = Rom2Target(source, target, decoder, build_lookup)
             else:
-                ru2i_trans = Urd2Target(source, target, decoder, build_lookup)
-            if decode == 'viterbi':
-                self.transform = ru2i_trans.transliterate
-            else:
-                self.transform = ru2i_trans.top_n_trans
+                ru2i = Urd2Target(source, target, decoder, build_lookup)
+            self.transform = _get_trans(ru2i, decode)
         elif target in ['eng', 'urd']:
             if source not in impl or source == target:
                 raise NotImplementedError(
                     'Language pair `%s-%s` is not implemented.' %
                     (source, target))
-            i2o_trans = Ind2Target(source, target, decoder, build_lookup)
-            if decode == 'viterbi':
-                self.transform = i2o_trans.transliterate
-            else:
-                self.transform = i2o_trans.top_n_trans
+            i2o = Ind2Target(source, target, decoder, build_lookup)
+            self.transform = _get_trans(i2o, decode)
         else:
             if source not in impl or target not in impl or source == target:
                 raise NotImplementedError(
                     'Language pair `%s-%s` is not implemented.' %
                     (source, target))
-            i2i_trans = Ind2Ind(source, target)
-            self.transform = i2i_trans.rtrans
+            if by_rule:
+                self.transform = Ind2IndRB(source, target).rtrans
+            else:
+                i2i = Ind2Target(source, target, decoder, build_lookup)
+                self.transform = _get_trans(i2i, decode)
 
     def convert(self, line):
         return self.transform(line)

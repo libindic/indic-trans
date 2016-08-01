@@ -1,7 +1,7 @@
 indic-trans
 ===========
 
-|travis| |coverage| |CircleCI|
+|travis| |coverage| |CircleCI| |Documentation Status|
 
 ----
 
@@ -30,7 +30,7 @@ Links & References
 ------------------
 
 * `Official source code repo <https://github.com/libindic/indic-trans>`_
-* `HTML documentation <http://irshadbhat.github.io/indictrans>`_
+* `HTML documentation <http://indic-trans.readthedocs.org>`_
 * `Transliteration Blog <http://irshadbhat.github.io/gsoc>`_
 * Mailing list: silpa-discuss@nongnu.org
 * IRC channel: ``#silpa`` at ``irc.freenode.net``
@@ -91,6 +91,7 @@ Examples
                         ben, mal, kan, tam, tel, ori, eng, mar, nep, bod, kok,
                         asm, urd}
     -b, --build-lookup  build lookup to fasten transliteration
+    -r, --by-rule       use rule-based system for transliteration
     -i, --input         <input-file>
     -o, --output        <output-file>
 
@@ -165,7 +166,7 @@ If the input text contains repeating words, which raw text generally does, make 
 
 ----
 
-|travis| |coverage| |CircleCI|
+|travis| |coverage| |CircleCI| |Documentation Status|
 
 .. |travis| image:: https://travis-ci.org/libindic/indic-trans.svg?branch=master
    :target: https://travis-ci.org/libindic/indic-trans
@@ -177,3 +178,7 @@ If the input text contains repeating words, which raw text generally does, make 
    
 .. |CircleCI| image:: https://circleci.com/gh/libindic/indic-trans.svg?style=svg
     :target: https://circleci.com/gh/libindic/indic-trans
+
+.. |Documentation Status| image:: https://readthedocs.org/projects/indic-trans/badge/?version=latest
+    :target: http://indic-trans.readthedocs.io/en/latest/?badge=latest
+    :alt: Documentation Status
