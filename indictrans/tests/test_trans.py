@@ -70,8 +70,8 @@ class TestTransliterator(TestCase):
                     for trg in indic:
                         if src == trg:
                             continue
-                        if src == 'tam' or trg == 'tam':
-                            # ML systems only developed for Tamil yet
+                        if src in ['tam', 'ben'] or trg in ['tam', 'ben']:
+                            # ML systems only for Tamil and Bengali yet
                             i2i_ml = Transliterator(source=src, target=trg,
                                                     by_rule=False)
                             i2i_ml.transform(line[i])
