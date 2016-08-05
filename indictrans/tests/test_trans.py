@@ -62,6 +62,7 @@ class TestTransliterator(TestCase):
             self.assertTrue(len(eng) == k)
 
     def test_rtrans(self):
+        dev = 'tam ben ori'.split()  # ML systems developed so far
         with io.open('%s/indic-test' % self.test_dir, encoding='utf-8') as fp:
             indic = fp.readline().split()
             for line in fp:
@@ -70,8 +71,7 @@ class TestTransliterator(TestCase):
                     for trg in indic:
                         if src == trg:
                             continue
-                        if src in ['tam', 'ben'] or trg in ['tam', 'ben']:
-                            # ML systems only for Tamil and Bengali yet
+                        if src in dev or trg in dev:
                             i2i_ml = Transliterator(source=src, target=trg,
                                                     by_rule=False)
                             i2i_ml.transform(line[i])
