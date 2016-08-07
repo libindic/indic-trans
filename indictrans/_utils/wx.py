@@ -900,56 +900,34 @@ class WX():
         # compile regexes
         const = 'kKgGfcCjJFtTdDNwWxXnpPbBmyrlvSsRh'
         self.ceVmd = re.compile("([%s])eV([MHz])" % const)
-
         self.ceV = re.compile("([%s])eV" % const)
-        # const+nukta+eV added for Bengali
         self.cZeV = re.compile("([%s])ZeV" % const)
-        # const+nukta+eV+modifier added for Bengali
         self.cZeVmd = re.compile("([%s])ZeV([MHz])" % const)
-
         self.cEYmd = re.compile("([%s])EY([MHz])" % const)
-
         self.cEY = re.compile("([%s])EY" % const)
-
         self.cOYmd = re.compile("([%s])OY([MHz])" % const)
-
         self.coVmd = re.compile("([%s])oV([MHz])" % const)
-
         self.coV = re.compile("([%s])oV" % const)
-        # const+nukta+oV added for Bengali
         self.cZoV = re.compile("([%s])ZoV" % const)
-        # const+nukta+oV+modifier added for Bengali
         self.cZoVmd = re.compile("([%s])ZoV([MHz])" % const)
-
         self.cOY = re.compile("([%s])OY" % const)
-        self.cZOY = re.compile("([%s])ZOY" %
-                               const)  # consonant+ZOY case added
-
+        self.cZOY = re.compile("([%s])ZOY" % const)
         self.cvmd = re.compile("([%s])([AiIuUeEoO])([MHz])" % const)
         self.cZvmd = re.compile("([%s])Z([AiIuUeEoO])([MHz])" % const)
-
         self.cv = re.compile("([%s])([AiIuUeEoO])" % const)
         self.cZv = re.compile("([%s])Z([AiIuUeEoO])" % const)
-
         self.camd = re.compile("([%s])a([MHz])" % const)
         self.cZamd = re.compile("([%s])Za([MHz])" % const)
-        self.cZmd = re.compile(
-            "([%s])Z([MHz])" %
-            const)  # consonant+Z+[MHz] case added
-
+        self.cZmd = re.compile("([%s])Z([MHz])" % const)
         self.ca = re.compile("([%s])a" % const)
         self.cZa = re.compile("([%s])Za" % const)
-        self.cYZa = re.compile("([%s])YZa" %
-                               const)  # consonant+YZa case added
-
+        self.cYZa = re.compile("([%s])YZa" % const)
         self.c = re.compile("([%s])" % const)
         self.cZ = re.compile("([%s])Z" % const)
-
         self.aqmd = re.compile("aq([MHz])")
         self.cq = re.compile("([%s])q" % const)
         self.cqmd = re.compile("([%s])q([MHz])" % const)
-        self.qmd = re.compile("q([MHz])")  # q+[MHz]
-
+        self.qmd = re.compile("q([MHz])")
         self.dig = re.compile("([0-9])")
         self.i2u = re.compile('([\xA1-\xFB])')
 
@@ -1790,7 +1768,6 @@ class WX():
         self.cnmd = re.compile("([\xB3-\xD8])\xE9([\xA1-\xA3])")
         self.cmmd = re.compile("([\xB3-\xD8])([\xDA-\xE7])([\xA1-\xA3])")
         self.cnmmd = re.compile("([\xB3-\xD8])\xE9([\xDA-\xE7])([\xA1-\xA3])")
-
         self.u2i_h = re.compile("([\u0900-\u097F])")
         self.u2i_t = re.compile("([\u0C01-\u0C6F])")
         self.u2i_k = re.compile("([\u0C80-\u0CFF])")
@@ -1817,9 +1794,7 @@ class WX():
         text = text.replace('\u00AD', '')  # SOFT_HYPHEN
         text = text.replace('\u200C', '')  # ZERO_WIDTH_NON_JOINER
         text = text.replace('\u200D', '')  # ZERO_WIDTH_JOINER
-
-        # Convert Devanagari VIRAM and Deergh Viram to "fullstop" for all
-        # scripts
+        # Convert Devanagari VIRAM and Deergh Viram to "fullstop"
         text = text.replace('\u0964', '.')
         text = text.replace('\u0965', '.')
 
@@ -1917,7 +1892,7 @@ class WX():
     def map_OY(self, my_string):
         if 'OY' not in my_string:
             return my_string
-        if 'Z' in my_string:  # Case ZOY added
+        if 'Z' in my_string:
             my_string = self.cZOY.sub(
                 lambda m: self.hashc_w2i[
                     m.group(1)] +
@@ -1976,7 +1951,6 @@ class WX():
                 m.group(1)] +
             self.hashc_w2i["Z"],
             my_string)
-        # consonant+YZa case added
         my_string = self.cYZa.sub(
             lambda m: self.hashc_w2i[
                 m.group(1) +
@@ -2001,7 +1975,6 @@ class WX():
             self.hashmd_w2i[
                 m.group(2)],
             my_string)
-        # q+[MHz] case added
         my_string = self.qmd.sub(
             lambda m: self.hashv_w2i["q"] +
             self.hashmd_w2i[
@@ -2012,16 +1985,13 @@ class WX():
                 m.group(1)] +
             self.hashm_w2i["q"],
             my_string)
-        # Added for the case Vowel(U090B)+Modifier
         my_string = self.aqmd.sub(
             lambda m: self.hashv_w2i["aq"] +
             self.hashmd_w2i[
                 m.group(1)],
             my_string)
         return my_string
-        # q, aq removed from here
 
-    # Added for the case lYYa,lYY[AiIuUeEoO],lYY[MHz]
     def map_lYY(self, my_string):
         if 'lYY' not in my_string:
             return my_string
@@ -2100,7 +2070,6 @@ class WX():
                 m.group(1)] + self.hashc_w2i["_"], my_string)
         return my_string
 
-    # Added for the case lYa,lY[AiIuUeEoO],lY[MHz]
     def map_lY(self, my_string):
         if 'lY' not in my_string:
             return my_string
@@ -2194,7 +2163,6 @@ class WX():
             my_string)
         return my_string
 
-    # Added for tamil -by Rashid
     def map_nY(self, my_string):
         if 'nY' not in my_string:
             return my_string
@@ -2288,7 +2256,6 @@ class WX():
             my_string)
         return my_string
 
-    # Added for tamil -by Rashid
     def map_rY(self, my_string):
         if 'rY' not in my_string:
             return my_string
@@ -2461,7 +2428,6 @@ class WX():
     def map_a(self, my_string):
         if 'a' not in my_string:
             return my_string
-        # non-word boundary added on the left of string
         my_string = re.sub('\BaA', self.hashv_w2i["aA"], my_string)
         my_string = re.sub('\Bai', self.hashv_w2i["ai"], my_string)
         my_string = re.sub('\BaI', self.hashv_w2i["aI"], my_string)
@@ -2513,11 +2479,8 @@ class WX():
         my_string = self.ca.sub(
             lambda m: self.hashc_w2i[
                 m.group(1)], my_string)
-
-        # q, aq replaced
         my_string = my_string.replace('aq', self.hashv_w2i["aq"])
         my_string = my_string.replace('q', self.hashv_w2i["aq"])
-
         my_string = self.c.sub(
             lambda m: self.hashc_w2i[
                 m.group(1)] +
@@ -2795,7 +2758,7 @@ class WX():
 
     def unicode2iscii_kan(self, unicode_):
         # Normalize Unicode values (NUKTA variations)
-        unicode_ = unicode_.replace('\u0CDE', '\u0CAB\u0CBC')  # ADDED
+        unicode_ = unicode_.replace('\u0CDE', '\u0CAB\u0CBC')
         # Normalize two-part dependent vowels
         unicode_ = unicode_.replace('\u0cbf\u0cd5', '\u0cc0')
         unicode_ = unicode_.replace('\u0cc6\u0cd5', '\u0cc7')
