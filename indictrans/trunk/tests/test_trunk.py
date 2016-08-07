@@ -57,6 +57,10 @@ class TestTrunk(TestCase):
         trunk.test_sp(clf, enc, '%s/hin2rom.tnt' % self.test_dir)
         # test model dump
         trunk.save_models(clf, enc, '/tmp/models')
+        # dump directory should get renamed if it already exists
+        trunk.save_models(clf, enc, '/tmp/models')
+        trunk.save_models(clf, enc, '/tmp/models')
+        trunk.save_models(clf, enc, '/tmp/models')
 
     def test_parser(self):
         parser = trunk.parse_args(['--data-file', 'path/to/train_file',

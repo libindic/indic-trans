@@ -6,7 +6,6 @@ import os
 import sys
 import json
 import argparse
-from builtins import input
 
 import numpy as np
 from six.moves import xrange
@@ -38,7 +37,7 @@ def save_models(clf, enc, out_dir):
             "UserWarnning: Output directory `{0}` already exists."
             " Renaming output directory.\n".format(out_dir))
         uid = get_uid(out_dir)
-        out_dir = '%s-%s' %(out_dir, uid) if uid else out_dir
+        out_dir = '%s-%s' % (out_dir, uid) if uid else out_dir
     os.makedirs(out_dir)
 
     with open('%s/sparse.vec' % out_dir, 'w') as j_fp:
