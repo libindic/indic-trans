@@ -53,6 +53,10 @@ class TestTrunk(TestCase):
         for i in xrange(len(y_out)):
             # each token of sequence should get a tag
             self.assertEqual(len(y[i]), len(y_out[i]))
+        # test direct testing
+        trunk.test_sp(clf, enc, '%s/hin2rom.tnt' % self.test_dir)
+        # test model dump
+        trunk.save_models(clf, enc, '/tmp/models')
 
     def test_parser(self):
         parser = trunk.parse_args(['--data-file', 'path/to/train_file',
