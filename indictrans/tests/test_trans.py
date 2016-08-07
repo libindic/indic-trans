@@ -73,7 +73,7 @@ class TestTransliterator(TestCase):
             self.assertTrue(len(eng) == k)
 
     def test_rtrans(self):
-        dev = 'tam ben ori mal tel'.split()  # ML systems developed so far
+        dev = 'tam ben ori mal tel pan kan guj hin'.split()
         with io.open('%s/indic-test' % self.test_dir, encoding='utf-8') as fp:
             indic = fp.readline().split()
             for line in fp:
