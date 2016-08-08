@@ -25,6 +25,17 @@ class TestTransliterator(TestCase):
         self.trg2src += list(zip(target_urd, source))
         self.test_dir = os.path.dirname(os.path.abspath(__file__))
 
+    def test_bad_input_lang(self):
+        self.assertRaises(NotImplementedError, Transliterator,
+                          source='eng', target='unknown')
+        self.assertRaises(NotImplementedError, Transliterator,
+                          source='unknown', target='eng')
+        self.assertRaises(NotImplementedError, Transliterator,
+                          source='unknown', target='unknown')
+
+    def test_bad_decoder(self):
+        self.assertRaises(ValueError, Transliterator, decode='unknown')
+
     def test_src2trg(self):
         for lang_pair in self.src2trg:
             src = lang_pair[0]
@@ -62,7 +73,7 @@ class TestTransliterator(TestCase):
             self.assertTrue(len(eng) == k)
 
     def test_rtrans(self):
-        dev = 'tam ben ori'.split()  # ML systems developed so far
+        dev = 'tam ben ori mal tel pan kan guj hin'.split()
         with io.open('%s/indic-test' % self.test_dir, encoding='utf-8') as fp:
             indic = fp.readline().split()
             for line in fp:

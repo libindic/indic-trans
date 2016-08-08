@@ -6,7 +6,6 @@ import os
 import sys
 import json
 import argparse
-from builtins import input
 
 import numpy as np
 from six.moves import xrange
@@ -19,18 +18,27 @@ __all__ = ["StructuredPerceptron"]
 
 
 def save_models(clf, enc, out_dir):
+    def get_uid(out_dir):
+        parent_dir, _, model_dir = out_dir.rpartition('/')
+        parent_dir = parent_dir if parent_dir else os.getcwd()
+        existing_models = os.listdir(parent_dir)
+        existing_models = [dr for dr in existing_models
+                           if dr.startswith(model_dir)]
+        uids = [dr.rsplit('-')[-1] for dr in existing_models]
+        uids = [uid for uid in uids if uid.isdigit()]
+        max_id = 1
+        if uids:
+            max_id = max(uids, key=int)
+            max_id = int(max_id) + 1 if max_id else max_id
+        return str(max_id)
+
     if os.path.isdir(out_dir):
         sys.stderr.write(
-            "UserWarnning: Output directory '{0}' already exists."
-            " Any existing models will get overwritten.".format(out_dir))
-        try:
-            input('\n\n---Press any key to continue---\n'
-                  '-----Press Crtl+C to return------\n')
-        except KeyboardInterrupt:
-            sys.stderr.write('\nModel dump aborted successfully\n')
-            return
-    else:
-        os.makedirs(out_dir)
+            "UserWarnning: Output directory `{0}` already exists."
+            " Renaming output directory.\n".format(out_dir))
+        uid = get_uid(out_dir)
+        out_dir = '%s-%s' % (out_dir, uid) if uid else out_dir
+    os.makedirs(out_dir)
 
     with open('%s/sparse.vec' % out_dir, 'w') as j_fp:
         json.dump(enc.unique_feats, j_fp)
