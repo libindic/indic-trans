@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from __future__ import unicode_literals
+
 import io
 import os
 import re
@@ -55,15 +57,15 @@ class UrduNormalizer():
     def normalize(self, text):
         """normalize text"""
         text = self.cnorm(text)
+        # canonical normalizations
+        text = text.translate(self.norm_tbl)
         # matra normalizations
         text = re.sub('[\u064d\u0652\u0654-\u065b]', '', text)
         text = re.sub('([^\u06a9\u06af\u0686\u062c\u0679\u0688'
                       '\u062a\u062f\u067e\u0628\u0691])\u06be',
-                      r'\1\u06c1', text)
+                      r'\1%s' % '\u06c1', text)
         # remove vowels
         text = re.sub('[\u0650\u064e\u064f]', '', text)
-        # canonical normalizations
-        text = text.translate(self.norm_tbl)
         # hamza and mada normalizations
         text = text.replace('\u0627\u0653', '\u0622')
         text = text.replace('\u0648\u0654', '\u0624')
