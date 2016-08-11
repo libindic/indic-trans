@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from __future__ import unicode_literals
+from __future__ import division, unicode_literals
 
 import io
 import os
@@ -36,7 +36,8 @@ class TestTransliterator(TestCase):
     def test_bad_decoder(self):
         self.assertRaises(ValueError, Transliterator, decode='unknown')
 
-    def test_src2trg(self):
+    def test_ind2ru(self):
+        """Test Indic-to-[Roman, Urdu] ML models"""
         for lang_pair in self.src2trg:
             src = lang_pair[0]
             trg = lang_pair[1]
@@ -47,7 +48,8 @@ class TestTransliterator(TestCase):
                     word, expected = line.split()
                     self.assertEqual(trans.transform(word), expected)
 
-    def test_trg2src(self):
+    def test_ru2ind(self):
+        """Test [Roman, Urdu]-to-Indic ML models"""
         for lang_pair in self.trg2src:
             src = lang_pair[0]
             trg = lang_pair[1]
@@ -59,6 +61,7 @@ class TestTransliterator(TestCase):
                     self.assertEqual(trans.transform(word), expected)
 
     def test_kbest(self):
+        """Make sure `k-best` works without failure"""
         k_best = range(2, 15)
         r2i = Transliterator(source='eng',
                              target='hin',
@@ -73,22 +76,25 @@ class TestTransliterator(TestCase):
             self.assertTrue(len(eng) == k)
 
     def test_rtrans(self):
-        dev = 'tam ben ori mal tel pan kan guj hin'.split()
+        """Test Indic-to-Indic ML and Rule-Based models."""
         with io.open('%s/indic-test' % self.test_dir, encoding='utf-8') as fp:
-            indic = fp.readline().split()
+            # first line contains language codes
+            lang_codes = fp.readline().split()
+            lang2word = dict(zip(lang_codes,
+                                 [[] for i in range(len(lang_codes))]))
             for line in fp:
                 line = line.split()
-                for i, src in enumerate(indic):
-                    for trg in indic:
-                        if src == trg:
-                            continue
-                        if src in dev or trg in dev:
-                            i2i_ml = Transliterator(source=src, target=trg,
-                                                    by_rule=False)
-                            i2i_ml.transform(line[i])
-                        i2i_rb = Transliterator(source=src, target=trg,
-                                                by_rule=True)
-                        i2i_rb.transform(line[i])
+                for i, word in enumerate(line):
+                    lang2word[lang_codes[i]].append(word)
+        for src in lang_codes:
+            for trg in lang_codes:
+                if src == trg:
+                    continue
+                s2t_ml = Transliterator(source=src, target=trg, by_rule=False)
+                s2t_rb = Transliterator(source=src, target=trg, by_rule=True)
+                for word in lang2word[src]:
+                    s2t_ml.transform(word)
+                    s2t_rb.transform(word)
 
     def test_parser(self):
         # test parser arguments
