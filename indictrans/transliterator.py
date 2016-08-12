@@ -35,13 +35,13 @@ class Transliterator():
         Target Language (3 letter ISO-639 code)
 
     decode : str, default: viterbi
-        Decoding algorithm, either "viterbi" or "beamsearch".
+        Decoding algorithm, either ``viterbi`` or ``beamsearch``.
 
     build_lookup : bool, default: False
         Flag to build lookup-table. Fastens the transliteration
         process if the input text contains repeating words.
 
-    by_rule : bool, default: False
+    rb : bool, default: True
         Decides whether to use rule-based system or ML system for
         transliteration. This choice is only for Indic to Indic
         transliterations. If ``True`` uses ruled-based one.
@@ -67,7 +67,7 @@ class Transliterator():
     bhrashtachar hai.
     """
     def __init__(self, source='hin', target='eng', decode='viterbi',
-                 build_lookup=False, by_rule=False):
+                 build_lookup=False, rb=True):
         source = source.lower()
         target = target.lower()
         impl = '''hin guj pan ben mal kan tam tel
@@ -95,7 +95,7 @@ class Transliterator():
                 raise NotImplementedError(
                     'Language pair `%s-%s` is not implemented.' %
                     (source, target))
-            if by_rule:
+            if rb:
                 self.transform = Ind2IndRB(source, target).rtrans
             else:
                 i2i = Ind2Target(source, target, decoder, build_lookup)
