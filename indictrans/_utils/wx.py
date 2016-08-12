@@ -22,7 +22,7 @@ class WX():
 
     Examples
     --------
-    >>> from wx import WX
+    >>> from indictrans import WX
     >>> wxc = WX(lang='hin', order='utf2wx')
     >>> hin_utf = u'''बीजेपी के सांसद सुब्रमण्यम स्वामी ने कुछ ही दिन पहले
     ... अपनी ही सरकार को कठघरे में खड़ा करते हुए जीडीपी आंकड़ों पर
@@ -1783,8 +1783,7 @@ class WX():
         self.u2i_pn = re.compile("([\u0A59-\u0A5B\u0A5E])")
 
     def normalize(self, text):
-        """
-        Performs some common normalization, which includes:
+        """Performs some common normalization, which includes:
         - Byte order mark, word joiner, etc. removal
         - ZERO_WIDTH_NON_JOINER and ZERO_WIDTH_JOINER removal
         """
