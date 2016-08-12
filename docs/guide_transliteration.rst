@@ -104,7 +104,7 @@ You can transliterate text files directly using the console shortcut ``indictran
 
 .. parsed-literal::
 
-    indictrans --h
+    $ indictrans --h
 
     -h, --help          show this help message and exit
     -v, --version       show program's version number and exit
@@ -122,6 +122,6 @@ You can transliterate text files directly using the console shortcut ``indictran
     $ indictrans < hindi.txt --s hin --t eng --build-lookup > hindi-rom.txt
     $ indictrans < roman.txt --s hin --t eng --build-lookup > roman-hin.txt
 
-    $ echo 'indictrans libindic hyderabad university bhagyalakshmi bharat morocco' |\
+    $ echo 'indictrans libindic hyderabad university bhagyalakshmi bharat morocco' |\\
      indictrans -s eng -t hin | indictrans -s hin -t tel -r # RULE-BASED
     ఇండిక్ట్రాంస లిబిందిక హైదరాబాద యూనివర్సిటీ భాగ్యాలక్ష్మీ భారత మోరోక్కో
