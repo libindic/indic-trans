@@ -90,8 +90,8 @@ class TestTransliterator(TestCase):
             for trg in lang_codes:
                 if src == trg:
                     continue
-                s2t_ml = Transliterator(source=src, target=trg, by_rule=False)
-                s2t_rb = Transliterator(source=src, target=trg, by_rule=True)
+                s2t_ml = Transliterator(source=src, target=trg, rb=False)
+                s2t_rb = Transliterator(source=src, target=trg, rb=True)
                 for word in lang2word[src]:
                     s2t_ml.transform(word)
                     s2t_rb.transform(word)
@@ -103,13 +103,13 @@ class TestTransliterator(TestCase):
                              '--source', 'hin',
                              '--target', 'eng',
                              '--build-lookup',
-                             '--by-rule'])
+                             '--rb'])
         self.assertEqual(parser.infile, 'infile')
         self.assertEqual(parser.outfile, 'outfile')
         self.assertEqual(parser.source, 'hin')
         self.assertEqual(parser.target, 'eng')
         self.assertTrue(parser.build_lookup)
-        self.assertTrue(parser.by_rule)
+        self.assertTrue(parser.rb)
         # test parser args processing
         process_args(parse_args(['-i', '%s/indic-test' % self.test_dir,
                                  '-o', '/tmp/test.out',
