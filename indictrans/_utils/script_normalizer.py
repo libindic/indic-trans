@@ -14,7 +14,7 @@ class UrduNormalizer():
 
     Examples
     --------
-    >>> from script_normalizer import UrduNormalizer
+    >>> from indictrans import UrduNormalizer
     >>> text = u'''ﺎﻧ کﻭ ﻍیﺮﻗﺎﻧﻮﻧی ﺝگہ کﺱ ﻥے ﺩی؟
     ... ﻝﻭگﻭں کﻭ ﻖﺘﻟ کیﺍ ﺝﺍﺭ ہﺍ ہے ۔
     ... ﺏڑے ﻡﺎﻣﻭں ﺎﻧ ﺪﻧﻭں ﻢﺤﻟہ ﺥﺩﺍﺩﺍﺩ ﻡیں ﺭہﺕے ﺕھے۔
