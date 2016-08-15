@@ -1,12 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# Copyright (C) 2015 Irshad Ahmad Bhat
+# Copyright (C) 2016 Irshad Ahmad Bhat
 
-"""
-Transliteration Tool:
-Indic to Roman transliterator
-"""
 from __future__ import unicode_literals
 
 import io
@@ -143,22 +139,20 @@ class BaseTransliterator(object):
         else:
             scores = self.coef_.dot(X.T).T
         if self.decode == 'viterbi':
-            y = self.decoder.decode(
-                scores,
-                self.intercept_trans_,
-                self.intercept_init_,
-                self.intercept_final_)
+            y = self.decoder.decode(scores,
+                                    self.intercept_trans_,
+                                    self.intercept_init_,
+                                    self.intercept_final_)
             y = [self.classes_[pid] for pid in y]
             y = ''.join(y).replace('_', '')
             return y
         else:
             top_seq = list()
-            y = self.decoder.decode(
-                scores,
-                self.intercept_trans_,
-                self.intercept_init_,
-                self.intercept_final_,
-                k_best)
+            y = self.decoder.decode(scores,
+                                    self.intercept_trans_,
+                                    self.intercept_init_,
+                                    self.intercept_final_,
+                                    k_best)
             for path in y:
                 w = [self.classes_[pid] for pid in path]
                 w = ''.join(w).replace('_', '')

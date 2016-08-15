@@ -6,7 +6,10 @@ import sys
 import codecs
 import argparse
 
+from ._utils import UrduNormalizer, WX
 from .transliterator import Transliterator
+
+__all__ = ['Transliterator', 'UrduNormalizer', 'WX']
 
 __author__ = "Irshad Ahmad Bhat"
 __version__ = "1.0"
@@ -22,6 +25,7 @@ def parse_args(args):
     parser = argparse.ArgumentParser(
         prog="indictrans",
         description="Transliterator for Indian Languages including English")
+    group = parser.add_mutually_exclusive_group()
     parser.add_argument('-v',
                         '--version',
                         action="version",
@@ -48,10 +52,14 @@ def parse_args(args):
         dest="build_lookup",
         action='store_true',
         help='build lookup to fasten transliteration')
-    parser.add_argument(
+    group.add_argument(
+        '-m',
+        '--ml',
+        action='store_true',
+        help='use ML system for transliteration')
+    group.add_argument(
         '-r',
-        '--by-rule',
-        dest="by_rule",
+        '--rb',
         action='store_true',
         help='use rule-based system for transliteration')
     parser.add_argument(
@@ -77,6 +85,8 @@ def parse_args(args):
 
 
 def process_args(args):
+    if not (args.ml or args.rb):
+        args.rb = True
     if args.infile:
         ifp = io.open(args.infile, encoding='utf-8')
     else:
@@ -96,7 +106,7 @@ def process_args(args):
     # initialize transliterator object
     trn = Transliterator(args.source,
                          args.target,
-                         by_rule=args.by_rule,
+                         rb=args.rb,
                          build_lookup=args.build_lookup)
 
     # transliterate text

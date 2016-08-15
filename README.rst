@@ -91,7 +91,8 @@ Examples
                         ben, mal, kan, tam, tel, ori, eng, mar, nep, bod, kok,
                         asm, urd}
     -b, --build-lookup  build lookup to fasten transliteration
-    -r, --by-rule       use rule-based system for transliteration
+    -m, --ml            use ML system for transliteration
+    -r, --rb            use rule-based system for transliteration
     -i, --input         <input-file>
     -o, --output        <output-file>
 
@@ -102,6 +103,8 @@ Examples
 	indictrans < roman.txt --s hin --t eng --build-lookup > roman-hin.txt
 
 If the input text contains repeating words, which raw text generally does, make sure to set ``build_lookup``. As the name indicates this builds lookup for transliterated words and thus avoids repeated transliteration of same words. This saves a lot of time if the input corpus is too big.
+
+Note that ``ml`` and ``rb`` are mutually exclusive arguments. If none of these is set, then the sytem defaults to ``rb``.
 
 2. Using Python:
 ~~~~~~~~~~~~~~~~

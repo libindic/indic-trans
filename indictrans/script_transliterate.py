@@ -15,7 +15,6 @@ from ._utils import ngram_context, WX
 
 class Ind2Target(BaseTransliterator):
     """Transliterates text from Indic to Roman/Urdu script"""
-
     def __init__(self, source, target, decoder, build_lookup=False):
         super(Ind2Target, self).__init__(source,
                                          target,
@@ -56,7 +55,6 @@ class Ind2Target(BaseTransliterator):
 
 class Rom2Target(BaseTransliterator):
     """Transliterates text from Roman to Indic script"""
-
     def __init__(self, source, target, decoder, build_lookup=False):
         super(Rom2Target, self).__init__(source,
                                          target,
@@ -109,7 +107,6 @@ class Rom2Target(BaseTransliterator):
 
 class Urd2Target(BaseTransliterator):
     """Transliterate text from Persio-Arabic to Indic script"""
-
     def __init__(self, source, target, decoder, build_lookup=False):
         super(Urd2Target, self).__init__(source,
                                          target,
