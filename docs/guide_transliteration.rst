@@ -10,23 +10,23 @@ In order to transliterate raw text, you can use the :class:`indictrans.Translite
 
 .. code-block:: python
 
-    from indictrans import Transliterator
-    trn = Transliterator(source='hin', target='eng', build_lookup=True)
-    hin = """कांग्रेस पार्टी अध्यक्ष सोनिया गांधी, तमिलनाडु की मुख्यमंत्री
-    जयललिता और रिज़र्व बैंक के गवर्नर रघुराम राजन के बीच एक समानता
-    है. ये सभी अलग-अलग कारणों से भारतीय जनता पार्टी के राज्यसभा सांसद
-    सुब्रमण्यम स्वामी के निशाने पर हैं. उनके जयललिता और सोनिया गांधी के
-    पीछे पड़ने का कारण कथित भ्रष्टाचार है."""
-    eng = trn.transform(hin)
-    print(eng)
+    >>> from indictrans import Transliterator
+    >>> trn = Transliterator(source='hin', target='eng', build_lookup=True)
+    >>> hin = """कांग्रेस पार्टी अध्यक्ष सोनिया गांधी, तमिलनाडु की मुख्यमंत्री
+    ... जयललिता और रिज़र्व बैंक के गवर्नर रघुराम राजन के बीच एक समानता
+    ... है. ये सभी अलग-अलग कारणों से भारतीय जनता पार्टी के राज्यसभा सांसद
+    ... सुब्रमण्यम स्वामी के निशाने पर हैं. उनके जयललिता और सोनिया गांधी के
+    ... पीछे पड़ने का कारण कथित भ्रष्टाचार है."""
+    >>> eng = trn.transform(hin)
+    >>> print(eng)
     congress party adhyaksh sonia gandhi, tamilnadu kii mukhyamantri
     jayalalita our reserve baink ke governor raghuram rajan ke beech ek samanta
     hai. ye sabi alag-alag carnon se bharatiya janata party ke rajyasabha saansad
     subramanyam swami ke nishane par hain. unke jayalalita our sonia gandhi ke
     peeche padane ka kaaran kathith bhrashtachar hai.
-    trn = Transliterator(source='eng', target='hin')
-    hin_ = trn.transform(eng)
-    print(hin_)
+    >>> trn = Transliterator(source='eng', target='hin')
+    >>> hin_ = trn.transform(eng)
+    >>> print(hin_)
     कांग्रेस पार्टी अध्यक्ष सोनिया गांधी, तमिलनाडु की मुख्यमांत्री
     जयललिता और रिज़र्व बैंक के गवर्नर रघुराम राजन के बीच एक समानता
     है. ये सभी अलग-अलग कार्नों से भारतीय जनता पार्टी के राज्यसभा संसद
@@ -40,12 +40,12 @@ You can generate ``k-best`` outputs for a given sequence by changing the default
 
 .. code-block:: python
     
-    from indictrans import Transliterator
-    r2i = Transliterator(source='eng', target='mal', decode='beamsearch')
-    words = '''sereleskar morocco calendar bhagyalakshmi bhoolokanathan medical
-            ernakulam kilometer vitamin management university naukuchiatal'''.split()
-    for word in words:
-        print('%s -> %s' % (word, '  '.join(r2i.transform(word, k_best=5))))
+    >>> from indictrans import Transliterator
+    >>> r2i = Transliterator(source='eng', target='mal', decode='beamsearch')
+    >>> words = '''sereleskar morocco calendar bhagyalakshmi bhoolokanathan medical
+    ...         ernakulam kilometer vitamin management university naukuchiatal'''.split()
+    >>> for word in words:
+    >>>     print('%s -> %s' % (word, '  '.join(r2i.transform(word, k_best=5))))
     sereleskar -> സേറെലേസ്കാര്  സെറെലേസ്കാര്  സേറെലേസ്കാര  സെറെലേസ്കാര  സേറെലേസ്കര്
     morocco -> മൊറോക്കോ  മൊറോക്ഡോ  മൊരോക്കോ  മോറോക്കോ  മൊറോക്കൂ
     calendar -> കേലെന്ദര  കേലെന്ഡര  കേലെന്ദ്ര  കേലെന്ദാര  കേലെന്ഡ്ര

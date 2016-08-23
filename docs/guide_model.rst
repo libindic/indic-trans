@@ -10,15 +10,15 @@ Assuming your data is in ``tnt`` format you can encode the data ane train a :cla
 
 .. code-block:: python
 
-    from indictrans import trunk
-    #load trianing data
-    X, y = trunk.load_data('indictrans/trunk/tests/hin2rom.tnt')
-    #build ngram-context
-    X = trunk.build_context(X, ngram=4)
-    #fit encoder
-    enc, X = trunk.fit_encoder(X)
-    #train structured-perceptron model
-    clf = trunk.train_sp(X, y, n_iter=5, verbose=2)
+    >>> from indictrans import trunk
+    >>> #load trianing data
+    ... X, y = trunk.load_data('indictrans/trunk/tests/hin2rom.tnt')
+    >>> #build ngram-context
+    ... X = trunk.build_context(X, ngram=4)
+    >>> #fit encoder
+    ... enc, X = trunk.fit_encoder(X)
+    >>> #train structured-perceptron model
+    ... clf = trunk.train_sp(X, y, n_iter=5, verbose=2)
     Iteration 1 ...
     Train-set error = 1.5490
     Iteration 2 ...
@@ -35,15 +35,15 @@ Then you can use the trained classifier as follows:
 
 .. code-block:: python
 
-    #load testing data
-    X_test, y = trunk.load_data('indictrans/trunk/tests/hin2rom.tnt')
-    #build ngram-context for testing data
-    X_test = trunk.build_context(X_test, ngram=4) # ngram value should be same as for train-set
-    #encode test-set
-    X_test = [enc.transform(x) for x in X_test]
-    #predict output sequences
-    y_ = clf.predict(X_test)
-    y[10]  # True
+    >>> #load testing data
+    ... X_test, y = trunk.load_data('indictrans/trunk/tests/hin2rom.tnt')
+    >>> #build ngram-context for testing data
+    ... X_test = trunk.build_context(X_test, ngram=4) # ngram value should be same as for train-set
+    >>> #encode test-set
+    ... X_test = [enc.transform(x) for x in X_test]
+    >>> #predict output sequences
+    ... y_ = clf.predict(X_test)
+    >>> y[10]  # True
     [u'c', u'l', u'a', u'ne', u'_']
     >>> y_[10]  # Predicted
     [u'c', u'l', u'a', u'n', u'_']
