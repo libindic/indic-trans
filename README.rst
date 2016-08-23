@@ -49,28 +49,20 @@ Dependencies
 
 .. _`Scipy`: http://www.scipy.org/install.html
 
-Install dependencies:
+Clone & Install
+---------------
 
 ::
 
-    pip install -r requirements.txt
+    Clone the repository:
+        git clone https://github.com/libindic/indictrans.git
+        ------------------------OR--------------------------
+        git clone https://github.com/irshadbhat/indictrans.git
 
-Download
-~~~~~~~~
-
-Download **indictrans**  from `github`_.
-
-.. _`github`: https://github.com/libindic/indic-trans
-
-Install
-~~~~~~~
-
-::
-
-    pip install git+git://github.com/irshadbhat/indic-trans.git
-    ----------------------------OR-----------------------------
-    pip install git+git://github.com/libindic/indic-trans.git    
-
+    Change to the cloned directory:
+        cd indic-trans
+        pip install -r requirements.txt
+        python setup.py install
 
 Examples
 --------
