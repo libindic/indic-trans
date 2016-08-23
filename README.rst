@@ -39,7 +39,7 @@ Installation
 ------------
 
 Dependencies
-~~~~~~~~~~~~
+^^^^^^^^^^^^
 
 `indictrans`_ requires `cython`_, and `SciPy`_.
 
@@ -50,7 +50,7 @@ Dependencies
 .. _`Scipy`: http://www.scipy.org/install.html
 
 Clone & Install
----------------
+^^^^^^^^^^^^^^^
 
 ::
 
@@ -68,7 +68,7 @@ Examples
 --------
 
 1. From Console:
-~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^
 
 .. parsed-literal::
 
@@ -99,7 +99,7 @@ If the input text contains repeating words, which raw text generally does, make 
 Note that ``ml`` and ``rb`` are mutually exclusive arguments. If none of these is set, then the sytem defaults to ``rb``.
 
 2. Using Python:
-~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^
 
 .. code:: python
 
@@ -133,7 +133,7 @@ Note that ``ml`` and ``rb`` are mutually exclusive arguments. If none of these i
     >>>
 
 3. K-Best Transliterations
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code:: python
 
