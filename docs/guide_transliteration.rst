@@ -8,10 +8,8 @@ Transliterate
 
 In order to transliterate raw text, you can use the :class:`indictrans.Transliterator` which uses already trained models to transliterate the text. If the input text contains repeating words, which raw text generally does, make sure to set ``build_lookup`` flag to ``True``. As the name indicates this builds lookup for transliterated words and thus avoids repeated transliteration of same words. This saves a lot of time if the input corpus is too big. 
 
-.. code:: python
+.. code-block:: python
 
-    Python 2.7.6
-    [GCC 4.8.2] on linux2
     from indictrans import Transliterator
     trn = Transliterator(source='hin', target='eng', build_lookup=True)
     hin = """कांग्रेस पार्टी अध्यक्ष सोनिया गांधी, तमिलनाडु की मुख्यमंत्री
@@ -40,10 +38,8 @@ K-Best Transliterations
 
 You can generate ``k-best`` outputs for a given sequence by changing the default decoder ``viterbi`` to ``beamsearch`` and then set the ``k_best`` parameter to the desired value.
 
-.. code:: python
+.. code-block:: python
     
-    Python 2.7.6
-    [GCC 4.8.2] on linux2
     from indictrans import Transliterator
     r2i = Transliterator(source='eng', target='mal', decode='beamsearch')
     words = '''sereleskar morocco calendar bhagyalakshmi bhoolokanathan medical
@@ -68,10 +64,8 @@ ML and Rule-Based systems for Indic Scripts
 
 For Indic scripts except Urdu you can use rule-based as well as machine learning (ML) system for transliteration. Rule based systems are very fast than ML systems and seem more accurate too. But for some language pairs ML systems generates better results.
 
-.. code:: python
+.. code-block:: python
 
-    Python 3.4.3
-    [GCC 4.8.4] on linux
     >>> from indictrans import Transliterator
     >>> rom_text = 'indictrans libindic hyderabad university bhagyalakshmi bharat morocco'.split()
     >>> r2h = Transliterator(source='eng', target='hin')
@@ -102,7 +96,7 @@ Transliterate from Console
 
 You can transliterate text files directly using the console shortcut ``indictrans``.
 
-.. parsed-literal::
+.. code-block:: bash
 
     $ indictrans --h
 

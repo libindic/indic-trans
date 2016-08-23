@@ -8,7 +8,7 @@ Train and Test
 
 Assuming your data is in ``tnt`` format you can encode the data ane train a :class:`indictrans.trunk.StructuredPerceptron` classifier.
 
-.. code:: python
+.. code-block:: python
 
     from indictrans import trunk
     #load trianing data
@@ -33,7 +33,7 @@ This will train the perceptron for 5 epochs (specified via the ``n_iter`` parame
 
 Then you can use the trained classifier as follows:
 
-.. code:: python
+.. code-block:: python
 
     #load testing data
     X_test, y = trunk.load_data('indictrans/trunk/tests/hin2rom.tnt')
@@ -61,7 +61,7 @@ Train directly from Console
 
 `indictrans-trunk` provides a much easier way to train, test and save models directly from console.
 
-.. parsed-literal::
+.. code-block:: bash
 
     user@indic-trans$ indictrans-trunk --help
 
