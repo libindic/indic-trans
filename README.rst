@@ -39,7 +39,7 @@ Installation
 ------------
 
 Dependencies
-~~~~~~~~~~~~
+^^^^^^^^^^^^
 
 `indictrans`_ requires `cython`_, and `SciPy`_.
 
@@ -49,34 +49,26 @@ Dependencies
 
 .. _`Scipy`: http://www.scipy.org/install.html
 
-Install dependencies:
+Clone & Install
+^^^^^^^^^^^^^^^
 
 ::
 
-    pip install -r requirements.txt
+    Clone the repository:
+        git clone https://github.com/libindic/indictrans.git
+        ------------------------OR--------------------------
+        git clone https://github.com/irshadbhat/indictrans.git
 
-Download
-~~~~~~~~
-
-Download **indictrans**  from `github`_.
-
-.. _`github`: https://github.com/libindic/indic-trans
-
-Install
-~~~~~~~
-
-::
-
-    pip install git+git://github.com/irshadbhat/indic-trans.git
-    ----------------------------OR-----------------------------
-    pip install git+git://github.com/libindic/indic-trans.git    
-
+    Change to the cloned directory:
+        cd indic-trans
+        pip install -r requirements.txt
+        python setup.py install
 
 Examples
 --------
 
 1. From Console:
-~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^
 
 .. parsed-literal::
 
@@ -107,7 +99,7 @@ If the input text contains repeating words, which raw text generally does, make 
 Note that ``ml`` and ``rb`` are mutually exclusive arguments. If none of these is set, then the sytem defaults to ``rb``.
 
 2. Using Python:
-~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^
 
 .. code:: python
 
@@ -141,7 +133,7 @@ Note that ``ml`` and ``rb`` are mutually exclusive arguments. If none of these i
     >>>
 
 3. K-Best Transliterations
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code:: python
 
