@@ -30,6 +30,7 @@ class Ind2Target(BaseTransliterator):
             self._to_indic = True
 
     def case_trans(self, word, k_best=5):
+        oword = word
         if not word:
             return ''
         if word[0] == self.esc_ch:
@@ -38,8 +39,8 @@ class Ind2Target(BaseTransliterator):
             if self.target == 'urd':
                 return word.translate(self.punkt_tbl)
             return word
-        if word in self.lookup:
-            return self.lookup[word]
+        if oword in self.lookup:
+            return self.lookup[oword]
         word = ' '.join(word)
         word = re.sub(r' ([VYZ])', r'\1', word)
         if not self._to_indic:
@@ -49,7 +50,7 @@ class Ind2Target(BaseTransliterator):
         if self._to_indic:
             t_word = self._to_utf(t_word)
         if self.build_lookup:
-            self.lookup[word] = t_word
+            self.lookup[oword] = t_word
         return t_word
 
 
@@ -79,15 +80,16 @@ class Rom2Target(BaseTransliterator):
         return text
 
     def case_trans(self, word, k_best=5):
+        oword = word
         if not word:
             return ''
         elif word[0] not in self.letters:
             return word
-        if word in self.lookup:
+        if oword in self.lookup:
             if self.decode == 'viterbi':
-                return self.wx_process(self.lookup[word])
+                return self.wx_process(self.lookup[oword])
             else:
-                return [self.wx_process(w) for w in self.lookup[word]]
+                return [self.wx_process(w) for w in self.lookup[oword]]
         word = re.sub(r'([a-z])\1\1+', r'\1\1', word)
         word = ' '.join(word)
         word = re.sub(r'([bcdgjptsk]) h', r'\1h', word)
@@ -101,7 +103,7 @@ class Rom2Target(BaseTransliterator):
                 t_word = [self.handle_matra(w) for w in t_word]
                 t_word = [self.wx_process(w) for w in t_word]
         if self.build_lookup:
-            self.lookup[word] = t_word
+            self.lookup[oword] = t_word
         return t_word
 
 
@@ -120,15 +122,16 @@ class Urd2Target(BaseTransliterator):
                                list(range(ord("\u0674"), ord("\u06d4")))))
 
     def case_trans(self, word, k_best=5):
+        oword = word
         if not word:
             return ''
         elif word[0] not in self.letters:
             return word.translate(self.punkt_tbl)
-        if word in self.lookup:
+        if oword in self.lookup:
             if self.decode == 'viterbi':
-                return self.wx_process(self.lookup[word])
+                return self.wx_process(self.lookup[oword])
             else:
-                return [self.wx_process(w) for w in self.lookup[word]]
+                return [self.wx_process(w) for w in self.lookup[oword]]
         word = ' '.join(word)
         word = word.replace(' \u06be', '\u06be')
         word_feats = ngram_context(word.split(), n=4)
@@ -139,7 +142,7 @@ class Urd2Target(BaseTransliterator):
             else:
                 t_word = [self.wx_process(w) for w in t_word]
         if self.build_lookup:
-            self.lookup[word] = t_word
+            self.lookup[oword] = t_word
         return t_word
 
 
