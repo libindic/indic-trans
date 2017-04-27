@@ -1,10 +1,17 @@
 #!/usr/bin/env python
 
+import os
+
 from setuptools import setup
 from setuptools.extension import Extension
 from Cython.Build import cythonize
 
 import numpy
+
+
+os.environ['PBR_VERSION'] = '1.2.3'
+os.environ['SKIP_WRITE_GIT_CHANGELOG'] = '1'
+os.environ['SKIP_GENERATE_AUTHORS'] = '1'
 
 
 extensions = [

@@ -219,7 +219,7 @@ class WX():
             "\xAC": "\u090F",  # Vowel EY
             "\xAD": "\u0910",  # Vowel AI
             "\xAE": "\u090D",  # Vowel AI
-            "\xB2": "\u090D",  # Vowel AYE (Devanagari Script)
+            # "\xB2": "\u090D",  # Vowel AYE (Devanagari Script)  #FIXME
             "\xAF": "\u0912",  # Vowel O
             "\xB0": "\u0913",  # Vowel OW
             "\xB1": "\u0914",  # Vowel AU
@@ -380,7 +380,7 @@ class WX():
             "\xAB": "\u0A0E",  # Vowel E
             "\xAC": "\u0A0F",  # Vowel EY
             "\xAD": "\u0A10",  # Vowel AI
-            "\xB2": "\u0A0D",  # Vowel AYE (Devanagari Script)
+            # "\xB2": "\u0A0D",  # Vowel AYE (Devanagari Script)  #FIXME
             "\xAF": "\u0A12",  # Vowel O
             "\xB0": "\u0A13",  # Vowel OW
             "\xB1": "\u0A14",  # Vowel AU
@@ -830,7 +830,7 @@ class WX():
             "\xA9": "\u0A8A",  # Vowel UU
             "\xAA": "\u0A8B",  # Vowel RI
             "\xAE": "\u0A8D",  # Vowel AI -Rashid added
-            "\xB2": "\u0A8D",  # Vowel AYE (Devanagari Script)
+            # "\xB2": "\u0A8D",  # Vowel AYE (Devanagari Script) #FIXME
             "\xAC": "\u0A8F",  # Vowel EY
             "\xAD": "\u0A90",  # Vowel AI
             "\xB0": "\u0A93",  # Vowel OW
