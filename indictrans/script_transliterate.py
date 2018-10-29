@@ -86,6 +86,8 @@ class Rom2Target(BaseTransliterator):
         elif word[0] not in self.letters:
             return word
         if oword in self.lookup:
+            if self.target == 'urd':
+                return self.lookup[oword]
             if self.decode == 'viterbi':
                 return self.wx_process(self.lookup[oword])
             else:
@@ -128,6 +130,8 @@ class Urd2Target(BaseTransliterator):
         elif word[0] not in self.letters:
             return word.translate(self.punkt_tbl)
         if oword in self.lookup:
+            if self.target == 'eng':
+                return self.lookup[oword]
             if self.decode == 'viterbi':
                 return self.wx_process(self.lookup[oword])
             else:
