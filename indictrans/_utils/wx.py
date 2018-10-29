@@ -2427,15 +2427,15 @@ class WX():
     def map_a(self, my_string):
         if 'a' not in my_string:
             return my_string
-        my_string = re.sub('\BaA', self.hashv_w2i["aA"], my_string)
-        my_string = re.sub('\Bai', self.hashv_w2i["ai"], my_string)
-        my_string = re.sub('\BaI', self.hashv_w2i["aI"], my_string)
-        my_string = re.sub('\Bau', self.hashv_w2i["au"], my_string)
-        my_string = re.sub('\BaU', self.hashv_w2i["aU"], my_string)
-        my_string = re.sub('\Bae', self.hashv_w2i["ae"], my_string)
-        my_string = re.sub('\BaE', self.hashv_w2i["aE"], my_string)
-        my_string = re.sub('\Bao', self.hashv_w2i["ao"], my_string)
-        my_string = re.sub('\BaO', self.hashv_w2i["aO"], my_string)
+        my_string = re.sub(r'\BaA', self.hashv_w2i["aA"], my_string)
+        my_string = re.sub(r'\Bai', self.hashv_w2i["ai"], my_string)
+        my_string = re.sub(r'\BaI', self.hashv_w2i["aI"], my_string)
+        my_string = re.sub(r'\Bau', self.hashv_w2i["au"], my_string)
+        my_string = re.sub(r'\BaU', self.hashv_w2i["aU"], my_string)
+        my_string = re.sub(r'\Bae', self.hashv_w2i["ae"], my_string)
+        my_string = re.sub(r'\BaE', self.hashv_w2i["aE"], my_string)
+        my_string = re.sub(r'\Bao', self.hashv_w2i["ao"], my_string)
+        my_string = re.sub(r'\BaO', self.hashv_w2i["aO"], my_string)
         return my_string
 
     def wx2iscii(self, my_string):
