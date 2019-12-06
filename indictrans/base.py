@@ -77,22 +77,27 @@ class BaseTransliterator(object):
         self.classes_ = np.load(
             '%s/models/%s/classes.npy' %
             (self.dist_dir, model),
-            encoding='latin1')[0]
+            encoding='latin1',
+            allow_pickle=True)[0]
         self.coef_ = np.load(
             '%s/models/%s/coef.npy' % (self.dist_dir, model),
-            encoding='latin1')[0].astype(np.float64)
+            encoding='latin1',
+            allow_pickle=True)[0].astype(np.float64)
         self.intercept_init_ = np.load(
             '%s/models/%s/intercept_init.npy' %
             (self.dist_dir, model),
-            encoding='latin1').astype(np.float64)
+            encoding='latin1',
+            allow_pickle=True).astype(np.float64)
         self.intercept_trans_ = np.load(
             '%s/models/%s/intercept_trans.npy' %
             (self.dist_dir, model),
-            encoding='latin1').astype(np.float64)
+            encoding='latin1',
+            allow_pickle=True).astype(np.float64)
         self.intercept_final_ = np.load(
             '%s/models/%s/intercept_final.npy' %
             (self.dist_dir, model),
-            encoding='latin1').astype(np.float64)
+            encoding='latin1',
+            allow_pickle=True).astype(np.float64)
         # convert numpy.bytes_/numpy.string_ to numpy.unicode_
         if not isinstance(self.classes_[0], np.unicode_):
             self.classes_ = {k: v.decode('utf-8')
