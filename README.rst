@@ -62,7 +62,7 @@ Clone & Install
     Change to the cloned directory:
         cd indic-trans
         pip install -r requirements.txt
-        python setup.py install
+        python install .
 
 Examples
 --------
